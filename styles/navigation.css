@@ -1,0 +1,93 @@
+.navigation-wrapper {
+  position: relative;
+}
+
+.navigation-button {
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+  color: #f5f6fa;
+}
+
+.navigation-menu ul li {
+  list-style: none;
+  font-family: impact;
+  font-weight: 300;
+  color: hsl(0, 0%, 70%);
+  margin-bottom: 20px;
+}
+
+.navigation-menu {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 30%;
+  background: #192a56;
+  height: 100%;
+  transform: skewX(0deg) translate(100%, 0);
+  transform-origin: top right;
+  transition: all 0.2s ease-in;
+  z-index: 1;
+}
+
+.navigation-menu ul {
+  transform: skewX(-8deg);
+  transform-origin: top left;
+  position: fixed;
+  right: 80px;
+  top: 120px;
+  width: 400px;
+  text-align: right;
+}
+
+.navigation-menu ul li {
+  position: relative;
+  z-index: 999;
+  font-size: 32px;
+  color: #f5f6fa;
+  line-height: 64px;
+}
+
+.navigation-menu.active {
+  transform: skewX(8deg) translate(0, 0);
+}
+
+.navigation-menu li {
+  opacity: 0;
+  transform: translate(0, 10px);
+  transition: all 0s ease-in 0.3s;
+}
+
+.navigation-menu.active li {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: all 0.2s ease-in 0s;
+}
+
+.navigation-menu.active li:nth-child(1) {
+  transition-delay: 0.3s;
+}
+.navigation-menu.active li:nth-child(2) {
+  transition-delay: 0.4s;
+}
+.navigation-menu.active li:nth-child(3) {
+  transition-delay: 0.5s;
+}
+.navigation-menu.active li:nth-child(4) {
+  transition-delay: 0.6s;
+}
+.navigation-menu.active li:nth-child(5) {
+  transition-delay: 0.7s;
+}
+.navigation-menu.active li:nth-child(6) {
+  transition-delay: 0.8s;
+}
