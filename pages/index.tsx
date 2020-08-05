@@ -76,10 +76,10 @@ export default function Home() {
       <ContainerDIv>
         <IconDiv>
           <IconBoxDiv onMouseOver={onMouseOver(1)} onMouseOut={onMouseOut}>
-            <img style={{ maxWidth: "100%" }} src='http://lorempixel.com/640/480/technics'></img>
+            <img style={{ maxWidth: "100%" }} src='/tistory.jpg'></img>
           </IconBoxDiv>
           <IconBoxDiv onMouseOver={onMouseOver(2)} onMouseOut={onMouseOut}>
-            <img style={{ maxWidth: "100%" }} src='http://lorempixel.com/640/480/sports'></img>
+            <img style={{ maxWidth: "100%" }} src='/github.png'></img>
           </IconBoxDiv>
           <IconBoxDiv onMouseOver={onMouseOver(3)} onMouseOut={onMouseOut}>
             <img style={{ maxWidth: "100%" }} src='http://lorempixel.com/640/480/technics'></img>
