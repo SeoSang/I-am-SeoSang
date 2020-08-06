@@ -1,7 +1,8 @@
 import React from "react"
 import Link from "next/link"
-import { FlexDiv, ContentImg, ImgBox } from "../../styles/styled"
+import { FlexDiv, ContentImg, ImgBox, GAME_BG_COLOR } from "../../styles/styled"
 import styled from "styled-components"
+import { RollButton } from "../../styles/buttons"
 
 const IMG_SIZE = "250px"
 
@@ -52,7 +53,7 @@ const ContentDiv = styled.div`
 
 const index = () => {
   return (
-    <FlexDiv backgroundColor='#16384c' height='100vh'>
+    <FlexDiv backgroundColor={GAME_BG_COLOR} height='100vh'>
       <ContainerDiv backgroundColor='#16384c'>
         <CardDiv>
           <Img_Box width={IMG_SIZE} height={IMG_SIZE} imgBorRad='4px'>

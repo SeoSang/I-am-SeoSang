@@ -1,6 +1,8 @@
 import * as React from "react"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Ball from "../../components/games/Ball"
+import { FlexDiv, GAME_BG_COLOR } from "../../styles/styled"
+import GameNavigation from "../../components/GameNavigation"
 
 function getWinNumbers() {
   console.log("getWinNumbers")
@@ -64,23 +66,26 @@ const Lotto = () => {
 
   return (
     <>
-      <div>
-        <div className='gameTitle lotto-title'>로또번호</div>
-      </div>
-      <div className='lotto-ballContainer'>
-        {winBalls.map((nums, i) => (
-          <Ball key={`${i}번째 공`} ballNum={nums}></Ball>
-        ))}
-      </div>
-      <div>
-        <div className='gameTitle lotto-title'>보너스번호</div>
-      </div>
-      <div className='lotto-ballContainer'>
-        {bonus == null ? null : <Ball key='bonus 공' ballNum={bonus}></Ball>}
-      </div>
-      <button className='gameButton' onClick={showBalls}>
-        다시뽑기
-      </button>
+      <GameNavigation></GameNavigation>
+      <FlexDiv height='90vh' backgroundColor={GAME_BG_COLOR}>
+        <div>
+          <div className='gameTitle lotto-title'>로또번호</div>
+        </div>
+        <div className='lotto-ballContainer'>
+          {winBalls.map((nums, i) => (
+            <Ball key={`${i}번째 공`} ballNum={nums}></Ball>
+          ))}
+        </div>
+        <div>
+          <div className='gameTitle lotto-title'>보너스번호</div>
+        </div>
+        <div className='lotto-ballContainer'>
+          {bonus == null ? null : <Ball key='bonus 공' ballNum={bonus}></Ball>}
+        </div>
+        <button className='gameButton' onClick={showBalls}>
+          다시뽑기
+        </button>
+      </FlexDiv>
     </>
   )
 }

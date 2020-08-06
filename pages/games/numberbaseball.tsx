@@ -1,6 +1,8 @@
 import * as React from "react"
 const { useState, createRef } = React
 import Try from "../../components/games/Try"
+import { GAME_BG_COLOR, FlexDiv } from "../../styles/styled"
+import GameNavigation from "../../components/GameNavigation"
 
 // 임의의 4자리 다 다른 숫자 받아오기 (문자열 배열)
 const getRandomNumbers = () => {
@@ -87,21 +89,24 @@ const NumberBaseball = () => {
 
   return (
     <React.Fragment>
-      <div className='gugudanTitle'>
-        <h1>숫자야구</h1>
-      </div>
-      <div className='gugudan'>
-        <h1>4자리 숫자를 맞춰보세요</h1>
-        <h1>{result}</h1>
-        <form onSubmit={onSubmitForm}>
-          <input ref={valueInput} maxLength={4} value={value} onChange={onChangeInput}></input>
-        </form>
-        <ul>
-          {tries.map((tr, i) => (
-            <Try key={`${i}차 시도 입니다.`} tryInfo={tr}></Try>
-          ))}
-        </ul>
-      </div>
+      <GameNavigation></GameNavigation>
+      <FlexDiv height='90vh' backgroundColor={GAME_BG_COLOR}>
+        <div className='gugudanTitle'>
+          <h1>숫자야구</h1>
+        </div>
+        <div className='gugudan'>
+          <h1>4자리 숫자를 맞춰보세요</h1>
+          <h1>{result}</h1>
+          <form onSubmit={onSubmitForm}>
+            <input ref={valueInput} maxLength={4} value={value} onChange={onChangeInput}></input>
+          </form>
+          <ul>
+            {tries.map((tr, i) => (
+              <Try key={`${i}차 시도 입니다.`} tryInfo={tr}></Try>
+            ))}
+          </ul>
+        </div>
+      </FlexDiv>
     </React.Fragment>
   )
 }

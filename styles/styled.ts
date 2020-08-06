@@ -15,7 +15,7 @@ interface ImgBoxDiv {
 }
 export const FlexDiv = styled.div`
   display: flex;
-  justify-contet: center;
+  justify-content: center;
   align-items: center;
   background-color: ${(props: MyDiv) => props.backgroundColor || "white"};
   height: ${(props: MyDiv) => props.height || "auto"};
@@ -34,3 +34,7 @@ export const ImgBox = styled.div`
     border-radius: ${(props: ImgBoxDiv) => props.imgBorRad || "0"};
   }
 `
+/** --  Page 별 props들 */
+
+// Game
+export const GAME_BG_COLOR = "#16384c"

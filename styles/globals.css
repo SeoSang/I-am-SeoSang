@@ -20,3 +20,12 @@ a {
   outline: none;
   font-family: "Sora", "Song Myung", sans-serif;
 }
+
+button {
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-user-select: none;
+  cursor: default;
+}
