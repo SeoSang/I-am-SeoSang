@@ -1,17 +1,24 @@
 import * as React from "react"
 const { useState, createRef } = React
-import Try from "../../components/games/Try"
-import { GAME_BG_COLOR, FlexDiv, WhiteH1, WhiteH2, WhiteH2_KOR } from "../../styles/styled"
+import {
+  GAME_BG_COLOR,
+  FlexDiv,
+  WhiteH1,
+  WhiteH2,
+  WhiteH2_KOR,
+  BlinkGreenDiv,
+  BlinkYellowDiv,
+} from "../../styles/styled"
 import GameNavigation from "../../components/GameNavigation"
-import { LotteryContainer } from "./lotto"
 import styled from "styled-components"
 import ScoreBoard from "../../components/games/ScoreBoard"
+import BillBoard from "../../components/games/BillBoard"
 
 export interface BaseballLine {
   inputNum: string
   strike: number
   ball: number
-  end: boolean
+  word?: string
 }
 export type BaseballResult = BaseballLine[]
 
@@ -45,6 +52,7 @@ const BaseballContainer = styled.div`
 // 버튼 눌렀을 때 야구아이콘 스타일
 const onClickBaseballStyle = {
   top: "10%",
+  left: "5%",
   transform: "scale(0.5)",
   filter: "grayscale(0)",
   img: {
@@ -81,8 +89,8 @@ const NumberBaseball = () => {
   const [baseballStyle, setBaseballStyle] = useState({})
   const [gameTriggered, setTrigger] = useState<boolean>(false)
   const [result, setResult] = useState<BaseballResult | []>([])
+  const [billBoard, setBillBoard] = useState<String>("")
 
-  console.log(answer)
   const onClickBaseBall = (e: React.MouseEvent) => {
     setBaseballStyle(onClickBaseballStyle)
     setTrigger(true)
@@ -98,7 +106,7 @@ const NumberBaseball = () => {
     } else if (!duplicateCheck(value)) {
       alert("숫자는 중복되면 안돼요!")
     } else if (value === answer.join("")) {
-      alert("홈런!! 한번 더 하시죠. 거절은 못합니다 ㅎㅎ")
+      setBillBoard("⭐ HOME RUN! ⭐")
       setAnswer(getRandomNumbers())
       setResult([])
     }
@@ -123,9 +131,10 @@ const NumberBaseball = () => {
           inputNum: value,
           strike: strike,
           ball: ball,
-          end: false,
+          word: `🤷‍♂️ ${strike}  Strike  ${ball}  Ball`,
         }
         setResult([...result, newLine])
+        setBillBoard(`🤷‍♂️ ${strike}  Strike  ${ball}  Ball`)
       }
     }
     inputFocus()
@@ -146,12 +155,16 @@ const NumberBaseball = () => {
   return (
     <React.Fragment>
       <GameNavigation></GameNavigation>
-      <ScoreBoard result={result}></ScoreBoard>
       <FlexDiv height='90vh' backgroundColor={GAME_BG_COLOR} direction='column'>
         <BaseballContainer style={baseballStyle} onClick={onClickBaseBall}>
           <img style={gameTriggered ? onClickImgStyle : {}} src='/baseball.png'></img>
         </BaseballContainer>
-        <FlexDiv direction='column' style={{ visibility: gameTriggered ? "visible" : "hidden" }}>
+        <FlexDiv
+          direction='column'
+          style={{ visibility: gameTriggered ? "visible" : "hidden", marginBottom: "15vh" }}
+        >
+          <BillBoard result={result}></BillBoard>
+          <WhiteH2 style={{ marginBottom: "20px" }}>{billBoard}</WhiteH2>
           <div>
             <WhiteH1>Number BaseBall!</WhiteH1>
           </div>
@@ -161,6 +174,7 @@ const NumberBaseball = () => {
               <input ref={valueInput} maxLength={4} value={value} onChange={onChangeInput}></input>
             </form>
           </div>
+          <ScoreBoard result={result}></ScoreBoard>
         </FlexDiv>
       </FlexDiv>
       <footer>"Icon made by Pixel perfect from www.flaticon.com"</footer>

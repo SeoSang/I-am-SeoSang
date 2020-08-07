@@ -2,14 +2,16 @@ import React, { FC } from "react"
 import styled from "styled-components"
 import { BaseballResult } from "../../pages/games/numberbaseball"
 
+interface CellProps {
+  width?: string
+}
+
 const Table = styled.div`
-  //   display: inline-block;
-  position: absolute;
-  width: 25vw;
-  right: 5%;
+  width: 40vw;
   background-color: #70a1ff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 7px;
+  margin: 10px;
 `
 
 const Tr = styled.div`
@@ -17,35 +19,27 @@ const Tr = styled.div`
 `
 const Cell = styled.div`
   display: inline-block;
-  width: 20%;
+  width: ${(props: CellProps) => props.width || "20%"};
+  font-weight: 500;
 `
-
-const dummy_result = [
-  {
-    inputNum: "1234",
-    strike: 3,
-    ball: 1,
-    end: false,
-  },
-]
 
 const ScoreBoard: FC<{ result: BaseballResult }> = ({ result }) => {
   return (
     <Table>
       <Tr style={{ color: "#DCDC55" }}>
-        <Cell>Try</Cell>
+        <Cell width='10%'>Try</Cell>
         <Cell>Input</Cell>
         <Cell>Strike</Cell>
         <Cell>Ball</Cell>
-        <Cell>Result</Cell>
+        <Cell width='30%'>Result</Cell>
       </Tr>
       {result.map((line, i) => (
         <Tr>
-          <Cell>{i + 1}</Cell>
+          <Cell width='10%'>{i + 1}</Cell>
           <Cell>{line.inputNum}</Cell>
           <Cell>{"🟡".repeat(line.strike)}</Cell>
           <Cell>{"🟢".repeat(line.ball)}</Cell>
-          <Cell>{line.end}</Cell>
+          <Cell width='30%'>{line.word}</Cell>
         </Tr>
       ))}
     </Table>

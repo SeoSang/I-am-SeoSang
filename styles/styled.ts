@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
 interface FlexDivProps {
   backgroundColor?: string
@@ -24,6 +24,9 @@ export const FlexDiv = styled.div`
   background-color: ${(props: FlexDivProps) => props.backgroundColor || "auto"};
   height: ${(props: FlexDivProps) => props.height || "auto"};
   width: ${(props: FlexDivProps) => props.width || "auto"};
+`
+export const In_BlockDiv = styled.div`
+  display: inline-block;
 `
 
 export const ContentImg = styled.img`
@@ -71,6 +74,75 @@ export const WhiteH2_KOR = styled.h2`
   color: #fefefe;
   font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
 `
+
+const blinkYellow = keyframes`
+    from { background-color: #FF0; }
+    50% { background-color: #AA0; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 0px 0; }
+    to { background-color: #FF0; }
+`
+
+const blinkGreen = keyframes`
+    from { 
+        background-color: #abff00; 
+    }
+    50% { 
+        background-color: #74DF00; 
+        box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #028039 0 -1px 9px, #abff00 0 0px 0; 
+    }
+    to { 
+        background-color: #abff00; 
+    }
+`
+
+export const BlinkYellowDiv = styled.div`
+  display: inline-block;
+  margin: 0 5px;
+  width: 24px;
+  height: 24px;
+  background-color: #ff0;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+  -webkit-animation: ${blinkYellow} 1s infinite;
+  -moz-animation: ${blinkYellow} 1s infinite;
+  -ms-animation: ${blinkYellow} 1s infinite;
+  -o-animation: ${blinkYellow} 1s infinite;
+  animation: ${blinkYellow} 1s infinite;
+`
+export const YellowStrikeDiv = styled.div`
+  display: inline-block;
+  margin: 0px 5px;
+  width: 24px;
+  height: 24px;
+  background-color: #ff0;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+`
+
+export const GreenBallDiv = styled.div`
+  display: inline-block;
+  margin: 0 5px;
+  width: 24px;
+  height: 24px;
+  background-color: #abff00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
+`
+
+export const BlinkGreenDiv = styled.div`
+  display: inline-block;
+  margin: 10px 5px;
+  width: 24px;
+  height: 24px;
+  background-color: #abff00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
+  -webkit-animation: ${blinkGreen} 1s infinite;
+  -moz-animation: ${blinkGreen} 1s infinite;
+  -ms-animation: ${blinkGreen} 1s infinite;
+  -o-animation: ${blinkGreen} 1s infinite;
+  animation: ${blinkGreen} 1s infinite;
+`
+
 /** --  Page 별 props들 */
 
 // Game

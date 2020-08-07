@@ -112,7 +112,7 @@ const Lotto = () => {
           <img src='/lottery.png'></img>
         </LotteryContainer>
         <FlexDiv flex='inline-flex' height='20%' backgroundColor={GAME_BG_COLOR}>
-          <div style={{ position: "absolute", left: "20%" }}>
+          <div style={{ position: "absolute", left: "10%" }}>
             <WhiteH2>{textObject.lottoNums}</WhiteH2>
           </div>
           <FlexDiv height='90px'>
@@ -122,7 +122,7 @@ const Lotto = () => {
           </FlexDiv>
         </FlexDiv>
         <FlexDiv flex='inline-flex' height='20%' backgroundColor={GAME_BG_COLOR}>
-          <div style={{ position: "absolute", left: "20%" }}>
+          <div style={{ position: "absolute", left: "10%" }}>
             <WhiteH2>{textObject.bonusNums}</WhiteH2>
           </div>
           <FlexDiv height='90px'>
