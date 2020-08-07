@@ -5,6 +5,7 @@ import { useRouter } from "next/router"
 
 const ROLL_COLORS: RollButtonProps = {
   hoverColor: "#1B1464",
+  prevBackColor: "#f1f2f6",
   hoverBackColor: "#C4E538",
 }
 

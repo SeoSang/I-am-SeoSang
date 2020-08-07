@@ -1,15 +1,18 @@
 import * as React from "react"
 import { memo } from "react"
+import { CSSProperties } from "react"
+import { FlexDiv } from "../../styles/styled"
 
 const Ball: React.FunctionComponent<{ ballNum: number }> = ({ ballNum }) => {
-  const styles = {
+  const styles: CSSProperties = {
     borderRadius: "10000px",
-    margin: "0 2%",
-    padding: "1%",
-    display: "inline-block",
-    width: "50px",
-    height: "50px",
+    width: "70px",
+    height: "70px",
+    margin: "0 15px",
     background: "radial-gradient(circle at 17px 17px, #eb4d4b, rgb(255, 252, 252))",
+    textAlign: "center",
+    fontWeight: 700,
+    fontSize: "large",
   }
 
   // 보너스번호 안나오게

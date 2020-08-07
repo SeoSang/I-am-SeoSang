@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Song+Myung&family=Sora:wght@200;300;400;477;500;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Red+Hat+Display:900&display=swap");
 
 html,
 body {
@@ -13,12 +15,25 @@ a {
   text-decoration: none;
 }
 
+@font-face {
+  font-family: "Noto Sans KR";
+  src: inherit;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  src: inherit;
+  unicode-range: U+0020-007E;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none;
-  font-family: "Sora", "Song Myung", sans-serif;
+  font-family: "Sora", "Noto Sans KR", "Song Myung", sans-serif;
 }
 
 button {

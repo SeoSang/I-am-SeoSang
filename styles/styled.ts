@@ -1,8 +1,11 @@
 import styled from "styled-components"
 
-interface MyDiv {
+interface FlexDivProps {
   backgroundColor?: string
+  width?: string
   height?: string
+  flex?: string
+  direction?: "row" | "column"
 }
 
 interface ImgBoxDiv {
@@ -14,11 +17,13 @@ interface ImgBoxDiv {
   imgBorRad?: string
 }
 export const FlexDiv = styled.div`
-  display: flex;
+  display: ${(props: FlexDivProps) => props.flex || "flex"};
+  flex-direction: ${(props: FlexDivProps) => props.direction || "row"};
   justify-content: center;
   align-items: center;
-  background-color: ${(props: MyDiv) => props.backgroundColor || "white"};
-  height: ${(props: MyDiv) => props.height || "auto"};
+  background-color: ${(props: FlexDivProps) => props.backgroundColor || "auto"};
+  height: ${(props: FlexDivProps) => props.height || "auto"};
+  width: ${(props: FlexDivProps) => props.width || "auto"};
 `
 
 export const ContentImg = styled.img`
@@ -33,6 +38,38 @@ export const ImgBox = styled.div`
     max-width: 100%;
     border-radius: ${(props: ImgBoxDiv) => props.imgBorRad || "0"};
   }
+`
+
+export const WhiteH1 = styled.h1`
+  font-size: 4vw;
+  max-width: 75vw;
+  color: #fefefe;
+  font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
+`
+export const WhiteH2 = styled.h2`
+  font-size: 2vw;
+  max-width: 75vw;
+  color: #fefefe;
+  font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
+`
+
+export const WhiteH3 = styled.h3`
+  font-size: 2vw;
+  max-width: 75vw;
+  color: #fefefe;
+  font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
+`
+export const WhiteH1_KOR = styled.h1`
+  font-size: 4vw;
+  max-width: 75vw;
+  color: #fefefe;
+  font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
+`
+export const WhiteH2_KOR = styled.h2`
+  font-size: 2vw;
+  max-width: 75vw;
+  color: #fefefe;
+  font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
 `
 /** --  Page 별 props들 */
 

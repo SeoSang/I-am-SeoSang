@@ -61,6 +61,7 @@ export const RollButtonDiv = styled.div`
       top: 50px;
       color: ${(props: RollButtonProps) => props.hoverColor || "#ffffff"};
       background-color: ${(props: RollButtonProps) => props.hoverBackColor || "#000000"};
+      border: 1px solid #000000;
       transition: all 0.2s ease;
       -webkit-transition: all 0.2s ease;
       -moz-transition: all 0.2s ease;

@@ -1,8 +1,51 @@
 import * as React from "react"
 const { useState, createRef } = React
 import Try from "../../components/games/Try"
-import { GAME_BG_COLOR, FlexDiv } from "../../styles/styled"
+import { GAME_BG_COLOR, FlexDiv, WhiteH1, WhiteH2, WhiteH2_KOR } from "../../styles/styled"
 import GameNavigation from "../../components/GameNavigation"
+import { LotteryContainer } from "./lotto"
+import styled from "styled-components"
+
+const BaseballContainer = styled.div`
+  position: absolute;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f1f2f6;
+  width: 150px;
+  height: 150px;
+  transition: all 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0.07);
+
+  img {
+    filter: grayscale(1);
+    max-width: 100%;
+  }
+
+  &:hover {
+    width: 250px;
+    height: 250px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0.1);
+    cursor: pointer;
+
+    img {
+      filter: grayscale(0);
+    }
+  }
+`
+
+// 버튼 눌렀을 때 야구아이콘 스타일
+const onClickBaseballStyle = {
+  top: "10%",
+  transform: "scale(0.5)",
+  filter: "grayscale(0)",
+  img: {
+    filter: "grayscale(0)",
+  },
+}
+
+const onClickImgStyle = {
+  filter: "grayscale(0)",
+}
 
 // 임의의 4자리 다 다른 숫자 받아오기 (문자열 배열)
 const getRandomNumbers = () => {
@@ -28,6 +71,13 @@ const NumberBaseball = () => {
   const [value, setValue] = useState("")
   const [answer, setAnswer] = useState(getRandomNumbers())
   const [tries, setTries] = useState<any[]>([])
+  const [baseballStyle, setBaseballStyle] = useState({})
+  const [gameTriggered, setTrigger] = useState<boolean>(false)
+
+  const onClickBaseBall = (e: React.MouseEvent) => {
+    setBaseballStyle(onClickBaseballStyle)
+    setTrigger(true)
+  }
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -90,23 +140,29 @@ const NumberBaseball = () => {
   return (
     <React.Fragment>
       <GameNavigation></GameNavigation>
-      <FlexDiv height='90vh' backgroundColor={GAME_BG_COLOR}>
-        <div className='gugudanTitle'>
-          <h1>숫자야구</h1>
-        </div>
-        <div className='gugudan'>
-          <h1>4자리 숫자를 맞춰보세요</h1>
-          <h1>{result}</h1>
-          <form onSubmit={onSubmitForm}>
-            <input ref={valueInput} maxLength={4} value={value} onChange={onChangeInput}></input>
-          </form>
-          <ul>
-            {tries.map((tr, i) => (
-              <Try key={`${i}차 시도 입니다.`} tryInfo={tr}></Try>
-            ))}
-          </ul>
-        </div>
+      <FlexDiv height='90vh' backgroundColor={GAME_BG_COLOR} direction='column'>
+        <BaseballContainer style={baseballStyle} onClick={onClickBaseBall}>
+          <img style={gameTriggered ? onClickImgStyle : {}} src='/baseball.png'></img>
+        </BaseballContainer>
+        <FlexDiv direction='column' style={{ visibility: gameTriggered ? "visible" : "hidden" }}>
+          <div>
+            <WhiteH1>Number BaseBall!</WhiteH1>
+          </div>
+          <div>
+            <WhiteH2_KOR>4자리 숫자를 맞춰보세요</WhiteH2_KOR>
+            <WhiteH2>{result}</WhiteH2>
+            <form onSubmit={onSubmitForm} style={{ textAlign: "center" }}>
+              <input ref={valueInput} maxLength={4} value={value} onChange={onChangeInput}></input>
+            </form>
+            <ul>
+              {tries.map((tr, i) => (
+                <Try key={`${i}차 시도 입니다.`} tryInfo={tr}></Try>
+              ))}
+            </ul>
+          </div>
+        </FlexDiv>
       </FlexDiv>
+      <footer>"Icon made by Pixel perfect from www.flaticon.com"</footer>
     </React.Fragment>
   )
 }
