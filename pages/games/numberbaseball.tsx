@@ -5,6 +5,15 @@ import { GAME_BG_COLOR, FlexDiv, WhiteH1, WhiteH2, WhiteH2_KOR } from "../../sty
 import GameNavigation from "../../components/GameNavigation"
 import { LotteryContainer } from "./lotto"
 import styled from "styled-components"
+import ScoreBoard from "../../components/games/ScoreBoard"
+
+export interface BaseballLine {
+  inputNum: string
+  strike: number
+  ball: number
+  end: boolean
+}
+export type BaseballResult = BaseballLine[]
 
 const BaseballContainer = styled.div`
   position: absolute;
@@ -67,13 +76,13 @@ const duplicateCheck = (n: string) => {
 }
 
 const NumberBaseball = () => {
-  const [result, setResult] = useState("")
   const [value, setValue] = useState("")
   const [answer, setAnswer] = useState(getRandomNumbers())
-  const [tries, setTries] = useState<any[]>([])
   const [baseballStyle, setBaseballStyle] = useState({})
   const [gameTriggered, setTrigger] = useState<boolean>(false)
+  const [result, setResult] = useState<BaseballResult | []>([])
 
+  console.log(answer)
   const onClickBaseBall = (e: React.MouseEvent) => {
     setBaseballStyle(onClickBaseballStyle)
     setTrigger(true)
@@ -89,24 +98,19 @@ const NumberBaseball = () => {
     } else if (!duplicateCheck(value)) {
       alert("숫자는 중복되면 안돼요!")
     } else if (value === answer.join("")) {
-      setResult("정답입니다!")
-      setTries([...tries, { try: value, result: "홈런" }])
       alert("홈런!! 한번 더 하시죠. 거절은 못합니다 ㅎㅎ")
-      setValue("")
       setAnswer(getRandomNumbers())
-      setTries([])
-      setResult("")
+      setResult([])
     }
     // 오답일 경우
     else {
       let strike = 0
       let ball = 0
       // 10번 넘게틀림 리겜
-      if (tries.length >= 9) {
+      if (result.length >= 9) {
         alert(`10번 넘게틀려서 실패! 답은 ${answer} 였습니다ㅎㅎ`)
         setAnswer(getRandomNumbers())
-        setTries([])
-        setResult("")
+        setResult([])
       } else {
         for (var j = 0; j < 4; j++) {
           if (value[j] === answer[j]) {
@@ -115,12 +119,14 @@ const NumberBaseball = () => {
             ball += 1
           }
         }
-        setResult(`${strike} strike and ${ball} ball`)
-        const RESULT = `${strike} strike and ${ball} ball`
-        setTries([...tries, { try: value, result: RESULT }])
-        console.log({ tries })
+        const newLine: BaseballLine = {
+          inputNum: value,
+          strike: strike,
+          ball: ball,
+          end: false,
+        }
+        setResult([...result, newLine])
       }
-      setValue("")
     }
     inputFocus()
   }
@@ -140,6 +146,7 @@ const NumberBaseball = () => {
   return (
     <React.Fragment>
       <GameNavigation></GameNavigation>
+      <ScoreBoard result={result}></ScoreBoard>
       <FlexDiv height='90vh' backgroundColor={GAME_BG_COLOR} direction='column'>
         <BaseballContainer style={baseballStyle} onClick={onClickBaseBall}>
           <img style={gameTriggered ? onClickImgStyle : {}} src='/baseball.png'></img>
@@ -150,15 +157,9 @@ const NumberBaseball = () => {
           </div>
           <div>
             <WhiteH2_KOR>4자리 숫자를 맞춰보세요</WhiteH2_KOR>
-            <WhiteH2>{result}</WhiteH2>
             <form onSubmit={onSubmitForm} style={{ textAlign: "center" }}>
               <input ref={valueInput} maxLength={4} value={value} onChange={onChangeInput}></input>
             </form>
-            <ul>
-              {tries.map((tr, i) => (
-                <Try key={`${i}차 시도 입니다.`} tryInfo={tr}></Try>
-              ))}
-            </ul>
           </div>
         </FlexDiv>
       </FlexDiv>
