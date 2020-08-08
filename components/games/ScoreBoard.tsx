@@ -17,6 +17,7 @@ const Table = styled.div`
 const Tr = styled.div`
   display: block;
 `
+
 const Cell = styled.div`
   display: inline-block;
   width: ${(props: CellProps) => props.width || "20%"};

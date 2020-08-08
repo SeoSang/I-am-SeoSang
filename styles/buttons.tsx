@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC } from "react"
+import { FC, useState } from "react"
 
 export interface RollButtonProps {
   prevColor?: string
@@ -100,4 +100,28 @@ export const RollButton: FC<{ content: string; colors?: RollButtonProps }> = ({
       <div>{content}</div>
     </RollButtonDiv>
   )
+}
+
+export const digits4Input = styled.input`
+  border-radius: 5px;
+  font-size: 4vw;
+  padding: 10px;
+`
+
+// Hook
+export const useInput = (initialState: any, validator: Function) => {
+  const [value, setValue] = useState(initialState)
+  const onChange = (event: any) => {
+    const {
+      target: { value },
+    } = event
+    let willUpdate = true
+    if (typeof validator === "function") {
+      willUpdate = validator(value)
+    }
+    if (willUpdate) {
+      setValue(value)
+    }
+  }
+  return { value, onChange }
 }

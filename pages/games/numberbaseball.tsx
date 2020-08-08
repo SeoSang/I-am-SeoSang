@@ -13,6 +13,7 @@ import GameNavigation from "../../components/GameNavigation"
 import styled from "styled-components"
 import ScoreBoard from "../../components/games/ScoreBoard"
 import BillBoard from "../../components/games/BillBoard"
+import { useInput, digits4Input } from "../../styles/buttons"
 
 export interface BaseballLine {
   inputNum: string
@@ -64,6 +65,28 @@ const onClickImgStyle = {
   filter: "grayscale(0)",
 }
 
+const DigitInput = styled.input`
+  background: rgba(164, 179, 87, 1);
+  background: -moz-linear-gradient(top, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, rgba(164, 179, 87, 1)),
+    color-stop(100%, rgba(117, 137, 12, 1))
+  );
+  background: -webkit-linear-gradient(top, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
+  background: -o-linear-gradient(top, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
+  background: -ms-linear-gradient(top, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
+  background: linear-gradient(to bottom, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
+  font-size: 3vw;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4b357', endColorstr='#75890c', GradientType=0 );
+  letter-spacing: 1vw;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  margin: 5px 0;
+`
+
 // 임의의 4자리 다 다른 숫자 받아오기 (문자열 배열)
 const getRandomNumbers = () => {
   const num = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -84,12 +107,15 @@ const duplicateCheck = (n: string) => {
 }
 
 const NumberBaseball = () => {
-  const [value, setValue] = useState("")
   const [answer, setAnswer] = useState(getRandomNumbers())
   const [baseballStyle, setBaseballStyle] = useState({})
   const [gameTriggered, setTrigger] = useState<boolean>(false)
   const [result, setResult] = useState<BaseballResult | []>([])
   const [billBoard, setBillBoard] = useState<String>("")
+  const digit4 = useInput("", (digits: string) => {
+    return !isNaN(Number(digits))
+  })
+  let value: string = digit4.value
 
   const onClickBaseBall = (e: React.MouseEvent) => {
     setBaseballStyle(onClickBaseballStyle)
@@ -140,16 +166,10 @@ const NumberBaseball = () => {
     inputFocus()
   }
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setValue(e.target.value)
-  }
-
   let valueInput = createRef<HTMLInputElement>()
 
   const inputFocus = () => {
     if (valueInput.current !== null) valueInput.current.focus()
-    console.log("TCL: inputFocus -> valueInput", valueInput)
   }
 
   return (
@@ -168,10 +188,10 @@ const NumberBaseball = () => {
           <div>
             <WhiteH1>Number BaseBall!</WhiteH1>
           </div>
-          <div>
+          <div style={{ textAlign: "center" }}>
             <WhiteH2_KOR>4자리 숫자를 맞춰보세요</WhiteH2_KOR>
             <form onSubmit={onSubmitForm} style={{ textAlign: "center" }}>
-              <input ref={valueInput} maxLength={4} value={value} onChange={onChangeInput}></input>
+              <DigitInput ref={valueInput} maxLength={4} {...digit4}></DigitInput>
             </form>
           </div>
           <ScoreBoard result={result}></ScoreBoard>

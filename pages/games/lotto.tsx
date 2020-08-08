@@ -87,11 +87,11 @@ const Lotto = () => {
         setWinBalls((prev) => {
           return [...prev, winNums[i]]
         })
-      }, (i + 1) * 1000)
+      }, (i + 1) * 1500)
     }
     bonusTimeoutID.current = setTimeout(() => {
       setBonus(winNums[6])
-    }, 7000)
+    }, 10500)
   }
 
   useEffect(() => {
