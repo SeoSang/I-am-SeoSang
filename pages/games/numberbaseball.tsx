@@ -5,7 +5,7 @@ import {
   FlexDiv,
   WhiteH1,
   WhiteH2,
-  WhiteH2_KOR,
+  WhiteH2_KR,
   BlinkGreenDiv,
   BlinkYellowDiv,
 } from "../../styles/styled"
@@ -189,7 +189,7 @@ const NumberBaseball = () => {
             <WhiteH1>Number BaseBall!</WhiteH1>
           </div>
           <div style={{ textAlign: "center" }}>
-            <WhiteH2_KOR>4자리 숫자를 맞춰보세요</WhiteH2_KOR>
+            <WhiteH2_KR>4자리 숫자를 맞춰보세요</WhiteH2_KR>
             <form onSubmit={onSubmitForm} style={{ textAlign: "center" }}>
               <DigitInput ref={valueInput} maxLength={4} {...digit4}></DigitInput>
             </form>

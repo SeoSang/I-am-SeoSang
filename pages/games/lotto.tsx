@@ -37,7 +37,6 @@ const onClickLotteryStyle = {
 }
 
 function getWinNumbers() {
-  console.log("getWinNumbers")
   const BONUS_INDEX = 7
   const candidate = Array(45)
     .fill(null)

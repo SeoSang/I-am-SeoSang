@@ -62,16 +62,44 @@ export const WhiteH3 = styled.h3`
   color: #fefefe;
   font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
 `
-export const WhiteH1_KOR = styled.h1`
+export const WhiteH1_KR = styled.h1`
   font-size: 4vw;
   max-width: 75vw;
   color: #fefefe;
   font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
 `
-export const WhiteH2_KOR = styled.h2`
+export const WhiteH2_KR = styled.h2`
   font-size: 2vw;
   max-width: 75vw;
   color: #fefefe;
+  font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
+`
+
+export const H2 = styled.h2`
+  font-size: 2vw;
+  max-width: 75vw;
+  color: ${(props) => props.color || "black"};
+  font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
+`
+
+export const H2_KR = styled.h2`
+  font-size: 2vw;
+  max-width: 75vw;
+  color: ${(props) => props.color || "black"};
+  font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
+`
+
+export const H1 = styled.h2`
+  font-size: 4vw;
+  max-width: 75vw;
+  color: ${(props) => props.color || "black"};
+  font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
+`
+
+export const H1_KR = styled.h2`
+  font-size: 4vw;
+  max-width: 75vw;
+  color: ${(props) => props.color || "black"};
   font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
 `
 

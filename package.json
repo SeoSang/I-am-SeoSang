@@ -7,43 +7,12 @@
     "build": "next build",
     "start": "next start"
   },
-  "babel": {
-    "env": {
-      "development": {
-        "presets": [
-          "next/babel"
-        ],
-        "plugins": [
-          [
-            "styled-components",
-            {
-              "ssr": true,
-              "displayName": true
-            }
-          ]
-        ]
-      },
-      "production": {
-        "presets": [
-          "next/babel"
-        ],
-        "plugins": [
-          [
-            "styled-components",
-            {
-              "ssr": true,
-              "displayName": false
-            }
-          ]
-        ]
-      }
-    }
-  },
   "dependencies": {
     "antd": "^4.4.3",
     "axios": "^0.19.2",
     "babel-plugin-styled-components": "^1.10.7",
     "immer": "^7.0.5",
+    "moment": "^2.27.0",
     "next": "^9.4.4",
     "next-redux-saga": "^4.1.2",
     "next-redux-wrapper": "^4.0.1",

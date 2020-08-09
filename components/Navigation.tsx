@@ -51,8 +51,8 @@ const Navigation = () => {
             </Link>
           </li>
           <li>
-            <Link href='/faq'>
-              <a>FAQ</a>
+            <Link href='/comment'>
+              <a>Comment</a>
             </Link>
           </li>
         </ul>
