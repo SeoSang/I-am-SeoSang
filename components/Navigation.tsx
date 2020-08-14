@@ -52,7 +52,7 @@ const Navigation = () => {
           </li>
           <li>
             <Link href='/comment'>
-              <a>Comment</a>
+              <a>Guest</a>
             </Link>
           </li>
         </ul>
