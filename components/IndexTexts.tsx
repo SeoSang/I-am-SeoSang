@@ -52,4 +52,4 @@ const IndexTexts: FC<{ onMouse: number }> = ({ onMouse }) => {
   )
 }
 
-export default IndexTexts
+export default React.memo(IndexTexts)

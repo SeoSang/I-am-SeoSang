@@ -51,4 +51,4 @@ const GameNavigation = () => {
   )
 }
 
-export default GameNavigation
+export default React.memo(GameNavigation)

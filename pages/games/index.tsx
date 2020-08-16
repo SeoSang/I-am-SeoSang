@@ -9,7 +9,7 @@ const IMG_SIZE = "250px"
 const ContainerDiv = styled(FlexDiv)`
   position: relative;
   padding: 25px;
-  width: 1000px;
+  width: 90%;
   flex-wrap: wrap;
 `
 /* Horizontal-offset Vertical-offset Blur-Radius Spread Shadow-Color */
@@ -79,9 +79,21 @@ const index = () => {
             </Link>
           </ContentDiv>
         </CardDiv>
+        <CardDiv>
+          <Img_Box width={IMG_SIZE} height={IMG_SIZE} imgBorRad='4px'>
+            <img src='/2048.png'></img>
+          </Img_Box>
+          <ContentDiv>
+            <h2>2048</h2>
+            <p>은근 꿀잼입니다.</p>
+            <Link href='/games/game2048'>
+              <a>GO!</a>
+            </Link>
+          </ContentDiv>
+        </CardDiv>
       </ContainerDiv>
     </FlexDiv>
   )
 }
 
-export default index
+export default React.memo(index)

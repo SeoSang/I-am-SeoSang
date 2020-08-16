@@ -38,7 +38,7 @@ const game2048 = () => {
           </Col>
         </Row>
         <Row>
-          <Game2048Board></Game2048Board>
+          <Game2048Board version={4}></Game2048Board>
         </Row>
         <Row>게임 방법 주저리 주저리 설명중~</Row>
         <footer>디자인과 게임 내용 출처 : "https://play2048.co/"</footer>
