@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react"
 import { FlexDiv, H2 } from "../../styles/styled"
 import styled from "styled-components"
-import { generateRandom, moveRight } from "./functions/Game2048Fun"
+import { generateRandom, moveRight, moveLeft, moveTop, moveBottom } from "./functions/Game2048Fun"
 
 interface CellProps {
   version?: number | undefined
@@ -69,13 +69,27 @@ const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
   const handleKeyPress = (e: React.KeyboardEvent) => {
     console.log("keyframe 일단눌림 !!")
     if (e.keyCode === 39) {
+      // 오른쪽
       const nextBoard = moveRight(gameBoard)
-      console.log("keyframe 39 눌림!!")
+      setGameBoard(Array.from(nextBoard))
+    }
+    if (e.keyCode === 37) {
+      // 왼쪽
+      const nextBoard = moveLeft(gameBoard)
+      setGameBoard(Array.from(nextBoard))
+    }
+    if (e.keyCode === 38) {
+      // 위쪽
+      const nextBoard = moveTop(gameBoard)
+      setGameBoard(Array.from(nextBoard))
+    }
+    if (e.keyCode === 40) {
+      // 아래쪽
+      const nextBoard = moveBottom(gameBoard)
       setGameBoard(Array.from(nextBoard))
     }
   }
 
-  console.log(gameBoard)
   return (
     <div>
       <input onKeyDown={handleKeyPress}></input>
