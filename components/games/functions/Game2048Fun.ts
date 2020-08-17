@@ -141,3 +141,64 @@ export const moveBottom = (board: number[][]) => {
   if (isSameBoard(board, nextBoard)) return board // 못움직이면 그대로
   return generateRandom(nextBoard)
 }
+
+const LEVEL0 = "#d2dae2"
+const LEVEL1 = "#fffa65"
+const LEVEL2 = "#ffc048"
+const LEVEL3 = "#ff9f1a"
+const LEVEL4 = "#ffcccc"
+const LEVEL5 = "#ff5e57"
+const LEVEL6 = "#ff3838"
+const LEVEL7 = "#0be881"
+const LEVEL8 = "#34e7e4"
+const LEVEL9 = "#cd84f1"
+const LEVEL10 = "#F8EFBA"
+const LEVEL11 = "#7d5fff"
+const LEVEL12 = "#575fcf"
+const LEVEL13 = "#808e9b"
+
+export const chooseColor: any = {
+  0: LEVEL0,
+  // Ver 2 , 4
+  2: LEVEL1,
+  4: LEVEL2,
+  8: LEVEL3,
+  16: LEVEL4,
+  32: LEVEL5,
+  64: LEVEL6,
+  128: LEVEL7,
+  256: LEVEL8,
+  512: LEVEL9,
+  1024: LEVEL10,
+  2048: LEVEL11,
+  4096: LEVEL12,
+  8192: LEVEL13,
+  // Ver 3
+  3: LEVEL1,
+  6: LEVEL2,
+  12: LEVEL3,
+  24: LEVEL4,
+  48: LEVEL5,
+  96: LEVEL6,
+  192: LEVEL7,
+  384: LEVEL8,
+  768: LEVEL9,
+  1536: LEVEL10,
+  3072: LEVEL11,
+  6144: LEVEL12,
+  12288: LEVEL13,
+  // Ver 4
+  5: LEVEL1,
+  10: LEVEL2,
+  20: LEVEL3,
+  40: LEVEL4,
+  80: LEVEL5,
+  160: LEVEL6,
+  320: LEVEL7,
+  640: LEVEL8,
+  1280: LEVEL9,
+  2560: LEVEL10,
+  5120: LEVEL11,
+  10240: LEVEL12,
+  20480: LEVEL13,
+}

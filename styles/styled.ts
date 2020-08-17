@@ -78,42 +78,42 @@ export const WhiteH2_KR = styled.h2`
 export const H3 = styled.h2`
   font-size: 1.5vw;
   max-width: 75vw;
-  color: ${(props) => props.color || "black"};
+  color: ${(props) => props.color || "inherit"};
   font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
 `
 
 export const H3_KR = styled.h2`
   font-size: 1.5vw;
   max-width: 75vw;
-  color: ${(props) => props.color || "black"};
+  color: ${(props) => props.color || "inherit"};
   font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
 `
 
 export const H2 = styled.h2`
   font-size: 2vw;
   max-width: 75vw;
-  color: ${(props) => props.color || "black"};
+  color: ${(props) => props.color || "inherit"};
   font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
 `
 
 export const H2_KR = styled.h2`
   font-size: 2vw;
   max-width: 75vw;
-  color: ${(props) => props.color || "black"};
+  color: ${(props) => props.color || "inherit"};
   font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
 `
 
 export const H1 = styled.h2`
   font-size: 4vw;
   max-width: 75vw;
-  color: ${(props) => props.color || "black"};
+  color: ${(props) => props.color || "inherit"};
   font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
 `
 
 export const H1_KR = styled.h2`
   font-size: 4vw;
   max-width: 75vw;
-  color: ${(props) => props.color || "black"};
+  color: ${(props) => props.color || "inherit"};
   font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
 `
 

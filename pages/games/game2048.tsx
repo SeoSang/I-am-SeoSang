@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Row, Col, Button } from "antd"
 import Game2048Board from "../../components/games/Game2048Board"
 import styled from "styled-components"
-import { GAME_BG_COLOR } from "../../styles/styled"
+import { GAME_BG_COLOR, H2_KR, H3_KR } from "../../styles/styled"
 
 const VersionButton = styled(Button)`
   display: block;
@@ -26,7 +26,10 @@ const game2048 = () => {
       </Col>
       <Col xs={24} md={12}>
         <Game2048Board version={version}></Game2048Board>
-        <Row>게임 방법 주저리 주저리 설명중~</Row>
+        <Row align='middle' justify='center' style={{ textAlign: "center" }}>
+          <p>➡⬅⬆⬇ 네 가지 키를 용해서 최고 점수를 얻어보세요!</p>
+          <p>좌측 메뉴를 통해 여러 모드를 즐길 수 있습니다!</p>
+        </Row>
         <footer>디자인과 게임 내용 출처 : "https://play2048.co/"</footer>
       </Col>
       <Col xs={0} md={6}></Col>

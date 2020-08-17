@@ -1,11 +1,20 @@
 import React, { FC, useState, useEffect, useCallback, useRef } from "react"
 import { Row, Col, Button } from "antd"
-import { FlexDiv, H2 } from "../../styles/styled"
+import { FlexDiv, H2, GAME_BG_COLOR } from "../../styles/styled"
 import styled from "styled-components"
-import { generateRandom, moveRight, moveLeft, moveTop, moveBottom } from "./functions/Game2048Fun"
+import {
+  generateRandom,
+  moveRight,
+  moveLeft,
+  moveTop,
+  moveBottom,
+  chooseColor,
+} from "./functions/Game2048Fun"
 
 interface CellProps {
-  version?: number | undefined
+  version: number
+  customTheme?: number
+  value: number
 }
 
 const getStyle = (version: number | undefined) => {
@@ -51,7 +60,23 @@ const STYLE = {
 const Cell = styled.div`
   ${(props: CellProps) => getStyle(props.version)}
   position: relative;
-  background-color: orange;
+  background-color: ${(props: CellProps) => {
+    let version = props.version !== 4 ? props.version : 2 // 4버전은 2버전이랑 색을 공유
+    let index = props.value / version
+    if (index === 0) return chooseColor[0]
+    let color = chooseColor[props.value]
+    switch (props.customTheme) {
+      case 1:
+        color = chooseColor[props.value]
+        break
+      case 2:
+        color = chooseColor[Math.floor(Math.pow(2, 13) / index)]
+        break
+      default:
+        break
+    }
+    return color
+  }};
   border: 2px solid;
 `
 const InnerH2 = styled(H2)`
@@ -71,6 +96,7 @@ const init_gameBoard = (version: number | undefined) => {
 const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
   const [gameBoard, setGameBoard] = useState<number[][]>(init_gameBoard(version))
   const [text, setText] = useState<string>("PRESS START!")
+  const [theme, setTheme] = useState<number>(1)
   const gameDoing = useRef(null)
 
   useEffect(() => {
@@ -79,7 +105,7 @@ const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
 
   // 키보드 눌렀을 때
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    console.log("keyframe 일단눌림 !!")
+    e.preventDefault()
     let nextBoard = gameBoard
     if (e.keyCode === 39) nextBoard = moveRight(gameBoard)
     if (e.keyCode === 37) nextBoard = moveLeft(gameBoard)
@@ -94,6 +120,16 @@ const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
       current?.focus()
       setText("START!")
       setGameBoard(init_gameBoard(version))
+    },
+    [version],
+  )
+
+  const onClickChange = useCallback(
+    (e: React.MouseEvent) => {
+      const { current }: any = gameDoing
+      current?.focus()
+      setText("THEME CHANGED!")
+      setTheme(theme === 1 ? 2 : 1)
     },
     [version],
   )
@@ -123,6 +159,7 @@ const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
       <Row>
         <Col span={18}>2048 Clone Game!</Col>
         <Col span={6}>
+          <Button onClick={onClickChange}>테마바꾸기</Button>
           <Button onClick={onClickStart}>Start</Button>
         </Col>
       </Row>
@@ -133,8 +170,9 @@ const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
               border: "none",
               cursor: "default",
               textAlign: "center",
-              fontSize: "4vw",
+              fontSize: "3vw",
               margin: "10px 0",
+              color: "#4b4b4b",
             }}
             onKeyDown={handleKeyPress}
             ref={gameDoing}
@@ -142,10 +180,12 @@ const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
             readOnly
           ></input>
           {gameBoard.map((row, r) => (
-            <FlexDiv width='80%' key={`FlexDiv__${r}`} style={{ margin: "0 auto" }}>
+            <FlexDiv width='60%' key={`FlexDiv__${r}`} style={{ margin: "0 auto" }}>
               {row.map((num, c) => (
-                <Cell version={version} key={`Cell__${r}_${c}`}>
-                  <InnerH2 key={`H2__${r}_${c}`}>{num}</InnerH2>
+                <Cell version={version} value={num} customTheme={theme} key={`Cell__${r}_${c}`}>
+                  <InnerH2 color={GAME_BG_COLOR} key={`H2__${r}_${c}`}>
+                    {num}
+                  </InnerH2>
                 </Cell>
               ))}
             </FlexDiv>
