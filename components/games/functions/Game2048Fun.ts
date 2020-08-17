@@ -3,6 +3,13 @@ import BillBoard from "../BillBoard"
 const pipe = (...functions: any) => (input: any) =>
   functions.reduce((acc: Function, fn: Function) => fn(acc), input)
 
+const isSameBoard = (board1: number[][], board2: number[][]): boolean => {
+  return board1.every((row, r) => {
+    return row.every((n, c) => {
+      return board2[r][c] === n
+    })
+  })
+}
 function transposeCCW(board: number[][]): number[][] {
   // 행렬 돌리기 (시계 반대)
   let version = board.length || 0
@@ -82,47 +89,55 @@ export const slideLeft = (board: number[][]) => {
   })
 }
 
-// 위쪽으로 단순 옮기기
-export const slideTop = (board: number[][]) => {
-  return pipe(transposeCCW, slideLeft, transposeCW)(board)
-}
+// slideTop과 Bottom 은 쓸 일이 없다  (회전 방식으로 바꿈.)
+// // 위쪽으로 단순 옮기기
+// export const slideTop = (board: number[][]) => {
+//   return pipe(transposeCCW, slideLeft, transposeCW)(board)
+// }
 
-// 위쪽으로 단순 옮기기
-export const slideBottom = (board: number[][]) => {
-  return pipe(transposeCCW, slideRight, transposeCW)(board)
-}
+// // 위쪽으로 단순 옮기기
+// export const slideBottom = (board: number[][]) => {
+//   return pipe(transposeCCW, slideRight, transposeCW)(board)
+// }
 
-export const combineLeft = (moveFun: any, generateFun: any) => (board: number[][]) => {
-  let combineCheck = false
+export const combineLeft = (board: number[][]) => {
   const version = board.length
+  const newBoard = Array.from(board)
   for (let row = 0; row < version; row++) {
     for (let col = 0; col < version - 1; col++) {
-      if (board[row][col] === board[row][col + 1]) {
-        board[row][col] = board[row][col] + board[row][col + 1]
-        board[row][col + 1] = 0
-        combineCheck = true
+      if (newBoard[row][col] === newBoard[row][col + 1]) {
+        newBoard[row][col] = newBoard[row][col] + newBoard[row][col + 1]
+        newBoard[row][col + 1] = 0
       }
     }
   }
-  return combineCheck ? generateFun(moveFun(board)) : board
+  return newBoard
 }
 
 // 오른쪽 버튼을 눌렀을 때
 export const moveRight = (board: number[][]) => {
-  return pipe(slideRight, combineLeft(slideRight, generateRandom))(board)
+  const nextBoard = pipe(slideRight, combineLeft, slideRight)(board)
+  if (isSameBoard(board, nextBoard)) return board // 변화 없으면 그대로
+  return generateRandom(nextBoard) // 변화 있으면 숫자 생성
 }
 
 // 왼쪽 버튼 눌렀을 때
 export const moveLeft = (board: number[][]) => {
-  return pipe(slideLeft, combineLeft(slideLeft, generateRandom))(board)
+  const nextBoard = pipe(slideLeft, combineLeft, slideLeft)(board)
+  if (isSameBoard(board, nextBoard)) return board // 변화 없으면 그대로
+  return generateRandom(nextBoard) // 변화 있으면 숫자 생성
 }
 
 // 위쪽 버튼을 눌렀을 때
 export const moveTop = (board: number[][]) => {
-  return pipe(transposeCCW, slideLeft, combineLeft(slideLeft, generateRandom), transposeCW)(board)
+  const nextBoard = pipe(transposeCCW, slideLeft, combineLeft, slideLeft, transposeCW)(board)
+  if (isSameBoard(board, nextBoard)) return board // 못움직이면 그대로
+  return generateRandom(nextBoard)
 }
 
 // 아래쪽 버튼 눌렀을 때
 export const moveBottom = (board: number[][]) => {
-  return pipe(transposeCCW, slideRight, combineLeft(slideRight, generateRandom), transposeCW)(board)
+  const nextBoard = pipe(transposeCCW, slideRight, combineLeft, slideRight, transposeCW)(board)
+  if (isSameBoard(board, nextBoard)) return board // 못움직이면 그대로
+  return generateRandom(nextBoard)
 }

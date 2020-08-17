@@ -1,45 +1,31 @@
-import React from "react"
+import React, { useState } from "react"
 import { Row, Col, Button } from "antd"
-import { H2 } from "../../styles/styled"
 import Game2048Board from "../../components/games/Game2048Board"
+import styled from "styled-components"
+import { GAME_BG_COLOR } from "../../styles/styled"
+
+const VersionButton = styled(Button)`
+  display: block;
+  width: 50%;
+  margin: 10px auto;
+`
 
 const game2048 = () => {
-  // 타이틀  점수
-  // 텍스트 새 게임
-  // 일단 비워두기
-  // 게임판
-  // 게임방법
-  // footer
+  const [version, setVersion] = useState(4)
+
+  const onClickButton = (ver: number) => (e: React.MouseEvent) => {
+    setVersion(ver)
+  }
   return (
-    <Row>
-      <Col xs={0} md={6}></Col>
+    <Row style={{ color: "#f5f6fa", minHeight: "100vh", backgroundColor: GAME_BG_COLOR }}>
+      <Col xs={0} md={6}>
+        <VersionButton onClick={onClickButton(2)}>2</VersionButton>
+        <VersionButton onClick={onClickButton(3)}>3</VersionButton>
+        <VersionButton onClick={onClickButton(4)}>4</VersionButton>
+        <VersionButton onClick={onClickButton(5)}>5</VersionButton>
+      </Col>
       <Col xs={24} md={12}>
-        {
-          // 타이틀과 점수
-        }
-        <Row>
-          <Col xs={24} md={6}>
-            <H2>2048</H2>
-          </Col>
-          <Col xs={24} md={3}>
-            Score
-          </Col>
-          <Col xs={24} md={3}>
-            Best
-          </Col>
-        </Row>
-        {
-          // 텍스트 새 게임
-        }
-        <Row>
-          <Col span={18}>2048 Clone Game!</Col>
-          <Col span={6}>
-            <Button>새 게임</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Game2048Board version={4}></Game2048Board>
-        </Row>
+        <Game2048Board version={version}></Game2048Board>
         <Row>게임 방법 주저리 주저리 설명중~</Row>
         <footer>디자인과 게임 내용 출처 : "https://play2048.co/"</footer>
       </Col>

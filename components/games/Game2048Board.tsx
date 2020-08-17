@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, useEffect, useCallback, useRef } from "react"
+import { Row, Col, Button } from "antd"
 import { FlexDiv, H2 } from "../../styles/styled"
 import styled from "styled-components"
 import { generateRandom, moveRight, moveLeft, moveTop, moveBottom } from "./functions/Game2048Fun"
@@ -18,6 +19,9 @@ const getStyle = (version: number | undefined) => {
       break
     case 4:
       verStyle = STYLE.ver4
+      break
+    case 5:
+      verStyle = STYLE.ver5
       break
     default:
       verStyle = STYLE.ver4
@@ -66,43 +70,89 @@ const init_gameBoard = (version: number | undefined) => {
 // version = 몇 칸짜리 게임인지
 const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
   const [gameBoard, setGameBoard] = useState<number[][]>(init_gameBoard(version))
+  const [text, setText] = useState<string>("PRESS START!")
+  const gameDoing = useRef(null)
+
+  useEffect(() => {
+    setGameBoard(init_gameBoard(version))
+  }, [version])
+
+  // 키보드 눌렀을 때
   const handleKeyPress = (e: React.KeyboardEvent) => {
     console.log("keyframe 일단눌림 !!")
-    if (e.keyCode === 39) {
-      // 오른쪽
-      const nextBoard = moveRight(gameBoard)
-      setGameBoard(Array.from(nextBoard))
-    }
-    if (e.keyCode === 37) {
-      // 왼쪽
-      const nextBoard = moveLeft(gameBoard)
-      setGameBoard(Array.from(nextBoard))
-    }
-    if (e.keyCode === 38) {
-      // 위쪽
-      const nextBoard = moveTop(gameBoard)
-      setGameBoard(Array.from(nextBoard))
-    }
-    if (e.keyCode === 40) {
-      // 아래쪽
-      const nextBoard = moveBottom(gameBoard)
-      setGameBoard(Array.from(nextBoard))
-    }
+    let nextBoard = gameBoard
+    if (e.keyCode === 39) nextBoard = moveRight(gameBoard)
+    if (e.keyCode === 37) nextBoard = moveLeft(gameBoard)
+    if (e.keyCode === 38) nextBoard = moveTop(gameBoard)
+    if (e.keyCode === 40) nextBoard = moveBottom(gameBoard)
+    setGameBoard(Array.from(nextBoard))
   }
+  // 게임 시작
+  const onClickStart = useCallback(
+    (e: React.MouseEvent) => {
+      const { current }: any = gameDoing
+      current?.focus()
+      setText("START!")
+      setGameBoard(init_gameBoard(version))
+    },
+    [version],
+  )
+
+  const gameFocus = useCallback(
+    (e: React.MouseEvent) => {
+      const { current }: any = gameDoing
+      current?.focus()
+      setText("PLAYING!")
+    },
+    [version],
+  )
 
   return (
-    <div>
-      <input onKeyDown={handleKeyPress}></input>
-      {gameBoard.map((row, r) => (
-        <FlexDiv width='100%' key={`FlexDiv__${r}`}>
-          {row.map((num, c) => (
-            <Cell version={version} key={`Cell__${r}_${c}`}>
-              <InnerH2 key={`H2__${r}_${c}`}>{num}</InnerH2>
-            </Cell>
+    <>
+      <Row>
+        <Col xs={24} md={6}>
+          <H2>2048</H2>
+        </Col>
+        <Col xs={24} md={3}>
+          Score
+        </Col>
+        <Col xs={24} md={3}>
+          Best
+        </Col>
+      </Row>
+      <Row>
+        <Col span={18}>2048 Clone Game!</Col>
+        <Col span={6}>
+          <Button onClick={onClickStart}>Start</Button>
+        </Col>
+      </Row>
+      <Row align={"middle"} justify={"center"} style={{ textAlign: "center" }}>
+        <div onClick={gameFocus} style={{ margin: "10px auto" }}>
+          <input
+            style={{
+              border: "none",
+              cursor: "default",
+              textAlign: "center",
+              fontSize: "4vw",
+              margin: "10px 0",
+            }}
+            onKeyDown={handleKeyPress}
+            ref={gameDoing}
+            value={text}
+            readOnly
+          ></input>
+          {gameBoard.map((row, r) => (
+            <FlexDiv width='80%' key={`FlexDiv__${r}`} style={{ margin: "0 auto" }}>
+              {row.map((num, c) => (
+                <Cell version={version} key={`Cell__${r}_${c}`}>
+                  <InnerH2 key={`H2__${r}_${c}`}>{num}</InnerH2>
+                </Cell>
+              ))}
+            </FlexDiv>
           ))}
-        </FlexDiv>
-      ))}
-    </div>
+        </div>
+      </Row>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { createElement, useState, useEffect, Context } from "react"
+import React, { createElement, useState, useEffect, Context, ButtonHTMLAttributes } from "react"
 import { FlexDiv, H1_KR, H2_KR, H3_KR } from "../styles/styled"
 import { Input, Comment, Tooltip, Button } from "antd"
 import Avatar from "antd/lib/avatar/avatar"
@@ -11,9 +11,10 @@ import {
   CaretDownOutlined,
   CaretUpOutlined,
 } from "@ant-design/icons"
-import styled from "styled-components"
+import styled, { StyledProps } from "styled-components"
 import axios from "axios"
 import Search from "antd/lib/input/Search"
+import { Style } from "util"
 
 export interface Comment {
   name: string
@@ -37,13 +38,13 @@ const GuestBookDiv = styled(FlexDiv)`
   overflow: auto;
 `
 
-const floatPrevButton = {
+const floatPrevButton: any = {
   top: "30vh",
   position: "absolute",
   zIndex: 2,
 }
 
-const floatMoreButton = {
+const floatMoreButton: any = {
   bottom: "10vh",
   position: "absolute",
   zIndex: 2,

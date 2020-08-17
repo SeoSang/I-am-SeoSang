@@ -9,6 +9,13 @@ const ROLL_COLORS: RollButtonProps = {
   hoverBackColor: "#C4E538",
 }
 
+const buttonStyle = {
+  height: "100%",
+  margin: "0 10%",
+  cursor: "pointer",
+  backgroundColor: GAME_BG_COLOR,
+}
+
 const GameNavigation = () => {
   const router = useRouter()
   const onClickHref = (href: string) => (e: React.MouseEvent) => {
@@ -25,27 +32,14 @@ const GameNavigation = () => {
         backgroundColor: GAME_BG_COLOR,
       }}
     >
-      <FlexDiv
-        onClick={onClickHref("lotto")}
-        style={{
-          height: "100%",
-          margin: "0 10%",
-          cursor: "pointer",
-          backgroundColor: GAME_BG_COLOR,
-        }}
-      >
+      <FlexDiv onClick={onClickHref("lotto")} style={buttonStyle}>
         <RollButton content={"Lotto"} colors={ROLL_COLORS}></RollButton>
       </FlexDiv>
-      <FlexDiv
-        onClick={onClickHref("numberbaseball")}
-        style={{
-          height: "100%",
-          margin: "0 10%",
-          cursor: "pointer",
-          backgroundColor: GAME_BG_COLOR,
-        }}
-      >
+      <FlexDiv onClick={onClickHref("numberbaseball")} style={buttonStyle}>
         <RollButton content={"Number Baseball"} colors={ROLL_COLORS}></RollButton>
+      </FlexDiv>
+      <FlexDiv onClick={onClickHref("game2048")} style={buttonStyle}>
+        <RollButton content={"2048"} colors={ROLL_COLORS}></RollButton>
       </FlexDiv>
     </FlexDiv>
   )
