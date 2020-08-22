@@ -9,6 +9,7 @@ export interface RollButtonProps {
 }
 
 export const RollButtonDiv = styled.div`
+  width: 100%;
   perspective: 500px;
   -webkit-perspective: 500px;
   -moz-perspective: 500px;

@@ -93,7 +93,7 @@ const init_gameBoard = (version: number | undefined) => {
 }
 
 // version = 몇 칸짜리 게임인지
-const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
+const Game2048Board: FC<{ version: number }> = ({ version }) => {
   const [gameBoard, setGameBoard] = useState<number[][]>(init_gameBoard(version))
   const [text, setText] = useState<string>("PRESS START!")
   const [theme, setTheme] = useState<number>(1)
@@ -121,7 +121,7 @@ const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
       setText("START!")
       setGameBoard(init_gameBoard(version))
     },
-    [version],
+    [version, theme],
   )
 
   const onClickChange = useCallback(
@@ -131,7 +131,7 @@ const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
       setText("THEME CHANGED!")
       setTheme(theme === 1 ? 2 : 1)
     },
-    [version],
+    [version, theme],
   )
 
   const gameFocus = useCallback(
@@ -140,7 +140,7 @@ const Game2048Board: FC<{ version: number | undefined }> = ({ version }) => {
       current?.focus()
       setText("PLAYING!")
     },
-    [version],
+    [version, theme],
   )
 
   return (

@@ -175,7 +175,7 @@ const NumberBaseball = () => {
   return (
     <React.Fragment>
       <GameNavigation></GameNavigation>
-      <FlexDiv height='90vh' backgroundColor={GAME_BG_COLOR} direction='column'>
+      <FlexDiv height='100vh' backgroundColor={GAME_BG_COLOR} direction='column'>
         <BaseballContainer style={baseballStyle} onClick={onClickBaseBall}>
           <img style={gameTriggered ? onClickImgStyle : {}} src='/baseball.png'></img>
         </BaseballContainer>

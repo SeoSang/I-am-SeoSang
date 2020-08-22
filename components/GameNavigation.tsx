@@ -1,7 +1,21 @@
 import React from "react"
-import { FlexDiv, GAME_BG_COLOR } from "../styles/styled"
+import { FlexDiv, H2 } from "../styles/styled"
 import { RollButton, RollButtonProps } from "../styles/buttons"
 import { useRouter } from "next/router"
+import styled from "styled-components"
+
+const GameNavigationContainer = styled(FlexDiv)`
+  position: absolute;
+  padding: 20px;
+  -webkit-box-shadow: 9px 11px 12px 2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 9px 11px 12px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 9px 11px 12px 2px rgba(0, 0, 0, 0.75);
+  background-color: #383b3a;
+  left: 3%;
+  bottom: 20%;
+  display: inline-flex;
+  flex-direction: column;
+`
 
 const ROLL_COLORS: RollButtonProps = {
   hoverColor: "#1B1464",
@@ -11,9 +25,10 @@ const ROLL_COLORS: RollButtonProps = {
 
 const buttonStyle = {
   height: "100%",
+  width: "100%",
   margin: "0 10%",
   cursor: "pointer",
-  backgroundColor: GAME_BG_COLOR,
+  backgroundColor: "#383b3a",
 }
 
 const GameNavigation = () => {
@@ -24,14 +39,10 @@ const GameNavigation = () => {
   }
 
   return (
-    <FlexDiv
-      style={{
-        display: "inline-flex",
-        width: "100vw",
-        height: "10vh",
-        backgroundColor: GAME_BG_COLOR,
-      }}
-    >
+    <GameNavigationContainer>
+      <H2 color='#f5f6fa' style={{ position: "absolute", top: "10px" }}>
+        GAMES
+      </H2>
       <FlexDiv onClick={onClickHref("lotto")} style={buttonStyle}>
         <RollButton content={"Lotto"} colors={ROLL_COLORS}></RollButton>
       </FlexDiv>
@@ -41,7 +52,7 @@ const GameNavigation = () => {
       <FlexDiv onClick={onClickHref("game2048")} style={buttonStyle}>
         <RollButton content={"2048"} colors={ROLL_COLORS}></RollButton>
       </FlexDiv>
-    </FlexDiv>
+    </GameNavigationContainer>
   )
 }
 

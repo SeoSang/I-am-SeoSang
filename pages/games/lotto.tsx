@@ -106,7 +106,7 @@ const Lotto = () => {
   return (
     <>
       <GameNavigation></GameNavigation>
-      <FlexDiv height='90vh' backgroundColor={GAME_BG_COLOR} direction='column'>
+      <FlexDiv height='100vh' backgroundColor={GAME_BG_COLOR} direction='column'>
         <LotteryContainer style={lotteryStyle} onClick={onClickLotto}>
           <img src='/lottery.png'></img>
         </LotteryContainer>
