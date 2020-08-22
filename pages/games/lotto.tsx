@@ -4,37 +4,7 @@ import Ball from "../../components/games/Ball"
 import { FlexDiv, GAME_BG_COLOR, WhiteH2 } from "../../styles/styled"
 import GameNavigation from "../../components/GameNavigation"
 import styled from "styled-components"
-
-export const LotteryContainer = styled.div`
-  position: absolute;
-  border-radius: 10px;
-  padding: 10px;
-  background-color: #f1f2f6;
-  width: 150px;
-  height: 150px;
-  transition: all 0.3s;
-  box-shadow: 0 5px 15px rgba(0, 0, 0.07);
-
-  img {
-    filter: grayscale(1);
-    max-width: 100%;
-  }
-
-  &:hover {
-    width: 250px;
-    height: 250px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0.1);
-    cursor: pointer;
-
-    img {
-      filter: grayscale(0);
-    }
-  }
-`
-const onClickLotteryStyle = {
-  top: "20%",
-  transform: "scale(0.5)",
-}
+import { onClickLotteryStyle, LotteryContainer, BallsContainer } from "../../styles/lotto/styled"
 
 function getWinNumbers() {
   const BONUS_INDEX = 7
@@ -56,6 +26,7 @@ const Lotto = () => {
   const [winBalls, setWinBalls] = useState<number[]>([])
   const [bonus, setBonus] = useState<number>(0)
   const [lotteryStyle, setLotteryStyle] = useState({})
+  const [ballContainerStyle, setBallContainerStyle] = useState({ display: "none" })
   const [textObject, setTextObject] = useState({ lottoNums: "", bonusNums: "" })
 
   const timeoutIDs = useRef<number[]>([])
@@ -64,6 +35,7 @@ const Lotto = () => {
   const onClickLotto = (e: React.MouseEvent) => {
     // e.preventDefault()
     setLotteryStyle(onClickLotteryStyle)
+    setBallContainerStyle({ display: "flex" })
     refresh()
     showBalls()
     setTextObject({ lottoNums: "6 Numbers", bonusNums: "Bonus" })
@@ -110,23 +82,23 @@ const Lotto = () => {
         <LotteryContainer style={lotteryStyle} onClick={onClickLotto}>
           <img src='/lottery.png'></img>
         </LotteryContainer>
-        <FlexDiv flex='inline-flex' height='20%' backgroundColor={GAME_BG_COLOR}>
-          <div style={{ position: "absolute", left: "10%" }}>
+        <FlexDiv height='20%' backgroundColor={GAME_BG_COLOR} direction='column'>
+          <div>
             <WhiteH2>{textObject.lottoNums}</WhiteH2>
           </div>
-          <FlexDiv height='90px'>
+          <BallsContainer style={ballContainerStyle}>
             {winBalls.map((nums, i) => (
               <Ball key={`${i}번째 공`} ballNum={nums}></Ball>
             ))}
-          </FlexDiv>
+          </BallsContainer>
         </FlexDiv>
-        <FlexDiv flex='inline-flex' height='20%' backgroundColor={GAME_BG_COLOR}>
-          <div style={{ position: "absolute", left: "10%" }}>
+        <FlexDiv height='20%' backgroundColor={GAME_BG_COLOR} direction='column'>
+          <div>
             <WhiteH2>{textObject.bonusNums}</WhiteH2>
           </div>
-          <FlexDiv height='90px'>
+          <BallsContainer style={ballContainerStyle}>
             {bonus == null ? null : <Ball key='bonus 공' ballNum={bonus}></Ball>}
-          </FlexDiv>
+          </BallsContainer>
         </FlexDiv>
       </FlexDiv>
       <footer>"Icon made by Pixel perfect from www.flaticon.com"</footer>

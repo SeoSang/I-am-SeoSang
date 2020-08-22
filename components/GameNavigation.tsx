@@ -12,7 +12,7 @@ const GameNavigationContainer = styled(FlexDiv)`
   box-shadow: 9px 11px 12px 2px rgba(0, 0, 0, 0.75);
   background-color: #383b3a;
   left: 3%;
-  bottom: 20%;
+  top: 5%;
   display: inline-flex;
   flex-direction: column;
 `

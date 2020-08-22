@@ -52,7 +52,7 @@ const BaseballContainer = styled.div`
 
 // 버튼 눌렀을 때 야구아이콘 스타일
 const onClickBaseballStyle = {
-  top: "10%",
+  bottom: "10%",
   left: "5%",
   transform: "scale(0.5)",
   filter: "grayscale(0)",

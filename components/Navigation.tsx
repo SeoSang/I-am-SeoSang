@@ -42,7 +42,7 @@ const Navigation = () => {
           </li>
           <li>
             <Link href='/profile'>
-              <a>ABOUT ME</a>
+              <a>About me</a>
             </Link>
           </li>
           <li>
