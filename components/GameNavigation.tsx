@@ -7,6 +7,7 @@ import styled from "styled-components"
 const GameNavigationContainer = styled(FlexDiv)`
   position: absolute;
   padding: 20px;
+  flex-wrap: nowrap;
   -webkit-box-shadow: 9px 11px 12px 2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 9px 11px 12px 2px rgba(0, 0, 0, 0.75);
   box-shadow: 9px 11px 12px 2px rgba(0, 0, 0, 0.75);

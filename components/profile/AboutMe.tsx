@@ -5,10 +5,10 @@ import { Row, Col } from "antd"
 const AboutMe = () => {
   return (
     <Row style={{ margin: "20px 10px" }}>
-      <Col xs={24} md={8}>
-        <img src='http://lorempixel.com/640/480/animals' style={{ maxWidth: "100%" }}></img>
+      <Col xs={24} md={6}>
+        <img src='/profile/profile_seo.jpg' style={{ maxWidth: "100%" }}></img>
       </Col>
-      <Col xs={24} md={16} style={{ padding: "0 5vw" }}>
+      <Col xs={24} md={12} style={{ padding: "0 5vw" }}>
         <H3_KR>⭐요약⭐</H3_KR>
         <ul>
           <li> 1997.06.09 ~ 서울 망원동 </li>
@@ -55,6 +55,20 @@ const AboutMe = () => {
               <strong>후기</strong>
             </a>
           </li>
+        </ul>
+      </Col>
+      <Col xs={24} md={6}>
+        <H3_KR>🧾 자격증 </H3_KR>
+        <ul>
+          <li> 정보처리 기능사 1급 </li>
+          <li> 컴활 1급</li>
+        </ul>
+        <br></br>
+        <H3_KR>😎 기타</H3_KR>
+        <ul>
+          <li> 프로그래머스 점수랭킹 83위 </li>
+          <li> 백준 골드 3 </li>
+          <li> (20.08.23 기준) </li>
         </ul>
       </Col>
     </Row>

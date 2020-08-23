@@ -36,7 +36,7 @@ const IconBoxDiv = styled(IconDiv)`
   width: calc(50% - 40px);
   margin: 0 30px 30px 0px;
   padding: 0 25px;
-  heigtht: 140px;
+  height: 225px;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -78,16 +78,16 @@ export default function Home() {
       <ContainerDIv>
         <IconDiv>
           <IconBoxDiv onMouseOver={onMouseOver(1)} onMouseOut={onMouseOut}>
-            <img style={{ maxWidth: "100%" }} src='/tistory.jpg'></img>
+            <img style={{ maxWidth: "100%" }} src='/question.ico'></img>
           </IconBoxDiv>
           <IconBoxDiv onMouseOver={onMouseOver(2)} onMouseOut={onMouseOut}>
-            <img style={{ maxWidth: "100%" }} src='/github.png'></img>
+            <img style={{ maxWidth: "100%" }} src='/code.ico'></img>
           </IconBoxDiv>
           <IconBoxDiv onMouseOver={onMouseOver(3)} onMouseOut={onMouseOut}>
-            <img style={{ maxWidth: "100%" }} src='http://lorempixel.com/640/480/technics'></img>
+            <img style={{ maxWidth: "100%" }} src='/exclamation.ico'></img>
           </IconBoxDiv>
           <IconBoxDiv onMouseOver={onMouseOver(4)} onMouseOut={onMouseOut}>
-            <img style={{ maxWidth: "100%" }} src='http://lorempixel.com/640/480/food'></img>
+            <img style={{ maxWidth: "100%" }} src='/plus.ico'></img>
           </IconBoxDiv>
         </IconDiv>
         <IndexTexts onMouse={onMouse}></IndexTexts>

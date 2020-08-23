@@ -16,6 +16,15 @@ interface ImgBoxDiv {
    */
   imgBorRad?: string
 }
+
+// Game
+export const GAME_BG_COLOR = "#16384c"
+
+// Index
+export const INDEX_BG_COLOR = "#ebecf1"
+export const INDEX_LINE_COLOR = "#206a5d"
+export const INDEX_TEXT_COLOR = "#1b1c25"
+
 export const FlexDiv = styled.div`
   display: ${(props: FlexDivProps) => props.flex || "flex"};
   flex-direction: ${(props: FlexDivProps) => props.direction || "row"};
@@ -185,13 +194,9 @@ export const BlinkGreenDiv = styled.div`
   -o-animation: ${blinkGreen} 1s infinite;
   animation: ${blinkGreen} 1s infinite;
 `
+export const A = styled.a`
+  font-weight: bolder;
+  color: ${INDEX_LINE_COLOR};
+`
 
 /** --  Page 별 props들 */
-
-// Game
-export const GAME_BG_COLOR = "#16384c"
-
-// Index
-export const INDEX_BG_COLOR = "#ebecf1"
-export const INDEX_LINE_COLOR = "#206a5d"
-export const INDEX_TEXT_COLOR = "#1b1c25"

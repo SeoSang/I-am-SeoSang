@@ -2,6 +2,16 @@ import React from "react"
 import styled from "styled-components"
 import { FlexDiv, INDEX_TEXT_COLOR, H2 } from "../../styles/styled"
 
+const TECH = {
+  Language: ["javascript.ico", "python.ico", "java.ico", "c.ico", "ocaml.ico"],
+  Web: ["html.ico", "css.ico", "javascript.ico", "typescript.ico", "webpack.ico", "babel.ico"],
+  Frontend: ["react.ico", "php.ico", "nextjs.ico"],
+  Backend: ["nodejs.ico", "express.png"],
+  Database: ["mysql.ico", "mongodb.ico"],
+  VersionControl: ["git.ico", "github.ico"],
+  ETC: ["excel.ico", "notion.ico", "trello.ico"],
+}
+
 const TechUsed = () => {
   const IconBox = styled.div`
     display: flex;
@@ -21,87 +31,66 @@ const TechUsed = () => {
   const IconContainer = styled(FlexDiv)`
     margin-bottom: 30px;
   `
+
   return (
     <FlexDiv direction='column' width='100%'>
       <H2 color={INDEX_TEXT_COLOR} style={{ marginTop: "20px" }}>
         Language
       </H2>
       <IconContainer>
-        <IconBox>
-          <img src='/profile/javascript.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/python.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/java.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/c.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/ocaml.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
+        {TECH.Language.map((icon) => (
+          <IconBox>
+            <img src={`/profile/${icon}`} style={{ maxWidth: "100%" }}></img>
+          </IconBox>
+        ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Web</H2>
       <IconContainer>
-        <IconBox>
-          <img src='/profile/html.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/css.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/javascript.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/typescript.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
+        {TECH.Web.map((icon) => (
+          <IconBox>
+            <img src={`/profile/${icon}`} style={{ maxWidth: "100%" }}></img>
+          </IconBox>
+        ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Frontend</H2>
       <IconContainer>
-        <IconBox>
-          <img src='/profile/react.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/php.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
+        {TECH.Frontend.map((icon) => (
+          <IconBox>
+            <img src={`/profile/${icon}`} style={{ maxWidth: "100%" }}></img>
+          </IconBox>
+        ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Backend</H2>
       <IconContainer>
-        <IconBox>
-          <img src='/profile/nodejs.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/express.png' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
+        {TECH.Backend.map((icon) => (
+          <IconBox>
+            <img src={`/profile/${icon}`} style={{ maxWidth: "100%" }}></img>
+          </IconBox>
+        ))}
       </IconContainer>
-      <H2 color={INDEX_TEXT_COLOR}>DataBase</H2>
+      <H2 color={INDEX_TEXT_COLOR}>Database</H2>
       <IconContainer>
-        <IconBox>
-          <img src='/profile/mysql.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/sequelize.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/mongodb.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
+        {TECH.Database.map((icon) => (
+          <IconBox>
+            <img src={`/profile/${icon}`} style={{ maxWidth: "100%" }}></img>
+          </IconBox>
+        ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Version Control</H2>
       <IconContainer>
-        <IconBox>
-          <img src='/profile/git.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
-        <IconBox>
-          <img src='/profile/github.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
+        {TECH.VersionControl.map((icon) => (
+          <IconBox>
+            <img src={`/profile/${icon}`} style={{ maxWidth: "100%" }}></img>
+          </IconBox>
+        ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>ETC</H2>
       <IconContainer>
-        <IconBox>
-          <img src='/profile/excel.ico' style={{ maxWidth: "100%" }}></img>
-        </IconBox>
+        {TECH.ETC.map((icon) => (
+          <IconBox>
+            <img src={`/profile/${icon}`} style={{ maxWidth: "100%" }}></img>
+          </IconBox>
+        ))}
       </IconContainer>
     </FlexDiv>
   )

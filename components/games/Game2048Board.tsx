@@ -11,6 +11,28 @@ import {
   chooseColor,
 } from "./functions/Game2048Fun"
 
+const ArrowContainer = styled.div`
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  background: #ea5455;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border: 5px solid #d2dae2;
+`
+
+const Arrow = styled(H2)`
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`
+
 interface CellProps {
   version: number
   customTheme?: number
@@ -96,6 +118,7 @@ const init_gameBoard = (version: number | undefined) => {
 const Game2048Board: FC<{ version: number }> = ({ version }) => {
   const [gameBoard, setGameBoard] = useState<number[][]>(init_gameBoard(version))
   const [text, setText] = useState<string>("PRESS START!")
+  const [arrow, setArrow] = useState<string>("")
   const [theme, setTheme] = useState<number>(1)
   const gameDoing = useRef(null)
 
@@ -112,6 +135,13 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
     if (e.keyCode === 38) nextBoard = moveTop(gameBoard)
     if (e.keyCode === 40) nextBoard = moveBottom(gameBoard)
     setGameBoard(Array.from(nextBoard))
+  }
+  const handleKeyUp = (e: React.KeyboardEvent) => {
+    e.preventDefault()
+    if (e.keyCode === 39) setArrow("➡")
+    if (e.keyCode === 37) setArrow("⬅")
+    if (e.keyCode === 38) setArrow("⬆")
+    if (e.keyCode === 40) setArrow("⬇")
   }
   // 게임 시작
   const onClickStart = useCallback(
@@ -157,13 +187,21 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
         </Col>
       </Row>
       <Row>
-        <Col span={18}>2048 Clone Game!</Col>
+        <Col span={18}>
+          <label>2048 Clone Game!</label>
+        </Col>
         <Col span={6}>
           <Button onClick={onClickChange}>테마바꾸기</Button>
           <Button onClick={onClickStart}>Start</Button>
         </Col>
       </Row>
       <Row align={"middle"} justify={"center"} style={{ textAlign: "center" }}>
+        <ArrowContainer>
+          <Arrow>{arrow}</Arrow>
+        </ArrowContainer>
+        <ArrowContainer style={{ left: "30px" }}>
+          <Arrow>{arrow}</Arrow>
+        </ArrowContainer>
         <div onClick={gameFocus} style={{ margin: "10px auto" }}>
           <input
             style={{
@@ -175,6 +213,7 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
               color: "#4b4b4b",
             }}
             onKeyDown={handleKeyPress}
+            onKeyUp={handleKeyUp}
             ref={gameDoing}
             value={text}
             readOnly
