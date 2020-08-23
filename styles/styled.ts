@@ -21,6 +21,7 @@ export const FlexDiv = styled.div`
   flex-direction: ${(props: FlexDivProps) => props.direction || "row"};
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   background-color: ${(props: FlexDivProps) => props.backgroundColor || "auto"};
   height: ${(props: FlexDivProps) => props.height || "auto"};
   width: ${(props: FlexDivProps) => props.width || "auto"};
@@ -189,3 +190,8 @@ export const BlinkGreenDiv = styled.div`
 
 // Game
 export const GAME_BG_COLOR = "#16384c"
+
+// Index
+export const INDEX_BG_COLOR = "#ebecf1"
+export const INDEX_LINE_COLOR = "#206a5d"
+export const INDEX_TEXT_COLOR = "#1b1c25"

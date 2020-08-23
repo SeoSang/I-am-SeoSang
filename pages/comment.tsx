@@ -1,5 +1,5 @@
 import React, { createElement, useState, useEffect, Context, ButtonHTMLAttributes } from "react"
-import { FlexDiv, H1_KR, H2_KR, H3_KR } from "../styles/styled"
+import { FlexDiv, H1_KR, H2_KR, H3_KR, INDEX_BG_COLOR } from "../styles/styled"
 import { Input, Comment, Tooltip, Button } from "antd"
 import Avatar from "antd/lib/avatar/avatar"
 import moment from "moment"
@@ -33,9 +33,8 @@ const GuestBookDiv = styled(FlexDiv)`
   -moz-border-radius: 10px 10px 10px 10px;
   -webkit-border-radius: 10px 10px 10px 10px;
   border: 6px solid #969496;
-  flex-direction: column;
   padding: 5vw;
-  overflow: auto;
+  // overflow: auto;
 `
 
 const floatPrevButton: any = {
@@ -126,7 +125,7 @@ const comment = ({ comments }: any) => {
     // console.log(comments)
   }, [])
   return (
-    <FlexDiv height='100vh'>
+    <FlexDiv color={INDEX_BG_COLOR} height='100vh'>
       <GuestBookDiv height='85vh' width='85vw'>
         {commentCount > 4 ? (
           <Button onClick={onClickPrev} style={floatPrevButton} icon={<CaretUpOutlined />}></Button>
@@ -157,7 +156,7 @@ const comment = ({ comments }: any) => {
           onChange={onChangeComment}
           placeholder={"안부 말을 남겨주세요😘"}
         ></Input.TextArea>
-        <div style={{ overflow: "auto" }}>
+        <FlexDiv direction='column' style={{ overflow: "auto" }}>
           {displayComments.map((comment: Comment, i) => (
             <Comment
               actions={[
@@ -186,7 +185,7 @@ const comment = ({ comments }: any) => {
               key={`comment_${i}`}
             />
           ))}
-        </div>
+        </FlexDiv>
       </GuestBookDiv>
     </FlexDiv>
   )

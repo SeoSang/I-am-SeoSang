@@ -3,10 +3,11 @@ import Head from "next/head"
 import styled from "styled-components"
 import { Row, Col } from "antd"
 import IndexTexts from "../components/IndexTexts"
+import { INDEX_BG_COLOR } from "../styles/styled"
 
 const ContainerDIv = styled.div`
-  position: relative;
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   width: 1100px;
 `
@@ -17,6 +18,7 @@ export const ContentDiv = styled.div`
   align-items: center;
   min-height: 100vh;
   max-width: 100vw;
+  background-color: ${INDEX_BG_COLOR};
 `
 
 const IconDiv = styled(ContainerDIv)`

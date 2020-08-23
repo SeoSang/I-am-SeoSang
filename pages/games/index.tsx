@@ -57,7 +57,7 @@ const index = () => {
       <ContainerDiv backgroundColor='#16384c'>
         <CardDiv>
           <Img_Box width={IMG_SIZE} height={IMG_SIZE} imgBorRad='4px'>
-            <img src='/lotto.jpg'></img>
+            <img src='/games/lotto.jpg'></img>
           </Img_Box>
           <ContentDiv>
             <h2>로또 추첨기</h2>
@@ -69,7 +69,7 @@ const index = () => {
         </CardDiv>
         <CardDiv>
           <Img_Box width={IMG_SIZE} height={IMG_SIZE} imgBorRad='4px'>
-            <img src='/numbers.jpg'></img>
+            <img src='/games/numbers.jpg'></img>
           </Img_Box>
           <ContentDiv>
             <h2>숫자 야구</h2>
@@ -81,7 +81,7 @@ const index = () => {
         </CardDiv>
         <CardDiv>
           <Img_Box width={IMG_SIZE} height={IMG_SIZE} imgBorRad='4px'>
-            <img src='/2048.png'></img>
+            <img src='/games/2048.png'></img>
           </Img_Box>
           <ContentDiv>
             <h2>2048</h2>

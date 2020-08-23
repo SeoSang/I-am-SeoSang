@@ -177,7 +177,7 @@ const NumberBaseball = () => {
       <GameNavigation></GameNavigation>
       <FlexDiv height='100vh' backgroundColor={GAME_BG_COLOR} direction='column'>
         <BaseballContainer style={baseballStyle} onClick={onClickBaseBall}>
-          <img style={gameTriggered ? onClickImgStyle : {}} src='/baseball.png'></img>
+          <img style={gameTriggered ? onClickImgStyle : {}} src='/games/baseball.png'></img>
         </BaseballContainer>
         <FlexDiv
           direction='column'

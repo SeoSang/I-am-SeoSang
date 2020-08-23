@@ -1,5 +1,6 @@
 import "../styles/globals.css"
 import "../styles/navigation.css"
+import "../styles/profile.css"
 import Head from "next/head"
 import { AppPropsType } from "next/dist/next-server/lib/utils"
 import AppLayout from "../components/AppLayout"

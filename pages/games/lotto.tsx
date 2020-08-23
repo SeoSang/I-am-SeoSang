@@ -80,7 +80,7 @@ const Lotto = () => {
       <GameNavigation></GameNavigation>
       <FlexDiv height='100vh' backgroundColor={GAME_BG_COLOR} direction='column'>
         <LotteryContainer style={lotteryStyle} onClick={onClickLotto}>
-          <img src='/lottery.png'></img>
+          <img src='/games/lottery.png'></img>
         </LotteryContainer>
         <FlexDiv height='20%' backgroundColor={GAME_BG_COLOR} direction='column'>
           <div>
