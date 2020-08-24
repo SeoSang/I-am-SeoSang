@@ -46,6 +46,8 @@ const IconBoxDiv = styled(IconDiv)`
 
   &:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0.1);
+    background-color: #32e0c4;
+    transition: background-color 1s;
   }
 
   img {

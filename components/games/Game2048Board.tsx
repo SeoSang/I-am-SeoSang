@@ -9,6 +9,7 @@ import {
   moveTop,
   moveBottom,
   chooseColor,
+  calScore,
 } from "./functions/Game2048Fun"
 
 const ArrowContainer = styled.div`
@@ -31,6 +32,13 @@ const Arrow = styled(H2)`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+`
+
+const ScoreBestCol = styled(Col)`
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 10px;
 `
 
 interface CellProps {
@@ -120,21 +128,33 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
   const [text, setText] = useState<string>("PRESS START!")
   const [arrow, setArrow] = useState<string>("")
   const [theme, setTheme] = useState<number>(1)
+  const [score, setScore] = useState<number>(0)
+  const [best, setBest] = useState<number>(0)
+  const [scoreDiff, setScoreDiff] = useState<number>(0)
   const gameDoing = useRef(null)
 
   useEffect(() => {
-    setGameBoard(init_gameBoard(version))
+    Initialize_Game()
   }, [version])
+
+  // 게임 초기화
+  const Initialize_Game = useCallback(() => {
+    setGameBoard(init_gameBoard(version))
+    setText("START!")
+    setScore(0)
+  }, [version, theme])
 
   // 키보드 눌렀을 때
   const handleKeyPress = (e: React.KeyboardEvent) => {
     e.preventDefault()
+    let prevBoard = Array.from(gameBoard)
     let nextBoard = gameBoard
     if (e.keyCode === 39) nextBoard = moveRight(gameBoard)
     if (e.keyCode === 37) nextBoard = moveLeft(gameBoard)
     if (e.keyCode === 38) nextBoard = moveTop(gameBoard)
     if (e.keyCode === 40) nextBoard = moveBottom(gameBoard)
     setGameBoard(Array.from(nextBoard))
+    setScore(score + calScore(prevBoard, nextBoard))
   }
   const handleKeyUp = (e: React.KeyboardEvent) => {
     e.preventDefault()
@@ -148,8 +168,7 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
     (e: React.MouseEvent) => {
       const { current }: any = gameDoing
       current?.focus()
-      setText("START!")
-      setGameBoard(init_gameBoard(version))
+      Initialize_Game()
     },
     [version, theme],
   )
@@ -179,20 +198,24 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
         <Col xs={24} md={6}>
           <H2>2048</H2>
         </Col>
-        <Col xs={24} md={3}>
-          Score
-        </Col>
-        <Col xs={24} md={3}>
-          Best
-        </Col>
+        <ScoreBestCol xs={12} md={3}>
+          <Row>Score</Row>
+          <Row>{score}</Row>
+        </ScoreBestCol>
+        <ScoreBestCol xs={12} md={3}>
+          <Row>Best</Row>
+          <Row>{score}</Row>
+        </ScoreBestCol>
       </Row>
       <Row>
-        <Col span={18}>
+        <Col xs={12} md={12}>
           <label>2048 Clone Game!</label>
         </Col>
-        <Col span={6}>
+        <Col xs={12} md={12} style={{ textAlign: "right" }}>
           <Button onClick={onClickChange}>테마바꾸기</Button>
-          <Button onClick={onClickStart}>Start</Button>
+          <Button style={{ margin: "10px" }} onClick={onClickStart}>
+            Start
+          </Button>
         </Col>
       </Row>
       <Row align={"middle"} justify={"center"} style={{ textAlign: "center" }}>

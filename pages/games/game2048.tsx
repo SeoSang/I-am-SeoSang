@@ -31,17 +31,18 @@ const game2048 = () => {
   }
   return (
     <Row style={{ color: "#f5f6fa", minHeight: "100vh", backgroundColor: GAME_BG_COLOR }}>
+      <Col xs={24} md={6} style={{ textAlign: "center" }}></Col>
       <GameNavigation></GameNavigation>
-      <Col xs={0} md={6} style={{ textAlign: "center" }}></Col>
       <Col xs={24} md={12}>
+        <br></br>
         <Game2048Board version={version}></Game2048Board>
         <Row align='middle' justify='center' style={{ textAlign: "center" }}>
-          <p>➡⬅⬆⬇ 네 가지 키를 용해서 최고 점수를 얻어보세요!</p>
-          <p>좌측 메뉴를 통해 여러 모드를 즐길 수 있습니다!</p>
+          <p>조작법 : ➡ / ⬅ / ⬆ / ⬇</p>
+          <p>우측 상단메뉴를 통해 여러 모드와 테마로 즐길 수 있습니다! (웹 전용)</p>
         </Row>
         <footer>게임 내용 출처 : "https://play2048.co/"</footer>
       </Col>
-      <Col xs={0} md={6} style={{ textAlign: "center" }}>
+      <Col xs={24} md={6} style={{ textAlign: "center" }}>
         <ModeContainer>
           <H2>SELECT MODE</H2>
           {new Array(4).fill(null).map((v, i) => (

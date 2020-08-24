@@ -32,7 +32,7 @@ const GuestBookDiv = styled(FlexDiv)`
   border-radius: 10px 10px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px;
   -webkit-border-radius: 10px 10px 10px 10px;
-  border: 6px solid #969496;
+  border: 6px solid #6e6d6d;
   padding: 5vw;
   // overflow: auto;
 `
@@ -56,6 +56,21 @@ const ERROR_OCCUR: Comment = {
   dislike: 0,
   createdAt: moment().toDate(),
 }
+
+const CommentDiv = styled(Comment)`
+  width: 65vw;
+  background-color: #f6f5f5;
+  padding-left: 15px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  -webkit-box-shadow: 10px 10px 5px -8px rgba(128, 128, 128, 0.78);
+  -moz-box-shadow: 10px 10px 5px -8px rgba(128, 128, 128, 0.78);
+  box-shadow: 10px 10px 5px -8px rgba(128, 128, 128, 0.78);
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #d9bd86;
+`
 
 const comment = ({ comments }: any) => {
   const [action, setAction] = useState(null)
@@ -135,30 +150,13 @@ const comment = ({ comments }: any) => {
         <div style={{ width: "100%", textAlign: "end" }}>
           <p>예쁜말만 합시다😁</p>
           <p>개인적인 용건은 ddrrpg@naver.com로 부탁드립니다.</p>
-        </div>
-        <H3_KR style={{ width: "60vw" }}>방명록 남기기</H3_KR>
-        <div>
-          <Button type='primary' style={{ cursor: "none", width: "10vw" }}>
-            이름 :
+          <Button>
+            <H3_KR style={{ width: "100%" }}>방명록 남기기</H3_KR>
           </Button>
-          <Search
-            style={{ width: "50vw" }}
-            placeholder='남길 이름도 입력해주세요😁'
-            enterButton='등록'
-            onChange={onChangeName}
-            onSearch={onSubmitComment}
-          />
         </div>
-        <Input.TextArea
-          style={{ width: "60vw" }}
-          rows={4}
-          value={value}
-          onChange={onChangeComment}
-          placeholder={"안부 말을 남겨주세요😘"}
-        ></Input.TextArea>
         <FlexDiv direction='column' style={{ overflow: "auto" }}>
           {displayComments.map((comment: Comment, i) => (
-            <Comment
+            <CommentDiv
               actions={[
                 <Tooltip key='comment-basic-like' title='Like'>
                   <span onClick={onClickLike}>

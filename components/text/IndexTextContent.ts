@@ -9,9 +9,9 @@ const text2 = {
   description: "저는 개발이 즐겁고 개발자인 것이 자랑스럽습니다👍",
 }
 const text3 = {
-  title: "타이틀 3",
+  title: "진짜는 모두가 알아본다.",
   description:
-    " Vero ipsam aliquid. At delectus voluptatem ut. Qui pariatur non debitis inventore quo reprehenderit sed nihil. Quaerat porro aperiam nostrum modi consequunturperspiciatis incidunt. Pariatur consequatur magni quis. Est sint eius minus totam.",
+    "겉만 번지르르하지 않은 진짜 실력을 갖추고 싶습니다. 점점 더 발전하는 개발자가 될 것입니다!",
 }
 const text4 = {
   title: "자세히",

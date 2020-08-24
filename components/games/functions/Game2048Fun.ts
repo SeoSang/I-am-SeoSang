@@ -142,6 +142,35 @@ export const moveBottom = (board: number[][]) => {
   return generateRandom(nextBoard)
 }
 
+// 점수 계산하는 함수
+export const calScore = (prev: number[][], now: number[][]) => {
+  const Score_prev: any = {}
+  const Score_now: any = {}
+  let score = 0
+  prev.map((row) => {
+    row.map((num) => {
+      Score_prev[num] = Score_prev[num] ? Score_prev[num] + 1 : 1
+    })
+  })
+  now.map((row) => {
+    row.map((num) => {
+      Score_now[num] = Score_now[num] ? Score_now[num] + 1 : 1
+    })
+  })
+  Object.keys(Score_prev).map((num) => {
+    let prev_cnt = Score_prev[num]
+    let now_cnt = Score_now[num] ? Score_now[num] : 0
+    // 터트렸을 때
+    if (prev_cnt > now_cnt) {
+      let isInitiailNum = num === "2" || num === "3" || num === "5"
+      let diff_cnt = isInitiailNum ? prev_cnt - now_cnt + 1 : prev_cnt - now_cnt // 초기값은 1개가 새로생긴다
+      score += diff_cnt * parseInt(num)
+      Score_now[parseInt(num) * 2] -= 1
+    }
+  })
+  return score
+}
+
 const LEVEL0 = "#d2dae2"
 const LEVEL1 = "#fffa65"
 const LEVEL2 = "#ffc048"
