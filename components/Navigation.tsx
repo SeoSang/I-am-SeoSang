@@ -10,7 +10,7 @@ const MENU_BUTTON_STYLE = {
   border: "2px solid",
   borderRadius: "3px",
   padding: "10px",
-  color: "#192A56",
+  color: "#776d8a",
 }
 const X_BUTTON_STYLE = {
   fontSize: "22px",

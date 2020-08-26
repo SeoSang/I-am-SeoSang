@@ -82,7 +82,7 @@ const Lotto = () => {
         <LotteryContainer style={lotteryStyle} onClick={onClickLotto}>
           <img src='/games/lottery.png'></img>
         </LotteryContainer>
-        <FlexDiv height='20%' backgroundColor={GAME_BG_COLOR} direction='column'>
+        <FlexDiv height='25%' backgroundColor={GAME_BG_COLOR} direction='column'>
           <div>
             <WhiteH2>{textObject.lottoNums}</WhiteH2>
           </div>
@@ -92,7 +92,7 @@ const Lotto = () => {
             ))}
           </BallsContainer>
         </FlexDiv>
-        <FlexDiv height='20%' backgroundColor={GAME_BG_COLOR} direction='column'>
+        <FlexDiv height='25%' backgroundColor={GAME_BG_COLOR} direction='column'>
           <div>
             <WhiteH2>{textObject.bonusNums}</WhiteH2>
           </div>

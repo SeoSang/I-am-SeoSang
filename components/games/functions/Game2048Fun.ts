@@ -72,7 +72,9 @@ export const slideRight = (board: number[][]) => {
   const newBoard = board.map((row, r) => {
     let remain = row.filter((n) => n != 0)
     let zero_cnt = version - remain.length
-    let newRow = Array(zero_cnt).fill(0).concat(remain)
+    let newRow = Array(zero_cnt)
+      .fill(0)
+      .concat(remain)
     return newRow
   })
   return newBoard
@@ -170,6 +172,17 @@ export const calScore = (prev: number[][], now: number[][]) => {
   })
   return score
 }
+
+// 게임 끝났는지 확인
+export const isGameOver = (board: number[][]) => {
+  if (moveLeft(board) !== board) return false
+  if (moveRight(board) !== board) return false
+  if (moveTop(board) !== board) return false
+  if (moveBottom(board) !== board) return false
+  return true
+}
+
+export const MOVING_KEYCODE = [37, 38, 39, 40]
 
 const LEVEL0 = "#d2dae2"
 const LEVEL1 = "#fffa65"

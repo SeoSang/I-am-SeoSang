@@ -23,7 +23,11 @@ const AboutMe = () => {
           <li>
             {" "}
             2019 하나와영 해커톤 최우수상 수상 :{" "}
-            <a style={{ color: INDEX_LINE_COLOR }} href='https://github.com/beygee/minki'>
+            <a
+              style={{ color: INDEX_LINE_COLOR }}
+              href='https://github.com/beygee/minki'
+              target='_blank'
+            >
               <strong>Minki</strong>
             </a>
           </li>
@@ -33,26 +37,39 @@ const AboutMe = () => {
             <a
               style={{ color: INDEX_LINE_COLOR }}
               href='https://www.youtube.com/watch?v=DTgJO6ti7s4'
+              target='_blank'
             >
               <strong>Berry IP</strong>
             </a>
           </li>
           <li>
             2019 블로그 개설 :{" "}
-            <a style={{ color: INDEX_LINE_COLOR }} href='https://programming119.tistory.com'>
+            <a
+              style={{ color: INDEX_LINE_COLOR }}
+              href='https://programming119.tistory.com'
+              target='_blank'
+            >
               <strong>개발자 아저씨들 힘을 모아</strong>
             </a>
           </li>
           <li>
             2020 독학의 해, 잡다한 토이 프로젝트들 진행중 /
-            <a style={{ color: INDEX_LINE_COLOR }} href='https://github.com/SeoSang'>
+            <a
+              style={{ color: INDEX_LINE_COLOR }}
+              href='https://github.com/SeoSang'
+              target='_blank'
+            >
               <strong>Github</strong>
             </a>
           </li>
           <li>
             {" "}
             2020 하절기 삼성 SDS 대학생 알고리즘 특강 Professional 과정 수료 /{" "}
-            <a style={{ color: INDEX_LINE_COLOR }} href='https://programming119.tistory.com/175'>
+            <a
+              style={{ color: INDEX_LINE_COLOR }}
+              href='https://programming119.tistory.com/175'
+              target='_blank'
+            >
               <strong>후기</strong>
             </a>
           </li>
@@ -72,7 +89,10 @@ const AboutMe = () => {
           <li> (20.08.23 기준) </li>
           <li>
             {" "}
-            연애중💕(18.08.13~) with <A href='https://blog.naver.com/minjy918'>김마림바</A>{" "}
+            연애중💕(18.08.13~) with{" "}
+            <A href='https://blog.naver.com/minjy918' target='_blank'>
+              김마림바
+            </A>{" "}
           </li>
         </ul>
       </Col>

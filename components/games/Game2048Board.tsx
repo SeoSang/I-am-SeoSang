@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, useCallback, useRef } from "react"
-import { Row, Col, Button } from "antd"
+import { Row, Col, Button, message } from "antd"
 import { FlexDiv, H2, GAME_BG_COLOR } from "../../styles/styled"
-import styled from "styled-components"
+import styled, { keyframes, css } from "styled-components"
 import {
   generateRandom,
   moveRight,
@@ -10,6 +10,8 @@ import {
   moveBottom,
   chooseColor,
   calScore,
+  isGameOver,
+  MOVING_KEYCODE,
 } from "./functions/Game2048Fun"
 
 const ArrowContainer = styled.div`
@@ -39,6 +41,35 @@ const ScoreBestCol = styled(Col)`
   border-radius: 5px;
   padding: 5px;
   margin-left: 10px;
+`
+
+const diffAnimation = keyframes`
+  0% {
+    top: 60px;
+    opacity: 100%;
+  }
+  100% {
+    top: -20px;
+    opacity: 0%;
+  }
+`
+const triggeredStyle = css`
+  animation: ${diffAnimation} 1s linear;
+  animation-iteration-count: 1;
+`
+const prevStyle = css`
+  animation: none;
+`
+interface DiffProps {
+  triggered: boolean
+}
+
+const DiffScore = styled.div`
+  position: absolute;
+  top: -20px;
+  opacity: 0;
+  font-size: 150%;
+  ${(props: DiffProps) => (props.triggered ? triggeredStyle : prevStyle)}
 `
 
 interface CellProps {
@@ -116,6 +147,10 @@ const InnerH2 = styled(H2)`
   transform: translate(-50%, -50%);
 `
 
+const isMovingKey = (keycode: number) => {
+  return MOVING_KEYCODE.find((element: number) => element === keycode) !== undefined
+}
+
 const init_gameBoard = (version: number | undefined) => {
   const newBoard = Array.from(Array(version), () => Array(version).fill(0))
   generateRandom(newBoard)
@@ -129,33 +164,82 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
   const [arrow, setArrow] = useState<string>("")
   const [theme, setTheme] = useState<number>(1)
   const [score, setScore] = useState<number>(0)
+  const [playing, setPlaying] = useState<boolean>(false)
   const [best, setBest] = useState<number>(0)
   const [scoreDiff, setScoreDiff] = useState<number>(0)
+  const [diff, setDiff] = useState<boolean>(false)
+  const [diffCheck, setDiffCheck] = useState<boolean>(true)
+  const [pressAvail, setPressAvail] = useState<boolean>(true)
   const gameDoing = useRef(null)
 
   useEffect(() => {
     Initialize_Game()
   }, [version])
 
+  useEffect(() => {
+    let timer: number
+    if (diffCheck) {
+      timer = setTimeout(() => {
+        setDiff(!diff)
+      })
+      setDiffCheck(false)
+    }
+    return () => {
+      if (!diffCheck) clearTimeout(timer)
+    }
+  }, [diff, diffCheck])
+
   // 게임 초기화
   const Initialize_Game = useCallback(() => {
     setGameBoard(init_gameBoard(version))
     setText("START!")
     setScore(0)
-  }, [version, theme])
+    setScoreDiff(0)
+    setDiff(false)
+    setDiffCheck(true)
+    setPlaying(true)
+  }, [version, theme, playing])
 
   // 키보드 눌렀을 때
   const handleKeyPress = (e: React.KeyboardEvent) => {
     e.preventDefault()
+    if (!pressAvail) return
+    // Ctrl + R 게임 초기화 (치트키)
+    if (e.keyCode === 82 && e.ctrlKey) {
+      Initialize_Game()
+      return
+    }
+    if (playing === false) return // 게임 중인지 체크
+    if (isMovingKey(e.keyCode) === false) return // 상하좌우 키 인지 체크
     let prevBoard = Array.from(gameBoard)
     let nextBoard = gameBoard
     if (e.keyCode === 39) nextBoard = moveRight(gameBoard)
-    if (e.keyCode === 37) nextBoard = moveLeft(gameBoard)
-    if (e.keyCode === 38) nextBoard = moveTop(gameBoard)
-    if (e.keyCode === 40) nextBoard = moveBottom(gameBoard)
+    else if (e.keyCode === 37) nextBoard = moveLeft(gameBoard)
+    else if (e.keyCode === 38) nextBoard = moveTop(gameBoard)
+    else if (e.keyCode === 40) nextBoard = moveBottom(gameBoard)
     setGameBoard(Array.from(nextBoard))
-    setScore(score + calScore(prevBoard, nextBoard))
+    const gettingScore = calScore(prevBoard, nextBoard)
+    setScore(score + gettingScore)
+    setScoreDiff(gettingScore)
+    // 움직인 결과일 때 diff 애니메이션 작동
+    if (isMovingKey(e.keyCode) && gettingScore !== 0) {
+      console.log(gettingScore)
+      console.log(gettingScore === 0)
+      setDiff(!diff)
+      setDiffCheck(true)
+    }
+    // 게임 끝!
+    if (isGameOver(gameBoard)) {
+      message.error(`게임 종료! 점수 : ${score}`)
+      setText("Game Over!!")
+      setPlaying(false)
+    }
+    setPressAvail(false)
+    setTimeout(() => {
+      setPressAvail(true)
+    }, 10)
   }
+
   const handleKeyUp = (e: React.KeyboardEvent) => {
     e.preventDefault()
     if (e.keyCode === 39) setArrow("➡")
@@ -170,7 +254,7 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
       current?.focus()
       Initialize_Game()
     },
-    [version, theme],
+    [version, theme, playing],
   )
 
   const onClickChange = useCallback(
@@ -180,16 +264,17 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
       setText("THEME CHANGED!")
       setTheme(theme === 1 ? 2 : 1)
     },
-    [version, theme],
+    [version, theme, playing],
   )
 
   const gameFocus = useCallback(
     (e: React.MouseEvent) => {
+      if (playing === false) return
       const { current }: any = gameDoing
       current?.focus()
       setText("PLAYING!")
     },
-    [version, theme],
+    [version, theme, playing],
   )
 
   return (
@@ -199,10 +284,12 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
           <H2>2048</H2>
         </Col>
         <ScoreBestCol xs={12} md={3}>
+          <DiffScore triggered={diff}>+{scoreDiff}</DiffScore>
           <Row>Score</Row>
           <Row>{score}</Row>
         </ScoreBestCol>
         <ScoreBestCol xs={12} md={3}>
+          <DiffScore triggered={diff}>+{scoreDiff}</DiffScore>
           <Row>Best</Row>
           <Row>{score}</Row>
         </ScoreBestCol>
@@ -231,7 +318,7 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
               border: "none",
               cursor: "default",
               textAlign: "center",
-              fontSize: "3vw",
+              fontSize: "2.5vw",
               margin: "10px 0",
               color: "#4b4b4b",
             }}
@@ -242,7 +329,7 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
             readOnly
           ></input>
           {gameBoard.map((row, r) => (
-            <FlexDiv width='60%' key={`FlexDiv__${r}`} style={{ margin: "0 auto" }}>
+            <FlexDiv width='55%' key={`FlexDiv__${r}`} style={{ margin: "0 auto" }}>
               {row.map((num, c) => (
                 <Cell version={version} value={num} customTheme={theme} key={`Cell__${r}_${c}`}>
                   <InnerH2 color={GAME_BG_COLOR} key={`H2__${r}_${c}`}>

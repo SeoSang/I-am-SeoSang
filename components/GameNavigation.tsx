@@ -44,14 +44,14 @@ const GameNavigation = () => {
       <H2 color='#f5f6fa' style={{ position: "absolute", top: "10px" }}>
         GAMES
       </H2>
+      <FlexDiv onClick={onClickHref("game2048")} style={buttonStyle}>
+        <RollButton content={"2048"} colors={ROLL_COLORS}></RollButton>
+      </FlexDiv>
       <FlexDiv onClick={onClickHref("lotto")} style={buttonStyle}>
         <RollButton content={"Lotto"} colors={ROLL_COLORS}></RollButton>
       </FlexDiv>
       <FlexDiv onClick={onClickHref("numberbaseball")} style={buttonStyle}>
         <RollButton content={"Number Baseball"} colors={ROLL_COLORS}></RollButton>
-      </FlexDiv>
-      <FlexDiv onClick={onClickHref("game2048")} style={buttonStyle}>
-        <RollButton content={"2048"} colors={ROLL_COLORS}></RollButton>
       </FlexDiv>
     </GameNavigationContainer>
   )

@@ -70,6 +70,7 @@ const IndexTexts: FC<{ onMouse: number }> = ({ onMouse }) => {
       </ContentBoxDiv>
       <ContentBoxDiv style={onMouse == 3 ? onMouseStyle : { transform: "scale(0)" }}>
         <TextDiv>
+          <IndexImage src='/real.jpg'></IndexImage>
           <H2_KR>진짜는</H2_KR>
           <H2_KR>모두가 알아본다.</H2_KR>
           <p>
@@ -78,8 +79,14 @@ const IndexTexts: FC<{ onMouse: number }> = ({ onMouse }) => {
             개발 블로그를 운영하고, 여러 토이 프로젝트를 진행중입니다. <br />
             점점 더 발전하는 개발자가 될 것입니다! <br />
             더 많이 발전하고 싶습니다! 😀 <br />
-            블로그 : <A href='https://programming119.tistory.com'>개발자 아저씨들 힘을모아</A>
-            <br /> 깃허브 : <A href='https://github.com/SeoSang'>Github</A>
+            블로그 :{" "}
+            <A href='https://programming119.tistory.com' target='_blank'>
+              개발자 아저씨들 힘을모아
+            </A>
+            <br /> 깃허브 :{" "}
+            <A href='https://github.com/SeoSang' target='_blank'>
+              Github
+            </A>
           </p>
         </TextDiv>
       </ContentBoxDiv>
@@ -88,7 +95,7 @@ const IndexTexts: FC<{ onMouse: number }> = ({ onMouse }) => {
           <H2_KR>자세히</H2_KR>
           <p>
             저에 대해 더 자세히 알고 싶으시다구요? <br />
-            우측 상단 메뉴버튼으로 About me 를 확인해주세요!
+            <strong>우측 상단 메뉴버튼 </strong>으로 <strong>About me </strong> 를 확인해주세요!
             <br /> 문의, 혹은 조언을 주실분은 <br />
             ddrrpg@naver.com 로 메일 부탁드립니다😊
           </p>
