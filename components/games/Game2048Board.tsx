@@ -225,8 +225,6 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
     if (isMovingKey(e.keyCode) && gettingScore !== 0) {
       console.log(gettingScore)
       console.log(gettingScore === 0)
-      setDiff(!diff)
-      setDiffCheck(true)
     }
     // 게임 끝!
     if (isGameOver(gameBoard)) {
