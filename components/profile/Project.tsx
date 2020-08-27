@@ -23,7 +23,9 @@ const Project = () => {
                 기술 스택 : Typescript, Next JS, Redux, Mysql, Node JS(Express), etc <br></br>
                 참여 인원 : 솔플😂 <br></br>
                 #SPA #SNS #Grid시스템 #풀스택 <br></br>
-                <A href='https://github.com/SeoSang/myDangDang'>깃허브</A>
+                <A href='https://github.com/SeoSang/myDangDang' target='_blank'>
+                  깃허브
+                </A>
               </p>
             }
           />
@@ -37,7 +39,9 @@ const Project = () => {
                 기술 스택 : JavaScript, Next JS, Redux, MongoDB, Node JS(Express), etc <br></br>
                 참여 인원 : 리액트 팀원들! <br></br>
                 #SPA #NoSQL #실시간 어플리케이션 #프론트담당 <br></br>
-                <A href='https://github.com/SeoSang/score____temp'>깃허브</A>
+                <A href='https://github.com/SeoSang/score____temp' target='_blank'>
+                  깃허브
+                </A>
               </p>
             }
           />
@@ -51,8 +55,12 @@ const Project = () => {
                 기술 스택 : Bat 파일, CMD <br></br>
                 참여 인원 : 솔플😂 <br></br>
                 #심심풀이 #능률올리기 #재밌어요 <br></br>
-                <A href='https://programming119.tistory.com/166?category=857957'>블로그</A>{" "}
-                <A href='https://github.com/SeoSang/MyEfficientWork'>깃허브</A>
+                <A href='https://programming119.tistory.com/166?category=857957' target='_blank'>
+                  블로그
+                </A>{" "}
+                <A href='https://github.com/SeoSang/MyEfficientWork' target='_blank'>
+                  깃허브
+                </A>
               </p>
             }
           />
@@ -66,7 +74,9 @@ const Project = () => {
                 기술 스택 : TypeScript, Redux<br></br>
                 참여 인원 : 솔플😂 <br></br>
                 #심화알고리즘 #AI #사실초보.. <br></br>
-                <A href='https://github.com/SeoSang/You-VS-Seopago-'>깃허브</A>
+                <A href='https://github.com/SeoSang/You-VS-Seopago-' target='_blank'>
+                  깃허브
+                </A>
               </p>
             }
           />

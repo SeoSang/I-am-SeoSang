@@ -1,6 +1,13 @@
-import React, { createElement, useState, useEffect, Context, ButtonHTMLAttributes } from "react"
+import React, {
+  createElement,
+  useState,
+  useEffect,
+  Context,
+  ButtonHTMLAttributes,
+  useCallback,
+} from "react"
 import { FlexDiv, H1_KR, H2_KR, H3_KR, INDEX_BG_COLOR } from "../styles/styled"
-import { Input, Comment, Tooltip, Button } from "antd"
+import { Input, Comment, Tooltip, Button, Modal, Col, Row } from "antd"
 import Avatar from "antd/lib/avatar/avatar"
 import moment from "moment"
 import {
@@ -76,6 +83,7 @@ const comment = ({ comments }: any) => {
   const [action, setAction] = useState(null)
   const [commentCount, setCommentCount] = useState(DISPLAY_COMMENT_COUNT)
   const [value, setValue] = useState("")
+  const [visible, setVisible] = useState(false) // 모달
   const [name, setName] = useState("")
   const [allComments, setAllComments] = useState<Comment[]>(comments)
   const [displayComments, setDisplayComments] = useState(comments)
@@ -125,9 +133,11 @@ const comment = ({ comments }: any) => {
 
   const onClickLike = (e: React.MouseEvent) => {
     console.log("like 클릭댐")
+    alert("좋아해주셔서 감사합니다. 좋아요 기능 구현 전입니다ㅎㅎ")
   }
   const onClickDislike = (e: React.MouseEvent) => {
     console.log("like 클릭댐")
+    alert("싫어해해주셔서 감사합니다. 좋아요 기능 구현 전입니다ㅎㅎ")
   }
   const onClickPrev = (e: React.MouseEvent) => {
     setCommentCount(commentCount <= 8 ? 4 : commentCount - 4)
@@ -136,12 +146,47 @@ const comment = ({ comments }: any) => {
     setCommentCount(commentCount + 4)
   }
 
+  // 모달 관련
+  const handleOk = useCallback(
+    (e: React.MouseEvent) => {
+      setVisible(false)
+      onSubmitComment(value)
+    },
+    [visible, value],
+  )
+
+  const handleCancel = useCallback(
+    (e: React.MouseEvent) => {
+      setVisible(false)
+    },
+    [visible],
+  )
+  const showModal = useCallback(() => {
+    setVisible(true)
+  }, [visible])
+
   useEffect(() => {
     // console.log(comments)
   }, [])
   return (
     <FlexDiv color={INDEX_BG_COLOR} height='100vh'>
       <GuestBookDiv height='85vh' width='85vw'>
+        <Modal title='방명록 남기기' visible={visible} onOk={handleOk} onCancel={handleCancel}>
+          <Row justify='space-around' align='middle'>
+            <Col span={8}>
+              <label>이름</label>
+            </Col>
+            <Col span={16}>
+              <Input value={name} onChange={onChangeName} placeholder='이름을 입력하세요.' />
+            </Col>
+          </Row>
+          <Input.TextArea
+            value={value}
+            onChange={onChangeComment}
+            placeholder='이쁜말, 고운말을 써주세요😄'
+            style={{ marginTop: "20px" }}
+          />
+        </Modal>
         {commentCount > 4 ? (
           <Button onClick={onClickPrev} style={floatPrevButton} icon={<CaretUpOutlined />}></Button>
         ) : null}
@@ -150,12 +195,10 @@ const comment = ({ comments }: any) => {
         <div style={{ width: "100%", textAlign: "end" }}>
           <p>예쁜말만 합시다😁</p>
           <p>개인적인 용건은 ddrrpg@naver.com로 부탁드립니다.</p>
-          <Button>
-            <H3_KR style={{ width: "100%" }}>방명록 남기기</H3_KR>
-          </Button>
+          <Button onClick={showModal}>방명록 남기기</Button>
         </div>
         <FlexDiv direction='column' style={{ overflow: "auto" }}>
-          {displayComments.map((comment: Comment, i) => (
+          {displayComments.map((comment: Comment, i: number) => (
             <CommentDiv
               actions={[
                 <Tooltip key='comment-basic-like' title='Like'>
