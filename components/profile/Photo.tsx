@@ -6,7 +6,7 @@ import Meta from "antd/lib/card/Meta"
 const Photo = () => {
   return (
     <FlexDiv direction='column'>
-      <H2 color={INDEX_TEXT_COLOR}>Hackaton</H2>
+      <H2 color={INDEX_TEXT_COLOR}>Photos</H2>
       <FlexDiv style={{ justifyContent: "space-around" }}>
         <Card style={{ width: "30%" }} cover={<img src='/profile/2019_hackaton.jpg' />}>
           <Meta
@@ -21,6 +21,9 @@ const Photo = () => {
         </Card>
         <Card style={{ width: "30%" }} cover={<img src='/profile/me_hackaton.jpg' />}>
           <Meta title='2020 고려대학교 해커톤' description='Googri!' />
+        </Card>
+        <Card style={{ width: "30%" }} cover={<img src='/profile/sds.jpg' />}>
+          <Meta title='2020 삼성 SDS 알고리즘 특강 수료증' description='다들 수고 많으셨습니다!' />
         </Card>
       </FlexDiv>
     </FlexDiv>

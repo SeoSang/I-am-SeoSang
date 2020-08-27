@@ -56,13 +56,16 @@ const AboutMe = () => {
               <strong>후기</strong>
             </a>
           </li>
+          <li> 2020 삼성 SDS 알고리즘 Professional 등급 취득 / </li>
         </ul>
       </Col>
       <Col xs={24} md={6}>
         <H3_KR>🧾 자격증 </H3_KR>
         <ul>
-          <li> 정보처리 기능사 1급 </li>
+          <li> 삼성 SDS 알고리즘 Professional 등급 </li>
           <li> 컴활 1급</li>
+          <li> 워드프로세서 1급 </li>
+          <li> 정보처리 기능사 1급 </li>
         </ul>
         <br></br>
         <H3_KR>😎 기타</H3_KR>
