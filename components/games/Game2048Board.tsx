@@ -223,8 +223,8 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
     if (isGameOver(gameBoard)) {
       // 최고 스코어 갱신
       if (score > best) {
-        setBest(best)
-        db.setBastScore_2048(version, score)
+        setBest(score)
+        db.setBestScore_2048(version, score)
         message.success(`최고기록 갱신!! 점수 : ${score}`)
       } else {
         message.error(`게임 종료! 점수 : ${score}`)

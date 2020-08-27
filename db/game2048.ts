@@ -4,7 +4,7 @@ import rootRef from "./index"
 interface Game2048DBSelector {
   get2048Data: () => Promise<Data2048>
   getBestScore_2048: (version: number) => Promise<number | firebase.database.DataSnapshot>
-  setBastScore_2048: (version: number, score: number) => {}
+  setBestScore_2048: (version: number, score: number) => {}
 }
 
 const game2048: Game2048DBSelector = {
@@ -51,7 +51,7 @@ const game2048: Game2048DBSelector = {
     return res
   },
   // 최고점수 갱신
-  setBastScore_2048: async (version: number, score: number) => {
+  setBestScore_2048: async (version: number, score: number) => {
     try {
       await rootRef
         .child("games")
