@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useCallback, useRef } from "react"
+import React, { FC, useState, useEffect, useCallback, useRef, Context } from "react"
 import { Row, Col, Button, message } from "antd"
 import { FlexDiv, H2, GAME_BG_COLOR } from "../../styles/styled"
 import styled, { keyframes, css } from "styled-components"
@@ -12,7 +12,22 @@ import {
   calScore,
   isGameOver,
   MOVING_KEYCODE,
+  getStyle,
 } from "./functions/Game2048Fun"
+import { NextPage } from "next"
+import axios from "axios"
+import * as firebase from "firebase/app"
+import { Data2048 } from "../../pages/games/game2048"
+import db from "../../db/game2048"
+
+interface DiffProps {
+  triggered: boolean
+}
+interface CellProps {
+  version: number
+  customTheme?: number
+  value: number
+}
 
 const ArrowContainer = styled.div`
   display: inline-block;
@@ -60,9 +75,6 @@ const triggeredStyle = css`
 const prevStyle = css`
   animation: none;
 `
-interface DiffProps {
-  triggered: boolean
-}
 
 const DiffScore = styled.div`
   position: absolute;
@@ -71,52 +83,6 @@ const DiffScore = styled.div`
   font-size: 150%;
   ${(props: DiffProps) => (props.triggered ? triggeredStyle : prevStyle)}
 `
-
-interface CellProps {
-  version: number
-  customTheme?: number
-  value: number
-}
-
-const getStyle = (version: number | undefined) => {
-  let verStyle = STYLE.ver4
-  switch (version) {
-    case 2:
-      verStyle = STYLE.ver2
-      break
-    case 3:
-      verStyle = STYLE.ver3
-      break
-    case 4:
-      verStyle = STYLE.ver4
-      break
-    case 5:
-      verStyle = STYLE.ver5
-      break
-    default:
-      verStyle = STYLE.ver4
-      break
-  }
-  return verStyle
-}
-const STYLE = {
-  ver2: {
-    width: "50%",
-    paddingBottom: "50%",
-  },
-  ver3: {
-    width: "33.3%",
-    paddingBottom: "33.3%",
-  },
-  ver4: {
-    width: "25%",
-    paddingBottom: "25%",
-  },
-  ver5: {
-    width: "20%",
-    paddingBottom: "20%",
-  },
-}
 
 const Cell = styled.div`
   ${(props: CellProps) => getStyle(props.version)}
@@ -147,6 +113,27 @@ const InnerH2 = styled(H2)`
   transform: translate(-50%, -50%);
 `
 
+const getBestFromData = (data: Data2048, version: number) => {
+  let result = -1
+  switch (version) {
+    case 2:
+      result = data.best.ver2
+      break
+    case 3:
+      result = data.best.ver3
+      break
+    case 4:
+      result = data.best.ver4
+      break
+    case 5:
+      result = data.best.ver5
+      break
+    default:
+      break
+  }
+  return result
+}
+
 const isMovingKey = (keycode: number) => {
   return MOVING_KEYCODE.find((element: number) => element === keycode) !== undefined
 }
@@ -158,7 +145,10 @@ const init_gameBoard = (version: number | undefined) => {
 }
 
 // version = 몇 칸짜리 게임인지
-const Game2048Board: FC<{ version: number }> = ({ version }) => {
+const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
+  version,
+  serverData,
+}) => {
   const [gameBoard, setGameBoard] = useState<number[][]>(init_gameBoard(version))
   const [text, setText] = useState<string>("PRESS START!")
   const [arrow, setArrow] = useState<string>("")
@@ -167,15 +157,18 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
   const [playing, setPlaying] = useState<boolean>(false)
   const [best, setBest] = useState<number>(0)
   const [scoreDiff, setScoreDiff] = useState<number>(0)
-  const [diff, setDiff] = useState<boolean>(false)
-  const [diffCheck, setDiffCheck] = useState<boolean>(true)
+  const [diff, setDiff] = useState<boolean>(false) // diff 애니메이션 trigger 역할
+  const [diffCheck, setDiffCheck] = useState<boolean>(true) // diff 변수 컨트롤 역할
   const [pressAvail, setPressAvail] = useState<boolean>(true)
   const gameDoing = useRef(null)
 
+  // 버전 바뀌었을 때
   useEffect(() => {
     Initialize_Game()
+    setBest(getBestFromData(serverData, version))
   }, [version])
 
+  // diff 애니메이션용
   useEffect(() => {
     let timer: number
     if (diffCheck) {
@@ -198,7 +191,7 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
     setDiff(false)
     setDiffCheck(true)
     setPlaying(true)
-  }, [version, theme, playing])
+  }, [version, theme, playing, serverData])
 
   // 키보드 눌렀을 때
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -223,12 +216,19 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
     setScoreDiff(gettingScore)
     // 움직인 결과일 때 diff 애니메이션 작동
     if (isMovingKey(e.keyCode) && gettingScore !== 0) {
-      console.log(gettingScore)
-      console.log(gettingScore === 0)
+      setDiff(!diff)
+      setDiffCheck(true)
     }
     // 게임 끝!
     if (isGameOver(gameBoard)) {
-      message.error(`게임 종료! 점수 : ${score}`)
+      // 최고 스코어 갱신
+      if (score > best) {
+        setBest(best)
+        db.setBastScore_2048(version, score)
+        message.success(`최고기록 갱신!! 점수 : ${score}`)
+      } else {
+        message.error(`게임 종료! 점수 : ${score}`)
+      }
       setText("Game Over!!")
       setPlaying(false)
     }
@@ -287,9 +287,8 @@ const Game2048Board: FC<{ version: number }> = ({ version }) => {
           <Row>{score}</Row>
         </ScoreBestCol>
         <ScoreBestCol xs={12} md={3}>
-          <DiffScore triggered={diff}>+{scoreDiff}</DiffScore>
           <Row>Best</Row>
-          <Row>{score}</Row>
+          <Row>{best}</Row>
         </ScoreBestCol>
       </Row>
       <Row>

@@ -72,9 +72,7 @@ export const slideRight = (board: number[][]) => {
   const newBoard = board.map((row, r) => {
     let remain = row.filter((n) => n != 0)
     let zero_cnt = version - remain.length
-    let newRow = Array(zero_cnt)
-      .fill(0)
-      .concat(remain)
+    let newRow = Array(zero_cnt).fill(0).concat(remain)
     return newRow
   })
   return newBoard
@@ -183,6 +181,49 @@ export const isGameOver = (board: number[][]) => {
 }
 
 export const MOVING_KEYCODE = [37, 38, 39, 40]
+
+// 스타일 관련
+
+export const getStyle = (version: number | undefined) => {
+  let verStyle = STYLE.ver4
+  switch (version) {
+    case 2:
+      verStyle = STYLE.ver2
+      break
+    case 3:
+      verStyle = STYLE.ver3
+      break
+    case 4:
+      verStyle = STYLE.ver4
+      break
+    case 5:
+      verStyle = STYLE.ver5
+      break
+    default:
+      verStyle = STYLE.ver4
+      break
+  }
+  return verStyle
+}
+
+export const STYLE = {
+  ver2: {
+    width: "50%",
+    paddingBottom: "50%",
+  },
+  ver3: {
+    width: "33.3%",
+    paddingBottom: "33.3%",
+  },
+  ver4: {
+    width: "25%",
+    paddingBottom: "25%",
+  },
+  ver5: {
+    width: "20%",
+    paddingBottom: "20%",
+  },
+}
 
 const LEVEL0 = "#d2dae2"
 const LEVEL1 = "#fffa65"

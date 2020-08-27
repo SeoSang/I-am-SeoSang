@@ -22,6 +22,7 @@ import styled, { StyledProps } from "styled-components"
 import axios from "axios"
 import Search from "antd/lib/input/Search"
 import { Style } from "util"
+import { DB_URL } from "../db"
 
 export interface Comment {
   name: string
@@ -31,7 +32,6 @@ export interface Comment {
   dislike: number
 }
 
-export const DB_URL = "https://i-am-seosang.firebaseio.com"
 const DISPLAY_COMMENT_COUNT = 3
 
 const GuestBookDiv = styled(FlexDiv)`

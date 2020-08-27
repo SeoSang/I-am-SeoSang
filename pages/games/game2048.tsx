@@ -4,6 +4,8 @@ import Game2048Board from "../../components/games/Game2048Board"
 import styled from "styled-components"
 import { GAME_BG_COLOR, H2, H3_KR } from "../../styles/styled"
 import GameNavigation from "../../components/GameNavigation"
+import { NextPage, NextPageContext } from "next"
+import db from "../../db/game2048"
 
 const EXIT_TEXT = "진행중인 게임이 종료 됩니다."
 
@@ -23,7 +25,16 @@ const ModeContainer = styled.div`
   margin: 20px auto;
 `
 
-const game2048 = () => {
+export interface Data2048 {
+  best: {
+    ver2: number
+    ver3: number
+    ver4: number
+    ver5: number
+  }
+}
+
+const game2048: NextPage<{ serverData: Data2048 }> = ({ serverData }) => {
   const [version, setVersion] = useState(4)
 
   const onClickButton = (ver: number) => {
@@ -35,7 +46,7 @@ const game2048 = () => {
       <GameNavigation></GameNavigation>
       <Col xs={24} md={12}>
         <br></br>
-        <Game2048Board version={version}></Game2048Board>
+        <Game2048Board serverData={serverData} version={version}></Game2048Board>
         <Row align='middle' justify='center' style={{ textAlign: "center" }}>
           <p>조작법 : ➡ / ⬅ / ⬆ / ⬇</p>
           <p>우측 상단메뉴를 통해 여러 모드와 테마로 즐길 수 있습니다! (웹 전용)</p>
@@ -64,6 +75,25 @@ const game2048 = () => {
       </Col>
     </Row>
   )
+}
+
+game2048.getInitialProps = async (ctx: NextPageContext) => {
+  try {
+    const res = await db.get2048Data()
+    return { serverData: res }
+  } catch (e) {
+    console.error(e)
+    return {
+      serverData: {
+        best: {
+          ver2: -1,
+          ver3: -1,
+          ver4: -1,
+          ver5: -1,
+        },
+      },
+    }
+  }
 }
 
 export default game2048

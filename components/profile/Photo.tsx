@@ -6,7 +6,7 @@ import Meta from "antd/lib/card/Meta"
 const Photo = () => {
   return (
     <FlexDiv direction='column'>
-      <H2 color={INDEX_TEXT_COLOR}>Photos</H2>
+      <H2 color={INDEX_TEXT_COLOR}>Photos </H2>
       <FlexDiv style={{ justifyContent: "space-around" }}>
         <Card style={{ width: "30%" }} cover={<img src='/profile/2019_hackaton.jpg' />}>
           <Meta
