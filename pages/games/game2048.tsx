@@ -25,6 +25,12 @@ const ModeContainer = styled.div`
   margin: 20px auto;
 `
 
+const MainContainer = styled(Row)`
+  color: #f5f6fa;
+  min-height: 100vh;
+  background-color: ${GAME_BG_COLOR};
+`
+
 export interface Data2048 {
   best: {
     ver2: number
@@ -41,7 +47,7 @@ const game2048: NextPage<{ serverData: Data2048 }> = ({ serverData }) => {
     setVersion(ver)
   }
   return (
-    <Row style={{ color: "#f5f6fa", minHeight: "100vh", backgroundColor: GAME_BG_COLOR }}>
+    <MainContainer>
       <Col xs={24} md={6} style={{ textAlign: "center" }}></Col>
       <GameNavigation></GameNavigation>
       <Col xs={24} md={12}>
@@ -73,7 +79,7 @@ const game2048: NextPage<{ serverData: Data2048 }> = ({ serverData }) => {
           ))}
         </ModeContainer>
       </Col>
-    </Row>
+    </MainContainer>
   )
 }
 

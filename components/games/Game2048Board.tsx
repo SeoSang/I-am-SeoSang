@@ -11,7 +11,7 @@ import {
   chooseColor,
   calScore,
   isGameOver,
-  MOVING_KEYCODE,
+  isMovingKey,
   getStyle,
 } from "./functions/Game2048Fun"
 import { NextPage } from "next"
@@ -132,10 +132,6 @@ const getBestFromData = (data: Data2048, version: number) => {
       break
   }
   return result
-}
-
-const isMovingKey = (keycode: number) => {
-  return MOVING_KEYCODE.find((element: number) => element === keycode) !== undefined
 }
 
 const init_gameBoard = (version: number | undefined) => {

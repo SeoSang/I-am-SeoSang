@@ -1,8 +1,8 @@
-import BillBoard from "../BillBoard"
-
+// 함수 파이핑
 const pipe = (...functions: any) => (input: any) =>
   functions.reduce((acc: Function, fn: Function) => fn(acc), input)
 
+// 같은 보드인지
 const isSameBoard = (board1: number[][], board2: number[][]): boolean => {
   return board1.every((row, r) => {
     return row.every((n, c) => {
@@ -10,8 +10,9 @@ const isSameBoard = (board1: number[][], board2: number[][]): boolean => {
     })
   })
 }
+
+// 행렬 돌리기 (시계 반대)
 function transposeCCW(board: number[][]): number[][] {
-  // 행렬 돌리기 (시계 반대)
   let version = board.length || 0
   let newBoard = Array.from(Array(version), () => Array(version).fill(0))
   for (let i = 0; i < version; i++) {
@@ -23,8 +24,8 @@ function transposeCCW(board: number[][]): number[][] {
   return newBoard
 }
 
+// 행렬 돌리기 (시계)
 function transposeCW(board: number[][]): number[][] {
-  // 행렬 돌리기 (시계)
   let version = board.length || 0
   let newBoard = Array.from(Array(version), () => Array(version).fill(0))
   for (let i = 0; i < version; i++) {
@@ -100,6 +101,7 @@ export const slideLeft = (board: number[][]) => {
 //   return pipe(transposeCCW, slideRight, transposeCW)(board)
 // }
 
+// 터트리기 (모여있던 같은숫자를 합쳐줍니다.)
 export const combineLeft = (board: number[][]) => {
   const version = board.length
   const newBoard = Array.from(board)
@@ -148,11 +150,13 @@ export const calScore = (prev: number[][], now: number[][]) => {
   const Score_now: any = {}
   let score = 0
   prev.map((row) => {
+    // 이전 보드 숫자들 기록
     row.map((num) => {
       Score_prev[num] = Score_prev[num] ? Score_prev[num] + 1 : 1
     })
   })
   now.map((row) => {
+    // 현재 보드 숫자들 기록
     row.map((num) => {
       Score_now[num] = Score_now[num] ? Score_now[num] + 1 : 1
     })
@@ -163,7 +167,7 @@ export const calScore = (prev: number[][], now: number[][]) => {
     // 터트렸을 때
     if (prev_cnt > now_cnt) {
       let isInitiailNum = num === "2" || num === "3" || num === "5"
-      let diff_cnt = isInitiailNum ? prev_cnt - now_cnt + 1 : prev_cnt - now_cnt // 초기값은 1개가 새로생긴다
+      let diff_cnt = isInitiailNum ? prev_cnt - now_cnt + 1 : prev_cnt - now_cnt // 초기값은 랜덤한 위치에 숫자 1개가 새로생긴다
       score += diff_cnt * parseInt(num)
       Score_now[parseInt(num) * 2] -= 1
     }
@@ -182,7 +186,12 @@ export const isGameOver = (board: number[][]) => {
 
 export const MOVING_KEYCODE = [37, 38, 39, 40]
 
-// 스타일 관련
+// 키 입력받은게 상하좌우중 한개인지
+export const isMovingKey = (keycode: number) => {
+  return MOVING_KEYCODE.find((element: number) => element === keycode) !== undefined
+}
+
+/* 스타일 관련 */
 
 export const getStyle = (version: number | undefined) => {
   let verStyle = STYLE.ver4
