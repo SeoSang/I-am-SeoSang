@@ -23,6 +23,7 @@ import axios from "axios"
 import Search from "antd/lib/input/Search"
 import { Style } from "util"
 import { DB_URL } from "../db"
+import { useRouter } from "next/router"
 
 export interface Comment {
   name: string
@@ -88,6 +89,8 @@ const comment = ({ comments }: any) => {
   const [allComments, setAllComments] = useState<Comment[]>(comments)
   const [displayComments, setDisplayComments] = useState(comments)
 
+  const router = useRouter()
+
   useEffect(() => {
     setDisplayComments(allComments.slice(commentCount - DISPLAY_COMMENT_COUNT, commentCount))
   }, [allComments, commentCount])
@@ -110,7 +113,7 @@ const comment = ({ comments }: any) => {
         like: 0,
         dislike: 0,
         name: name,
-        createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
       }
       axios.post(`${DB_URL}/comments.json`, JSON.stringify(commentData)).then((res) => {
         console.log(res)
@@ -119,6 +122,7 @@ const comment = ({ comments }: any) => {
           return
         })
       })
+      // setTimeout(() => router.reload(), 1000)
     } catch (e) {
       console.error(e)
     }
@@ -140,10 +144,14 @@ const comment = ({ comments }: any) => {
     alert("싫어해해주셔서 감사합니다. 좋아요 기능 구현 전입니다ㅎㅎ")
   }
   const onClickPrev = (e: React.MouseEvent) => {
-    setCommentCount(commentCount <= 8 ? 4 : commentCount - 4)
+    setCommentCount(
+      commentCount <= DISPLAY_COMMENT_COUNT * 2
+        ? DISPLAY_COMMENT_COUNT
+        : commentCount - DISPLAY_COMMENT_COUNT,
+    )
   }
   const onClickMore = (e: React.MouseEvent) => {
-    setCommentCount(commentCount + 4)
+    setCommentCount(commentCount + DISPLAY_COMMENT_COUNT)
   }
 
   // 모달 관련
@@ -220,7 +228,7 @@ const comment = ({ comments }: any) => {
               style={{ width: "65vw" }}
               datetime={
                 <Tooltip title={comment.createdAt}>
-                  <span>{moment(comment.createdAt).fromNow()}</span>
+                  <span>{moment(comment.createdAt, "YYYY-MM-DD HH:mm:ss").fromNow()}</span>
                 </Tooltip>
               }
               key={`comment_${i}`}

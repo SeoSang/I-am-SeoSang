@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect, useCallback, useRef, Context } from "react"
-import { Row, Col, Button, message } from "antd"
+import { Row, Col, Button, message, Popover, Input } from "antd"
 import { FlexDiv, H2, GAME_BG_COLOR } from "../../styles/styled"
 import styled, { keyframes, css } from "styled-components"
 import {
@@ -19,6 +19,8 @@ import axios from "axios"
 import * as firebase from "firebase/app"
 import { Data2048 } from "../../pages/games/game2048"
 import db from "../../db/game2048"
+import Modal from "antd/lib/modal/Modal"
+import { useRouter } from "next/router"
 
 interface DiffProps {
   triggered: boolean
@@ -114,19 +116,26 @@ const InnerH2 = styled(H2)`
 `
 
 const getBestFromData = (data: Data2048, version: number) => {
-  let result = -1
+  let result = {
+    name: "서버오류",
+    score: -1,
+  }
   switch (version) {
     case 2:
-      result = data.best.ver2
+      result.score = data.best.ver2
+      result.name = data.best.ver2_name
       break
     case 3:
-      result = data.best.ver3
+      result.score = data.best.ver3
+      result.name = data.best.ver3_name
       break
     case 4:
-      result = data.best.ver4
+      result.score = data.best.ver4
+      result.name = data.best.ver4_name
       break
     case 5:
-      result = data.best.ver5
+      result.score = data.best.ver5
+      result.name = data.best.ver4_name
       break
     default:
       break
@@ -152,16 +161,23 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
   const [score, setScore] = useState<number>(0)
   const [playing, setPlaying] = useState<boolean>(false)
   const [best, setBest] = useState<number>(0)
+  const [bestName, setBestName] = useState<string>("오류발생")
+  const [newName, setNewName] = useState<string>("")
   const [scoreDiff, setScoreDiff] = useState<number>(0)
   const [diff, setDiff] = useState<boolean>(false) // diff 애니메이션 trigger 역할
   const [diffCheck, setDiffCheck] = useState<boolean>(true) // diff 변수 컨트롤 역할
+  const [modalVisible, setModalVisible] = useState<boolean>(false) // 최고점수 갱신 이름기록
   const [pressAvail, setPressAvail] = useState<boolean>(true)
+
+  const router = useRouter()
   const gameDoing = useRef(null)
 
   // 버전 바뀌었을 때
   useEffect(() => {
     Initialize_Game()
-    setBest(getBestFromData(serverData, version))
+    const data = getBestFromData(serverData, version)
+    setBest(data.score)
+    setBestName(data.name)
   }, [version])
 
   // diff 애니메이션용
@@ -177,6 +193,16 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
       if (!diffCheck) clearTimeout(timer)
     }
   }, [diff, diffCheck])
+
+  const gameFocus = useCallback(
+    (e: React.MouseEvent) => {
+      if (playing === false) return
+      const { current }: any = gameDoing
+      current?.focus()
+      setText("PLAYING!")
+    },
+    [version, theme, playing],
+  )
 
   // 게임 초기화
   const Initialize_Game = useCallback(() => {
@@ -219,9 +245,7 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
     if (isGameOver(gameBoard)) {
       // 최고 스코어 갱신
       if (score > best) {
-        setBest(score)
-        db.setBestScore_2048(version, score)
-        message.success(`최고기록 갱신!! 점수 : ${score}`)
+        setModalVisible(true)
       } else {
         message.error(`게임 종료! 점수 : ${score}`)
       }
@@ -261,15 +285,17 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
     [version, theme, playing],
   )
 
-  const gameFocus = useCallback(
-    (e: React.MouseEvent) => {
-      if (playing === false) return
-      const { current }: any = gameDoing
-      current?.focus()
-      setText("PLAYING!")
-    },
-    [version, theme, playing],
-  )
+  const updateBest = useCallback(() => {
+    db.setBestName_2048(version, newName)
+    db.setBestScore_2048(version, score)
+    setBest(score)
+    setBestName(newName)
+    message.success(`${newName}님 최고기록 갱신! 점수 : ${score}`)
+    setModalVisible(false)
+    setTimeout(() => {
+      router.reload()
+    }, 1500)
+  }, [best, newName, bestName, score, modalVisible])
 
   return (
     <>
@@ -282,10 +308,12 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
           <Row>Score</Row>
           <Row>{score}</Row>
         </ScoreBestCol>
-        <ScoreBestCol xs={12} md={3}>
-          <Row>Best</Row>
-          <Row>{best}</Row>
-        </ScoreBestCol>
+        <Popover placement='bottomLeft' title={"최고기록 달성자"} content={bestName}>
+          <ScoreBestCol xs={12} md={3}>
+            <Row>Best</Row>
+            <Row>{best}</Row>
+          </ScoreBestCol>
+        </Popover>
       </Row>
       <Row>
         <Col xs={12} md={12}>
@@ -326,13 +354,33 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
               {row.map((num, c) => (
                 <Cell version={version} value={num} customTheme={theme} key={`Cell__${r}_${c}`}>
                   <InnerH2 color={GAME_BG_COLOR} key={`H2__${r}_${c}`}>
-                    {num}
+                    {num !== 0 ? num : " "}
                   </InnerH2>
                 </Cell>
               ))}
             </FlexDiv>
           ))}
         </div>
+        <Modal
+          title='⭐ 최고기록 달성을 축하드립니다 ⭐'
+          visible={modalVisible}
+          onOk={updateBest}
+          onCancel={() => {
+            setModalVisible(false)
+          }}
+          okText='OK'
+          cancelText='Cancel'
+        >
+          <Input
+            value={newName}
+            onChange={(e) => {
+              setNewName(e.target.value)
+            }}
+            placeholder='서버에 이름을 저장하세요!'
+            style={{ marginBottom: "20px" }}
+          ></Input>
+          <p>🚫 경고 : 이 창을 종료하게되면 최고기록은 저장되지 않습니다</p>
+        </Modal>
       </Row>
     </>
   )

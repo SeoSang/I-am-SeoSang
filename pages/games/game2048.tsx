@@ -37,7 +37,24 @@ export interface Data2048 {
     ver3: number
     ver4: number
     ver5: number
+    ver2_name: string
+    ver3_name: string
+    ver4_name: string
+    ver5_name: string
   }
+}
+
+export const INIT_DATA_2048 = {
+  best: {
+    ver2: -1,
+    ver3: -1,
+    ver4: -1,
+    ver5: -1,
+    ver2_name: "에러발생",
+    ver3_name: "에러발생",
+    ver4_name: "에러발생",
+    ver5_name: "에러발생",
+  },
 }
 
 const game2048: NextPage<{ serverData: Data2048 }> = ({ serverData }) => {
@@ -90,14 +107,7 @@ game2048.getInitialProps = async (ctx: NextPageContext) => {
   } catch (e) {
     console.error(e)
     return {
-      serverData: {
-        best: {
-          ver2: -1,
-          ver3: -1,
-          ver4: -1,
-          ver5: -1,
-        },
-      },
+      serverData: INIT_DATA_2048,
     }
   }
 }
