@@ -1,9 +1,12 @@
 import { Data2048, INIT_DATA_2048 } from "../pages/games/game2048"
 import rootRef from "./index"
+import { admin } from "firebase-admin/lib/database"
 
 interface Game2048DBSelector {
   get2048Data: () => Promise<Data2048>
-  getBestScore_2048: (version: number) => Promise<number | firebase.database.DataSnapshot>
+  getBestScore_2048: (
+    version: number,
+  ) => Promise<number | firebase.database.DataSnapshot>
   setBestScore_2048: (version: number, score: number) => {}
   setBestName_2048: (version: number, name: string) => {}
 }
@@ -15,7 +18,7 @@ const game2048: Game2048DBSelector = {
       await rootRef
         .child("games")
         .child("2048")
-        .once("value", function (data) {
+        .once("value", function (data: any) {
           data_2048 = data.val()
         })
       return data_2048

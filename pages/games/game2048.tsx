@@ -69,10 +69,14 @@ const game2048: NextPage<{ serverData: Data2048 }> = ({ serverData }) => {
       <GameNavigation></GameNavigation>
       <Col xs={24} md={12}>
         <br></br>
-        <Game2048Board serverData={serverData} version={version}></Game2048Board>
+        <Game2048Board
+          serverData={serverData}
+          version={version}></Game2048Board>
         <Row align='middle' justify='center' style={{ textAlign: "center" }}>
           <p>조작법 : ➡ / ⬅ / ⬆ / ⬇</p>
-          <p>우측 상단메뉴를 통해 여러 모드와 테마로 즐길 수 있습니다! (웹 전용)</p>
+          <p>
+            우측 상단메뉴를 통해 여러 모드와 테마로 즐길 수 있습니다! (웹 전용)
+          </p>
         </Row>
         <footer>게임 내용 출처 : "https://play2048.co/"</footer>
       </Col>
@@ -89,8 +93,7 @@ const game2048: NextPage<{ serverData: Data2048 }> = ({ serverData }) => {
               }}
               okText='Yes'
               cancelText='No'
-              key={`Popconfirm__${i}`}
-            >
+              key={`Popconfirm__${i}`}>
               <VersionButton>{`${i + 2}  ❌  ${i + 2}`}</VersionButton>
             </Popconfirm>
           ))}

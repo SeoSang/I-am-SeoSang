@@ -3,7 +3,6 @@ import React, {
   useState,
   useEffect,
   Context,
-  ButtonHTMLAttributes,
   useCallback,
 } from "react"
 import { FlexDiv, H1_KR, H2_KR, H3_KR, INDEX_BG_COLOR } from "../styles/styled"
@@ -18,20 +17,10 @@ import {
   CaretDownOutlined,
   CaretUpOutlined,
 } from "@ant-design/icons"
-import styled, { StyledProps } from "styled-components"
-import axios from "axios"
-import Search from "antd/lib/input/Search"
-import { Style } from "util"
+import styled from "styled-components"
 import { DB_URL } from "../db"
 import { useRouter } from "next/router"
-
-export interface Comment {
-  name: string
-  content: string
-  createdAt: string | Date
-  like: number
-  dislike: number
-}
+import db, { CommentData } from "../db/comment"
 
 const DISPLAY_COMMENT_COUNT = 3
 
@@ -57,12 +46,12 @@ const floatMoreButton: any = {
   zIndex: 2,
 }
 
-const ERROR_OCCUR: Comment = {
+const ERROR_OCCUR: CommentData = {
   name: "에러발생",
   content: "데이터를 불러오는데 에러가 발생했습니다...",
   like: 0,
   dislike: 0,
-  createdAt: moment().toDate(),
+  createdAt: moment().format("YYYY-MM-DD HH:mm"),
 }
 
 const CommentDiv = styled(Comment)`
@@ -86,16 +75,18 @@ const comment = ({ comments }: any) => {
   const [value, setValue] = useState("")
   const [visible, setVisible] = useState(false) // 모달
   const [name, setName] = useState("")
-  const [allComments, setAllComments] = useState<Comment[]>(comments)
+  const [allComments, setAllComments] = useState<CommentData[]>(comments)
   const [displayComments, setDisplayComments] = useState(comments)
 
   const router = useRouter()
 
   useEffect(() => {
-    setDisplayComments(allComments.slice(commentCount - DISPLAY_COMMENT_COUNT, commentCount))
+    setDisplayComments(
+      allComments.slice(commentCount - DISPLAY_COMMENT_COUNT, commentCount),
+    )
   }, [allComments, commentCount])
 
-  const onSubmitComment = (val: string) => {
+  const onSubmitComment = async (val: string) => {
     if (name === "") {
       alert("이름을 입력해주세요!")
       return
@@ -108,21 +99,19 @@ const comment = ({ comments }: any) => {
       return
     }
     try {
-      const commentData: Comment = {
+      const commentData: CommentData = {
         content: value,
         like: 0,
         dislike: 0,
         name: name,
         createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
       }
-      axios.post(`${DB_URL}/comments.json`, JSON.stringify(commentData)).then((res) => {
-        console.log(res)
-        axios.get(`${DB_URL}/comments.json`).then((getRes) => {
-          setAllComments((Object.values(getRes.data) as Comment[]).reverse())
+      db.addComment(commentData).then((_) => {
+        db.getComments().then((result) => {
+          setAllComments((Object.values(result) as CommentData[]).reverse())
           return
         })
       })
-      // setTimeout(() => router.reload(), 1000)
     } catch (e) {
       console.error(e)
     }
@@ -179,13 +168,21 @@ const comment = ({ comments }: any) => {
   return (
     <FlexDiv color={INDEX_BG_COLOR} height='100vh'>
       <GuestBookDiv height='85vh' width='85vw'>
-        <Modal title='방명록 남기기' visible={visible} onOk={handleOk} onCancel={handleCancel}>
+        <Modal
+          title='방명록 남기기'
+          visible={visible}
+          onOk={handleOk}
+          onCancel={handleCancel}>
           <Row justify='space-around' align='middle'>
             <Col span={8}>
               <label>이름</label>
             </Col>
             <Col span={16}>
-              <Input value={name} onChange={onChangeName} placeholder='이름을 입력하세요.' />
+              <Input
+                value={name}
+                onChange={onChangeName}
+                placeholder='이름을 입력하세요.'
+              />
             </Col>
           </Row>
           <Input.TextArea
@@ -196,9 +193,15 @@ const comment = ({ comments }: any) => {
           />
         </Modal>
         {commentCount > 4 ? (
-          <Button onClick={onClickPrev} style={floatPrevButton} icon={<CaretUpOutlined />}></Button>
+          <Button
+            onClick={onClickPrev}
+            style={floatPrevButton}
+            icon={<CaretUpOutlined />}></Button>
         ) : null}
-        <Button onClick={onClickMore} style={floatMoreButton} icon={<CaretDownOutlined />}></Button>
+        <Button
+          onClick={onClickMore}
+          style={floatMoreButton}
+          icon={<CaretDownOutlined />}></Button>
         <H1_KR color='#000000'>방명록</H1_KR>
         <div style={{ width: "100%", textAlign: "end" }}>
           <p>예쁜말만 합시다😁</p>
@@ -206,29 +209,37 @@ const comment = ({ comments }: any) => {
           <Button onClick={showModal}>방명록 남기기</Button>
         </div>
         <FlexDiv direction='column' style={{ overflow: "auto" }}>
-          {displayComments.map((comment: Comment, i: number) => (
+          {displayComments.map((comment: CommentData, i: number) => (
             <CommentDiv
               actions={[
                 <Tooltip key='comment-basic-like' title='Like'>
                   <span onClick={onClickLike}>
-                    {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
+                    {createElement(
+                      action === "liked" ? LikeFilled : LikeOutlined,
+                    )}
                     <span className='comment-action'>{comment.like}</span>
                   </span>
                 </Tooltip>,
                 <Tooltip key='comment-basic-dislike' title='Dislike'>
                   <span onClick={onClickDislike}>
-                    {React.createElement(action === "disliked" ? DislikeFilled : DislikeOutlined)}
+                    {React.createElement(
+                      action === "disliked" ? DislikeFilled : DislikeOutlined,
+                    )}
                     <span className='comment-action'>{comment.dislike}</span>
                   </span>
                 </Tooltip>,
               ]}
               author={<a>{comment.name}</a>}
-              avatar={<Avatar alt={comment.name}>{comment.name.charAt(0)}</Avatar>}
+              avatar={
+                <Avatar alt={comment.name}>{comment.name.charAt(0)}</Avatar>
+              }
               content={<p>{comment.content}</p>}
               style={{ width: "65vw" }}
               datetime={
                 <Tooltip title={comment.createdAt}>
-                  <span>{moment(comment.createdAt, "YYYY-MM-DD HH:mm:ss").fromNow()}</span>
+                  <span>
+                    {moment(comment.createdAt, "YYYY-MM-DD HH:mm:ss").fromNow()}
+                  </span>
                 </Tooltip>
               }
               key={`comment_${i}`}
@@ -242,8 +253,7 @@ const comment = ({ comments }: any) => {
 
 comment.getInitialProps = async (ctx: Context<any>) => {
   try {
-    const res = await fetch(`${DB_URL}/comments.json`)
-    const comments = await res.json()
+    const comments = await db.getComments()
     return { comments: Object.values(comments).reverse() }
   } catch (e) {
     console.error(e)
