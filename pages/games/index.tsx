@@ -3,6 +3,7 @@ import Link from "next/link"
 import { FlexDiv, ContentImg, ImgBox, GAME_BG_COLOR } from "../../styles/styled"
 import styled from "styled-components"
 import { RollButton } from "../../styles/buttons"
+import NotSupported from "../../components/NotSupported"
 
 const IMG_SIZE = "250px"
 
@@ -11,6 +12,9 @@ const ContainerDiv = styled(FlexDiv)`
   padding: 25px;
   width: 90%;
   flex-wrap: wrap;
+  @media (max-width: 770px) {
+    display: none;
+  }
 `
 /* Horizontal-offset Vertical-offset Blur-Radius Spread Shadow-Color */
 const CardDiv = styled.div`
@@ -54,6 +58,7 @@ const ContentDiv = styled.div`
 const index = () => {
   return (
     <FlexDiv backgroundColor={GAME_BG_COLOR} height='100vh'>
+      <NotSupported />
       <ContainerDiv backgroundColor='#16384c'>
         <CardDiv>
           <Img_Box width={IMG_SIZE} height={IMG_SIZE} imgBorRad='4px'>

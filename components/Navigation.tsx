@@ -21,7 +21,7 @@ const X_BUTTON_STYLE = {
 
 const Navigation = () => {
   const [isActive, setActive] = useState(false)
-  const onClickMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const onClickMenu = () => {
     setActive(!isActive)
   }
   return (
@@ -33,7 +33,12 @@ const Navigation = () => {
           <MenuOutlined style={MENU_BUTTON_STYLE} />
         )}
       </div>
-      <div className={isActive ? MENU_ACTIVE : MENU}>
+      <div
+        className={isActive ? MENU_ACTIVE : MENU}
+        onClick={() => {
+          if (isActive) onClickMenu()
+        }}
+        style={!isActive ? { zIndex: 0 } : {}}>
         <ul>
           <li>
             <Link href='/'>
@@ -54,6 +59,16 @@ const Navigation = () => {
             <Link href='/comment'>
               <a>Guest</a>
             </Link>
+          </li>
+          <li>
+            <a href='https://programming119.tistory.com/' target='_blank'>
+              Blog
+            </a>
+          </li>
+          <li>
+            <a href='https://github.com/SeoSang' target='_blank'>
+              Github
+            </a>
           </li>
         </ul>
       </div>
