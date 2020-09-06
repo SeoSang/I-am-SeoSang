@@ -86,42 +86,42 @@ export const WhiteH2_KR = styled.h2`
 `
 
 export const H3 = styled.h2`
-  font-size: 1.5vw;
+  font-size: 1.3rem;
   max-width: 75vw;
   color: ${(props) => props.color || "inherit"};
   font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
 `
 
 export const H3_KR = styled.h2`
-  font-size: 1.5vw;
+  font-size: 1.3rem;
   max-width: 75vw;
   color: ${(props) => props.color || "inherit"};
   font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
 `
 
 export const H2 = styled.h2`
-  font-size: 2vw;
+  font-size: 1.5rem;
   max-width: 75vw;
   color: ${(props) => props.color || "inherit"};
   font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
 `
 
 export const H2_KR = styled.h2`
-  font-size: 2vw;
+  font-size: 1.5rem;
   max-width: 75vw;
   color: ${(props) => props.color || "inherit"};
   font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
 `
 
 export const H1 = styled.h2`
-  font-size: 4vw;
+  font-size: 3rem;
   max-width: 75vw;
   color: ${(props) => props.color || "inherit"};
   font-family: "Red Hat Display", "Noto Sans KR", sans-serif;
 `
 
 export const H1_KR = styled.h2`
-  font-size: 4vw;
+  font-size: 3rem;
   max-width: 75vw;
   color: ${(props) => props.color || "inherit"};
   font-family: "Noto Sans KR", "Red Hat Display", sans-serif;
@@ -153,7 +153,8 @@ export const BlinkYellowDiv = styled.div`
   height: 24px;
   background-color: #ff0;
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px,
+    #ff0 0 2px 12px;
   -webkit-animation: ${blinkYellow} 1s infinite;
   -moz-animation: ${blinkYellow} 1s infinite;
   -ms-animation: ${blinkYellow} 1s infinite;
@@ -167,7 +168,8 @@ export const YellowStrikeDiv = styled.div`
   height: 24px;
   background-color: #ff0;
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px,
+    #ff0 0 2px 12px;
 `
 
 export const GreenBallDiv = styled.div`
@@ -177,7 +179,8 @@ export const GreenBallDiv = styled.div`
   height: 24px;
   background-color: #abff00;
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px,
+    #89ff00 0 2px 12px;
 `
 
 export const BlinkGreenDiv = styled.div`
@@ -187,7 +190,8 @@ export const BlinkGreenDiv = styled.div`
   height: 24px;
   background-color: #abff00;
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px,
+    #89ff00 0 2px 12px;
   -webkit-animation: ${blinkGreen} 1s infinite;
   -moz-animation: ${blinkGreen} 1s infinite;
   -ms-animation: ${blinkGreen} 1s infinite;
