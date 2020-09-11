@@ -45,7 +45,7 @@ const isGenerateAvailable = (board: number[][]): boolean => {
       if (n == 0) {
         check = true
       }
-    }),
+    })
   )
   return check
 }
@@ -91,6 +91,7 @@ export const slideLeft = (board: number[][]) => {
 }
 
 // slideTop과 Bottom 은 쓸 일이 없다  (회전 방식으로 바꿈.)
+
 // // 위쪽으로 단순 옮기기
 // export const slideTop = (board: number[][]) => {
 //   return pipe(transposeCCW, slideLeft, transposeCW)(board)
@@ -132,14 +133,26 @@ export const moveLeft = (board: number[][]) => {
 
 // 위쪽 버튼을 눌렀을 때
 export const moveTop = (board: number[][]) => {
-  const nextBoard = pipe(transposeCCW, slideLeft, combineLeft, slideLeft, transposeCW)(board)
+  const nextBoard = pipe(
+    transposeCCW,
+    slideLeft,
+    combineLeft,
+    slideLeft,
+    transposeCW
+  )(board)
   if (isSameBoard(board, nextBoard)) return board // 못움직이면 그대로
   return generateRandom(nextBoard)
 }
 
 // 아래쪽 버튼 눌렀을 때
 export const moveBottom = (board: number[][]) => {
-  const nextBoard = pipe(transposeCCW, slideRight, combineLeft, slideRight, transposeCW)(board)
+  const nextBoard = pipe(
+    transposeCCW,
+    slideRight,
+    combineLeft,
+    slideRight,
+    transposeCW
+  )(board)
   if (isSameBoard(board, nextBoard)) return board // 못움직이면 그대로
   return generateRandom(nextBoard)
 }
@@ -188,7 +201,9 @@ export const MOVING_KEYCODE = [37, 38, 39, 40]
 
 // 키 입력받은게 상하좌우중 한개인지
 export const isMovingKey = (keycode: number) => {
-  return MOVING_KEYCODE.find((element: number) => element === keycode) !== undefined
+  return (
+    MOVING_KEYCODE.find((element: number) => element === keycode) !== undefined
+  )
 }
 
 /* 스타일 관련 */

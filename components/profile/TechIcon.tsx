@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import styled from "styled-components"
-import { FlexDiv, H3_KR } from "../../styles/styled"
+import { H3_KR } from "../../styles/styled"
 
 interface TechHoverProps {
   visible: boolean

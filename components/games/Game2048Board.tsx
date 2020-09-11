@@ -1,4 +1,11 @@
-import React, { FC, useState, useEffect, useCallback, useRef, Context } from "react"
+import React, {
+  FC,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  Context,
+} from "react"
 import { Row, Col, Button, message, Popover, Input } from "antd"
 import { FlexDiv, H2, GAME_BG_COLOR } from "../../styles/styled"
 import styled, { keyframes, css } from "styled-components"
@@ -15,8 +22,6 @@ import {
   getStyle,
 } from "./functions/Game2048Fun"
 import { NextPage } from "next"
-import axios from "axios"
-import * as firebase from "firebase/app"
 import { Data2048 } from "../../pages/games/game2048"
 import db from "../../db/game2048"
 import Modal from "antd/lib/modal/Modal"
@@ -154,7 +159,9 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
   version,
   serverData,
 }) => {
-  const [gameBoard, setGameBoard] = useState<number[][]>(init_gameBoard(version))
+  const [gameBoard, setGameBoard] = useState<number[][]>(
+    init_gameBoard(version)
+  )
   const [text, setText] = useState<string>("PRESS START!")
   const [arrow, setArrow] = useState<string>("")
   const [theme, setTheme] = useState<number>(1)
@@ -201,7 +208,7 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
       current?.focus()
       setText("PLAYING!")
     },
-    [version, theme, playing],
+    [version, theme, playing]
   )
 
   // 게임 초기화
@@ -272,7 +279,7 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
       current?.focus()
       Initialize_Game()
     },
-    [version, theme, playing],
+    [version, theme, playing]
   )
 
   const onClickChange = useCallback(
@@ -282,7 +289,7 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
       setText("THEME CHANGED!")
       setTheme(theme === 1 ? 2 : 1)
     },
-    [version, theme, playing],
+    [version, theme, playing]
   )
 
   const updateBest = useCallback(() => {
@@ -308,7 +315,10 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
           <Row>Score</Row>
           <Row>{score}</Row>
         </ScoreBestCol>
-        <Popover placement='bottomLeft' title={"최고기록 달성자"} content={bestName}>
+        <Popover
+          placement='bottomLeft'
+          title={"최고기록 달성자"}
+          content={bestName}>
           <ScoreBestCol xs={12} md={3}>
             <Row>Best</Row>
             <Row>{best}</Row>
@@ -347,12 +357,18 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
             onKeyUp={handleKeyUp}
             ref={gameDoing}
             value={text}
-            readOnly
-          ></input>
+            readOnly></input>
           {gameBoard.map((row, r) => (
-            <FlexDiv width='55%' key={`FlexDiv__${r}`} style={{ margin: "0 auto" }}>
+            <FlexDiv
+              width='55%'
+              key={`FlexDiv__${r}`}
+              style={{ margin: "0 auto" }}>
               {row.map((num, c) => (
-                <Cell version={version} value={num} customTheme={theme} key={`Cell__${r}_${c}`}>
+                <Cell
+                  version={version}
+                  value={num}
+                  customTheme={theme}
+                  key={`Cell__${r}_${c}`}>
                   <InnerH2 color={GAME_BG_COLOR} key={`H2__${r}_${c}`}>
                     {num !== 0 ? num : " "}
                   </InnerH2>
@@ -369,16 +385,14 @@ const Game2048Board: NextPage<{ version: number; serverData: Data2048 }> = ({
             setModalVisible(false)
           }}
           okText='OK'
-          cancelText='Cancel'
-        >
+          cancelText='Cancel'>
           <Input
             value={newName}
             onChange={(e) => {
               setNewName(e.target.value)
             }}
             placeholder='서버에 이름을 저장하세요!'
-            style={{ marginBottom: "20px" }}
-          ></Input>
+            style={{ marginBottom: "20px" }}></Input>
           <p>🚫 경고 : 이 창을 종료하게되면 최고기록은 저장되지 않습니다</p>
         </Modal>
       </Row>

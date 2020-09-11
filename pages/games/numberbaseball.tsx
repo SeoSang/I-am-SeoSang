@@ -6,14 +6,12 @@ import {
   WhiteH1,
   WhiteH2,
   WhiteH2_KR,
-  BlinkGreenDiv,
-  BlinkYellowDiv,
 } from "../../styles/styled"
 import GameNavigation from "../../components/GameNavigation"
 import styled from "styled-components"
 import ScoreBoard from "../../components/games/ScoreBoard"
 import BillBoard from "../../components/games/BillBoard"
-import { useInput, digits4Input } from "../../styles/buttons"
+import { useInput } from "../../styles/buttons"
 
 export interface BaseballLine {
   inputNum: string
@@ -67,17 +65,37 @@ const onClickImgStyle = {
 
 const DigitInput = styled.input`
   background: rgba(164, 179, 87, 1);
-  background: -moz-linear-gradient(top, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
+  background: -moz-linear-gradient(
+    top,
+    rgba(164, 179, 87, 1) 0%,
+    rgba(117, 137, 12, 1) 100%
+  );
   background: -webkit-gradient(
     left top,
     left bottom,
     color-stop(0%, rgba(164, 179, 87, 1)),
     color-stop(100%, rgba(117, 137, 12, 1))
   );
-  background: -webkit-linear-gradient(top, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
-  background: -o-linear-gradient(top, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
-  background: -ms-linear-gradient(top, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
-  background: linear-gradient(to bottom, rgba(164, 179, 87, 1) 0%, rgba(117, 137, 12, 1) 100%);
+  background: -webkit-linear-gradient(
+    top,
+    rgba(164, 179, 87, 1) 0%,
+    rgba(117, 137, 12, 1) 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    rgba(164, 179, 87, 1) 0%,
+    rgba(117, 137, 12, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    top,
+    rgba(164, 179, 87, 1) 0%,
+    rgba(117, 137, 12, 1) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(164, 179, 87, 1) 0%,
+    rgba(117, 137, 12, 1) 100%
+  );
   font-size: 3vw;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4b357', endColorstr='#75890c', GradientType=0 );
   letter-spacing: 1vw;
@@ -92,7 +110,10 @@ const getRandomNumbers = () => {
   const num = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
   var randomNum = []
   for (var i = 0; i < 4; i++) {
-    const pickOneEachNum = num.splice(Math.ceil(Math.random() * 9) - i - 1, 1)[0]
+    const pickOneEachNum = num.splice(
+      Math.ceil(Math.random() * 9) - i - 1,
+      1
+    )[0]
     randomNum.push(pickOneEachNum)
   }
   return randomNum
@@ -175,14 +196,21 @@ const NumberBaseball = () => {
   return (
     <React.Fragment>
       <GameNavigation></GameNavigation>
-      <FlexDiv height='100vh' backgroundColor={GAME_BG_COLOR} direction='column'>
+      <FlexDiv
+        height='100vh'
+        backgroundColor={GAME_BG_COLOR}
+        direction='column'>
         <BaseballContainer style={baseballStyle} onClick={onClickBaseBall}>
-          <img style={gameTriggered ? onClickImgStyle : {}} src='/games/baseball.png'></img>
+          <img
+            style={gameTriggered ? onClickImgStyle : {}}
+            src='/games/baseball.png'></img>
         </BaseballContainer>
         <FlexDiv
           direction='column'
-          style={{ visibility: gameTriggered ? "visible" : "hidden", marginBottom: "15vh" }}
-        >
+          style={{
+            visibility: gameTriggered ? "visible" : "hidden",
+            marginBottom: "15vh",
+          }}>
           <BillBoard result={result}></BillBoard>
           <WhiteH2 style={{ marginBottom: "20px" }}>{billBoard}</WhiteH2>
           <div>
@@ -191,7 +219,10 @@ const NumberBaseball = () => {
           <div style={{ textAlign: "center" }}>
             <WhiteH2_KR>4자리 숫자를 맞춰보세요</WhiteH2_KR>
             <form onSubmit={onSubmitForm} style={{ textAlign: "center" }}>
-              <DigitInput ref={valueInput} maxLength={4} {...digit4}></DigitInput>
+              <DigitInput
+                ref={valueInput}
+                maxLength={4}
+                {...digit4}></DigitInput>
             </form>
           </div>
           <ScoreBoard result={result}></ScoreBoard>

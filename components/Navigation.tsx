@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import Link from "next/link"
-import Head from "next/head"
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons"
 
 const MENU = "navigation-menu"

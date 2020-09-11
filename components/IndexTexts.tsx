@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import styled from "styled-components"
-import { H2_KR, A } from "../styles/styled"
+import { H2_KR } from "../styles/styled"
 
 const ContentDiv = styled.div`
   position: relative;

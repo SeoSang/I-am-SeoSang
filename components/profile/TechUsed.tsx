@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import { FlexDiv, INDEX_TEXT_COLOR, H2, H3_KR } from "../../styles/styled"
-import Icon from "./TechIcon"
 import TechIcon from "./TechIcon"
 
 const TECH = {

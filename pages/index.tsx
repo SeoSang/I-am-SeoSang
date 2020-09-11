@@ -1,7 +1,5 @@
 import React, { useState } from "react"
-import Head from "next/head"
 import styled, { keyframes } from "styled-components"
-import { Row, Col } from "antd"
 import IndexTexts from "../components/IndexTexts"
 import { INDEX_BG_COLOR } from "../styles/styled"
 

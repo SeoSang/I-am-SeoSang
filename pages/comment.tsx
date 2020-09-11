@@ -5,7 +5,7 @@ import React, {
   Context,
   useCallback,
 } from "react"
-import { FlexDiv, H1_KR, H2_KR, H3_KR, INDEX_BG_COLOR } from "../styles/styled"
+import { FlexDiv, H1_KR, INDEX_BG_COLOR } from "../styles/styled"
 import { Input, Comment, Tooltip, Button, Modal, Col, Row } from "antd"
 import Avatar from "antd/lib/avatar/avatar"
 import moment from "moment"
@@ -18,7 +18,6 @@ import {
   CaretUpOutlined,
 } from "@ant-design/icons"
 import styled from "styled-components"
-import { DB_URL } from "../db"
 import { useRouter } from "next/router"
 import db, { CommentData } from "../db/comment"
 
@@ -82,7 +81,7 @@ const comment = ({ comments }: any) => {
 
   useEffect(() => {
     setDisplayComments(
-      allComments.slice(commentCount - DISPLAY_COMMENT_COUNT, commentCount),
+      allComments.slice(commentCount - DISPLAY_COMMENT_COUNT, commentCount)
     )
   }, [allComments, commentCount])
 
@@ -136,7 +135,7 @@ const comment = ({ comments }: any) => {
     setCommentCount(
       commentCount <= DISPLAY_COMMENT_COUNT * 2
         ? DISPLAY_COMMENT_COUNT
-        : commentCount - DISPLAY_COMMENT_COUNT,
+        : commentCount - DISPLAY_COMMENT_COUNT
     )
   }
   const onClickMore = (e: React.MouseEvent) => {
@@ -149,14 +148,14 @@ const comment = ({ comments }: any) => {
       setVisible(false)
       onSubmitComment(value)
     },
-    [visible, value],
+    [visible, value]
   )
 
   const handleCancel = useCallback(
     (e: React.MouseEvent) => {
       setVisible(false)
     },
-    [visible],
+    [visible]
   )
   const showModal = useCallback(() => {
     setVisible(true)
@@ -215,7 +214,7 @@ const comment = ({ comments }: any) => {
                 <Tooltip key='comment-basic-like' title='Like'>
                   <span onClick={onClickLike}>
                     {createElement(
-                      action === "liked" ? LikeFilled : LikeOutlined,
+                      action === "liked" ? LikeFilled : LikeOutlined
                     )}
                     <span className='comment-action'>{comment.like}</span>
                   </span>
@@ -223,7 +222,7 @@ const comment = ({ comments }: any) => {
                 <Tooltip key='comment-basic-dislike' title='Dislike'>
                   <span onClick={onClickDislike}>
                     {React.createElement(
-                      action === "disliked" ? DislikeFilled : DislikeOutlined,
+                      action === "disliked" ? DislikeFilled : DislikeOutlined
                     )}
                     <span className='comment-action'>{comment.dislike}</span>
                   </span>

@@ -1,7 +1,12 @@
 import React, { FC } from "react"
 import { BaseballResult } from "../../pages/games/numberbaseball"
 import styled from "styled-components"
-import { In_BlockDiv, BlinkYellowDiv, BlinkGreenDiv, FlexDiv, WhiteH2 } from "../../styles/styled"
+import {
+  BlinkYellowDiv,
+  BlinkGreenDiv,
+  FlexDiv,
+  WhiteH2,
+} from "../../styles/styled"
 
 const BillBoardDiv = styled.div`
   display: flex;
@@ -28,8 +33,7 @@ const BillBoard: FC<{ result: BaseballResult }> = ({ result }) => {
           style={{
             color: "#ffff12",
             margin: "0 10px",
-          }}
-        >
+          }}>
           Strike
         </WhiteH2>
       </FlexDiv>
@@ -37,7 +41,9 @@ const BillBoard: FC<{ result: BaseballResult }> = ({ result }) => {
         {latestData && latestData.strike
           ? new Array(latestData.strike)
               .fill("str")
-              .map((str, i) => <BlinkYellowDiv key={`strike${i}`}></BlinkYellowDiv>)
+              .map((str, i) => (
+                <BlinkYellowDiv key={`strike${i}`}></BlinkYellowDiv>
+              ))
           : ""}
       </FlexDiv>
       <FlexDiv>
@@ -45,8 +51,7 @@ const BillBoard: FC<{ result: BaseballResult }> = ({ result }) => {
           style={{
             color: "#51ff00",
             margin: "0 10px",
-          }}
-        >
+          }}>
           Ball
         </WhiteH2>
       </FlexDiv>
@@ -54,7 +59,9 @@ const BillBoard: FC<{ result: BaseballResult }> = ({ result }) => {
         {latestData && latestData.ball
           ? new Array(latestData.ball)
               .fill("ball")
-              .map((ball, i) => <BlinkGreenDiv key={`ball${i}`}></BlinkGreenDiv>)
+              .map((ball, i) => (
+                <BlinkGreenDiv key={`ball${i}`}></BlinkGreenDiv>
+              ))
           : ""}
       </FlexDiv>
     </BillBoardDiv>

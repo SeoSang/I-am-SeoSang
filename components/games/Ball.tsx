@@ -1,6 +1,5 @@
 import * as React from "react"
 import { memo } from "react"
-import { CSSProperties } from "react"
 import styled, { keyframes } from "styled-components"
 
 const fadein = keyframes`

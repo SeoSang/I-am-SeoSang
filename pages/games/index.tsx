@@ -1,8 +1,7 @@
 import React from "react"
 import Link from "next/link"
-import { FlexDiv, ContentImg, ImgBox, GAME_BG_COLOR } from "../../styles/styled"
+import { FlexDiv, ImgBox, GAME_BG_COLOR } from "../../styles/styled"
 import styled from "styled-components"
-import { RollButton } from "../../styles/buttons"
 import NotSupported from "../../components/NotSupported"
 
 const IMG_SIZE = "250px"
