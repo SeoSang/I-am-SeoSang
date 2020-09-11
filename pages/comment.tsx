@@ -67,6 +67,13 @@ const CommentDiv = styled(Comment)`
   -webkit-border-radius: 10px 10px 10px 10px;
   border: 2px solid #d9bd86;
 `
+const isValidComment = (comment: any) => {
+  console.log(comment)
+  if (comment.name && comment.content && comment.createdAt) {
+    return true
+  }
+  return false
+}
 
 const comment = ({ comments }: any) => {
   const [action, setAction] = useState(null)
@@ -208,42 +215,49 @@ const comment = ({ comments }: any) => {
           <Button onClick={showModal}>방명록 남기기</Button>
         </div>
         <FlexDiv direction='column' style={{ overflow: "auto" }}>
-          {displayComments.map((comment: CommentData, i: number) => (
-            <CommentDiv
-              actions={[
-                <Tooltip key='comment-basic-like' title='Like'>
-                  <span onClick={onClickLike}>
-                    {createElement(
-                      action === "liked" ? LikeFilled : LikeOutlined
-                    )}
-                    <span className='comment-action'>{comment.like}</span>
-                  </span>
-                </Tooltip>,
-                <Tooltip key='comment-basic-dislike' title='Dislike'>
-                  <span onClick={onClickDislike}>
-                    {React.createElement(
-                      action === "disliked" ? DislikeFilled : DislikeOutlined
-                    )}
-                    <span className='comment-action'>{comment.dislike}</span>
-                  </span>
-                </Tooltip>,
-              ]}
-              author={<a>{comment.name}</a>}
-              avatar={
-                <Avatar alt={comment.name}>{comment.name.charAt(0)}</Avatar>
-              }
-              content={<p>{comment.content}</p>}
-              style={{ width: "65vw" }}
-              datetime={
-                <Tooltip title={comment.createdAt}>
-                  <span>
-                    {moment(comment.createdAt, "YYYY-MM-DD HH:mm:ss").fromNow()}
-                  </span>
-                </Tooltip>
-              }
-              key={`comment_${i}`}
-            />
-          ))}
+          {displayComments.map((comment: CommentData, i: number) =>
+            isValidComment(comment) ? (
+              <CommentDiv
+                actions={[
+                  <Tooltip key='comment-basic-like' title='Like'>
+                    <span onClick={onClickLike}>
+                      {createElement(
+                        action === "liked" ? LikeFilled : LikeOutlined
+                      )}
+                      <span className='comment-action'>{comment.like}</span>
+                    </span>
+                  </Tooltip>,
+                  <Tooltip key='comment-basic-dislike' title='Dislike'>
+                    <span onClick={onClickDislike}>
+                      {React.createElement(
+                        action === "disliked" ? DislikeFilled : DislikeOutlined
+                      )}
+                      <span className='comment-action'>{comment.dislike}</span>
+                    </span>
+                  </Tooltip>,
+                ]}
+                author={<a>{comment.name}</a>}
+                avatar={
+                  <Avatar alt={comment.name}>{comment.name.charAt(0)}</Avatar>
+                }
+                content={<p>{comment.content}</p>}
+                style={{ width: "65vw" }}
+                datetime={
+                  <Tooltip title={comment.createdAt}>
+                    <span>
+                      {moment(
+                        comment.createdAt,
+                        "YYYY-MM-DD HH:mm:ss"
+                      ).fromNow()}
+                    </span>
+                  </Tooltip>
+                }
+                key={`comment_${i}`}
+              />
+            ) : (
+              ""
+            )
+          )}
         </FlexDiv>
       </GuestBookDiv>
     </FlexDiv>

@@ -30,7 +30,7 @@ const comment: CommentSelector = {
     let res
     try {
       await rootRef.child("comments").once("value", (data) => {
-        res = data.val()
+        res = data.toJSON()
       })
       return res
     } catch (e) {
@@ -39,11 +39,8 @@ const comment: CommentSelector = {
     }
   },
   addComment: async (comment: CommentData) => {
-    const newKey = randomstring.generate()
-    const res: any = {}
-    res[newKey] = JSON.stringify(comment)
     try {
-      await rootRef.child("comments").set(res)
+      await rootRef.child("comments").push(comment)
     } catch (e) {
       console.error(e)
     }
