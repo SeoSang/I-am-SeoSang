@@ -63,7 +63,7 @@ const IndexTexts: FC<{ onMouse: number }> = ({ onMouse }) => {
         style={onMouse == 1 ? onMouseStyle : { transform: "scale(0)" }}>
         <IndexImage src='/me_park.jpg'></IndexImage>
         <TextDiv>
-          <H2_KR>안녕하세요ㅎㅎ</H2_KR>
+          <H2_KR>안녕하세요😁</H2_KR>
           <p>반갑습니다! 저는 서상혁입니다.</p>
         </TextDiv>
       </ContentBoxDiv>
