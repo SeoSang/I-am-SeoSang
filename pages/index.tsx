@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Head from "next/head"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 import { Row, Col } from "antd"
 import IndexTexts from "../components/IndexTexts"
 import { INDEX_BG_COLOR } from "../styles/styled"
@@ -83,11 +83,44 @@ const IconBoxDiv = styled(IconDiv)`
     }
   }
 `
+const slide = keyframes`
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(30px, 0);
+  }
+}
+`
+
+const fadein = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
+
+const Arrow = styled.i`
+  position: absolute;
+  top: 5px;
+  right: 200px;
+  animation: ${slide} 1.5s ease-in-out infinite, ${fadein} 0.5s ease-in-out;
+  margin-left: 9px;
+  font-size: 5rem;
+  color: #32e0c4;
+  &:before {
+    content: "➡";
+  }
+`
 
 export default function Home() {
   const [onMouse, setOnMouse] = useState(0)
   const onMouseOver = (id: number) => (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     setOnMouse(id)
   }
@@ -96,9 +129,7 @@ export default function Home() {
   }
   return (
     <ContentDiv>
-      <Head>
-        <link href='/public/index.css' rel='stylesheet'></link>
-      </Head>
+      {onMouse !== 0 ? <Arrow aria-hidden='true'></Arrow> : ""}
       <ContainerDIv>
         <IndexTexts onMouse={onMouse}></IndexTexts>
         <IconDiv>
