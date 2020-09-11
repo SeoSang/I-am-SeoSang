@@ -23,14 +23,26 @@ import db, { CommentData } from "../db/comment"
 
 const DISPLAY_COMMENT_COUNT = 3
 
-const GuestBookDiv = styled(FlexDiv)`
+const GuestBookDiv = styled.div`
+  height: 88vh;
+  width: 85vw;
+  overflow: auto;
   background-color: #f0eadf;
   border-radius: 10px 10px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px;
   -webkit-border-radius: 10px 10px 10px 10px;
   border: 6px solid #6e6d6d;
   padding: 5vw;
-  // overflow: auto;
+`
+const CommentConatiner = styled(FlexDiv)`
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: no-wrap;
+`
+
+const ContentContainer = styled(FlexDiv)`
+  margin-top: 20px;
+  overflow: auto;
 `
 
 const floatPrevButton: any = {
@@ -56,7 +68,7 @@ const ERROR_OCCUR: CommentData = {
 const CommentDiv = styled(Comment)`
   width: 65vw;
   background-color: #f6f5f5;
-  padding-left: 15px;
+  padding: 5px 10px;
   margin-bottom: 8px;
   margin-top: 8px;
   -webkit-box-shadow: 10px 10px 5px -8px rgba(128, 128, 128, 0.78);
@@ -172,93 +184,103 @@ const comment = ({ comments }: any) => {
     // console.log(comments)
   }, [])
   return (
-    <FlexDiv color={INDEX_BG_COLOR} height='100vh'>
-      <GuestBookDiv height='85vh' width='85vw'>
-        <Modal
-          title='방명록 남기기'
-          visible={visible}
-          onOk={handleOk}
-          onCancel={handleCancel}>
-          <Row justify='space-around' align='middle'>
-            <Col span={8}>
-              <label>이름</label>
-            </Col>
-            <Col span={16}>
-              <Input
-                value={name}
-                onChange={onChangeName}
-                placeholder='이름을 입력하세요.'
-              />
-            </Col>
-          </Row>
-          <Input.TextArea
-            value={value}
-            onChange={onChangeComment}
-            placeholder='이쁜말, 고운말을 써주세요😄'
-            style={{ marginTop: "20px" }}
-          />
-        </Modal>
-        {commentCount > 4 ? (
+    <FlexDiv direction='column' color={INDEX_BG_COLOR} height='100vh'>
+      <GuestBookDiv>
+        <CommentConatiner>
+          <Modal
+            title='방명록 남기기'
+            visible={visible}
+            onOk={handleOk}
+            onCancel={handleCancel}>
+            <Row justify='space-around' align='middle'>
+              <Col span={8}>
+                <label>이름</label>
+              </Col>
+              <Col span={16}>
+                <Input
+                  value={name}
+                  onChange={onChangeName}
+                  placeholder='이름을 입력하세요.'
+                />
+              </Col>
+            </Row>
+            <Input.TextArea
+              value={value}
+              onChange={onChangeComment}
+              placeholder='이쁜말, 고운말을 써주세요😄'
+              style={{ marginTop: "20px" }}
+            />
+          </Modal>
           <Button
-            onClick={onClickPrev}
-            style={floatPrevButton}
-            icon={<CaretUpOutlined />}></Button>
-        ) : null}
-        <Button
-          onClick={onClickMore}
-          style={floatMoreButton}
-          icon={<CaretDownOutlined />}></Button>
-        <H1_KR color='#000000'>방명록</H1_KR>
-        <div style={{ width: "100%", textAlign: "end" }}>
-          <p>예쁜말만 합시다😁</p>
-          <p>개인적인 용건은 ddrrpg@naver.com로 부탁드립니다.</p>
-          <Button onClick={showModal}>방명록 남기기</Button>
-        </div>
-        <FlexDiv direction='column' style={{ overflow: "auto" }}>
-          {displayComments.map((comment: CommentData, i: number) =>
-            isValidComment(comment) ? (
-              <CommentDiv
-                actions={[
-                  <Tooltip key='comment-basic-like' title='Like'>
-                    <span onClick={onClickLike}>
-                      {createElement(
-                        action === "liked" ? LikeFilled : LikeOutlined
-                      )}
-                      <span className='comment-action'>{comment.like}</span>
-                    </span>
-                  </Tooltip>,
-                  <Tooltip key='comment-basic-dislike' title='Dislike'>
-                    <span onClick={onClickDislike}>
-                      {React.createElement(
-                        action === "disliked" ? DislikeFilled : DislikeOutlined
-                      )}
-                      <span className='comment-action'>{comment.dislike}</span>
-                    </span>
-                  </Tooltip>,
-                ]}
-                author={<a>{comment.name}</a>}
-                avatar={
-                  <Avatar alt={comment.name}>{comment.name.charAt(0)}</Avatar>
-                }
-                content={<p>{comment.content}</p>}
-                style={{ width: "65vw" }}
-                datetime={
-                  <Tooltip title={comment.createdAt}>
-                    <span>
-                      {moment(
-                        comment.createdAt,
-                        "YYYY-MM-DD HH:mm:ss"
-                      ).fromNow()}
-                    </span>
-                  </Tooltip>
-                }
-                key={`comment_${i}`}
-              />
-            ) : (
-              ""
-            )
-          )}
-        </FlexDiv>
+            onClick={onClickMore}
+            style={floatMoreButton}
+            icon={<CaretDownOutlined />}></Button>
+          <div style={{ marginBottom: "0", flex: 1 }}>
+            <H1_KR style={{ marginBottom: "0", flex: 1 }} color='#000000'>
+              방명록
+            </H1_KR>
+          </div>
+          <div style={{ width: "100%", textAlign: "end" }}>
+            <p>예쁜말만 합시다😁</p>
+            <p>개인적인 용건은 ddrrpg@naver.com로 부탁드립니다.</p>
+            <Button onClick={showModal}>방명록 남기기</Button>
+          </div>
+          {commentCount > 4 ? (
+            <Button
+              onClick={onClickPrev}
+              style={floatPrevButton}
+              icon={<CaretUpOutlined />}></Button>
+          ) : null}
+          <ContentContainer direction='column'>
+            {displayComments.map((comment: CommentData, i: number) =>
+              isValidComment(comment) ? (
+                <CommentDiv
+                  actions={[
+                    <Tooltip key='comment-basic-like' title='Like'>
+                      <span onClick={onClickLike}>
+                        {createElement(
+                          action === "liked" ? LikeFilled : LikeOutlined
+                        )}
+                        <span className='comment-action'>{comment.like}</span>
+                      </span>
+                    </Tooltip>,
+                    <Tooltip key='comment-basic-dislike' title='Dislike'>
+                      <span onClick={onClickDislike}>
+                        {React.createElement(
+                          action === "disliked"
+                            ? DislikeFilled
+                            : DislikeOutlined
+                        )}
+                        <span className='comment-action'>
+                          {comment.dislike}
+                        </span>
+                      </span>
+                    </Tooltip>,
+                  ]}
+                  author={<a>{comment.name}</a>}
+                  avatar={
+                    <Avatar alt={comment.name}>{comment.name.charAt(0)}</Avatar>
+                  }
+                  content={<p>{comment.content}</p>}
+                  style={{ width: "65vw" }}
+                  datetime={
+                    <Tooltip title={comment.createdAt}>
+                      <span>
+                        {moment(
+                          comment.createdAt,
+                          "YYYY-MM-DD HH:mm:ss"
+                        ).fromNow()}
+                      </span>
+                    </Tooltip>
+                  }
+                  key={`comment_${i}`}
+                />
+              ) : (
+                ""
+              )
+            )}
+          </ContentContainer>
+        </CommentConatiner>
       </GuestBookDiv>
     </FlexDiv>
   )
