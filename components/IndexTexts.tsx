@@ -37,18 +37,28 @@ const TextDiv = styled.div`
   max-width: 70%;
   h2 {
     @media (max-width: 770px) {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
+    }
+  }
+  p {
+    @media (max-width: 770px) {
+      font-size: 0.6rem;
     }
   }
 `
 
 const IndexImage = styled.img`
-  max-height: 400px;
+  max-height: 300px;
   max-width: 400px;
   margin-bottom: 20px;
   -webkit-box-shadow: 10px 10px 5px -5px rgba(82, 82, 82, 0.77);
   -moz-box-shadow: 10px 10px 5px -5px rgba(82, 82, 82, 0.77);
   box-shadow: 10px 10px 5px -5px rgba(82, 82, 82, 0.77);
+
+  @media (max-width: 770px) {
+    max-height: 200px;
+    max-width: 200px;
+  }
 `
 
 const onMouseStyle = {
@@ -88,9 +98,6 @@ const IndexTexts: FC<{ onMouse: number }> = ({ onMouse }) => {
           <H2_KR>모두가 알아본다.</H2_KR>
           <p>
             겉만 번지르르하지 않은 진짜 실력을 갖추고 싶습니다. <br />
-            아직은 4학년 재학중인 학생이지만
-            <br />
-            점점 더 발전해 나아갈 것입니다.
           </p>
         </TextDiv>
       </ContentBoxDiv>

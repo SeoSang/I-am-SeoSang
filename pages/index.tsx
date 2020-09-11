@@ -59,14 +59,14 @@ const IconBoxDiv = styled(IconDiv)`
 
     &:hover {
       box-shadow: 0 10px 30px rgba(0, 0, 0.1);
-      background-color: #32e0c4;
+      background-color: #99f3bd;
       transition: background-color 1s;
     }
   }
 
   &:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0.1);
-    background-color: #32e0c4;
+    background-color: #99f3bd;
     transition: background-color 1s;
   }
 
@@ -109,9 +109,12 @@ const Arrow = styled.i`
   animation: ${slide} 1.5s ease-in-out infinite, ${fadein} 0.5s ease-in-out;
   margin-left: 9px;
   font-size: 5rem;
-  color: #32e0c4;
+  color: #99f3bd;
   &:before {
     content: "➡";
+  }
+  @media (max-width: 1000px) {
+    font-size: 4rem;
   }
 `
 
