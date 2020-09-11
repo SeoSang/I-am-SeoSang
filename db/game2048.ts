@@ -5,7 +5,7 @@ import { admin } from "firebase-admin/lib/database"
 interface Game2048DBSelector {
   get2048Data: () => Promise<Data2048>
   getBestScore_2048: (
-    version: number,
+    version: number
   ) => Promise<number | firebase.database.DataSnapshot>
   setBestScore_2048: (version: number, score: number) => {}
   setBestName_2048: (version: number, name: string) => {}
@@ -38,7 +38,6 @@ const game2048: Game2048DBSelector = {
         .child("best")
         .child(versionKey)
         .once("value", function (data) {
-          console.log(data.val())
           return data.val()
         })
     } catch (e) {

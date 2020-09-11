@@ -80,7 +80,6 @@ const CommentDiv = styled(Comment)`
   border: 2px solid #d9bd86;
 `
 const isValidComment = (comment: any) => {
-  console.log(comment)
   if (comment.name && comment.content && comment.createdAt) {
     return true
   }
@@ -143,11 +142,9 @@ const comment = ({ comments }: any) => {
   }
 
   const onClickLike = (e: React.MouseEvent) => {
-    console.log("like 클릭댐")
     alert("좋아해주셔서 감사합니다. 좋아요 기능 구현 전입니다ㅎㅎ")
   }
   const onClickDislike = (e: React.MouseEvent) => {
-    console.log("like 클릭댐")
     alert("싫어해해주셔서 감사합니다. 좋아요 기능 구현 전입니다ㅎㅎ")
   }
   const onClickPrev = (e: React.MouseEvent) => {
@@ -180,9 +177,6 @@ const comment = ({ comments }: any) => {
     setVisible(true)
   }, [visible])
 
-  useEffect(() => {
-    // console.log(comments)
-  }, [])
   return (
     <FlexDiv direction='column' color={INDEX_BG_COLOR} height='100vh'>
       <GuestBookDiv>
