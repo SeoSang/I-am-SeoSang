@@ -6,6 +6,8 @@ import { GAME_BG_COLOR, H2 } from "../../styles/styled"
 import GameNavigation from "../../components/GameNavigation"
 import { NextPage, NextPageContext } from "next"
 import db from "../../db/game2048"
+import NotSupported from "../../components/NotSupported"
+import GameLayout from "../../components/GameLayout"
 
 const EXIT_TEXT = "진행중인 게임이 종료 됩니다."
 
@@ -64,42 +66,44 @@ const game2048: NextPage<{ serverData: Data2048 }> = ({ serverData }) => {
     setVersion(ver)
   }
   return (
-    <MainContainer>
-      <Col xs={24} md={6} style={{ textAlign: "center" }}></Col>
-      <GameNavigation></GameNavigation>
-      <Col xs={24} md={12}>
-        <br></br>
-        <Game2048Board
-          serverData={serverData}
-          version={version}></Game2048Board>
-        <Row align='middle' justify='center' style={{ textAlign: "center" }}>
-          <p>조작법 : ➡ / ⬅ / ⬆ / ⬇</p>
-          <p>
-            우측 상단메뉴를 통해 여러 모드와 테마로 즐길 수 있습니다! (웹 전용)
-          </p>
-        </Row>
-        <footer>게임 내용 출처 : "https://play2048.co/"</footer>
-      </Col>
-      <Col xs={24} md={6} style={{ textAlign: "center" }}>
-        <ModeContainer>
-          <H2>SELECT MODE</H2>
-          {new Array(4).fill(null).map((v, i) => (
-            <Popconfirm
-              placement='leftTop'
-              title={EXIT_TEXT}
-              onConfirm={() => {
-                message.info("Mode changed.")
-                onClickButton(i + 2)
-              }}
-              okText='Yes'
-              cancelText='No'
-              key={`Popconfirm__${i}`}>
-              <VersionButton>{`${i + 2}  ❌  ${i + 2}`}</VersionButton>
-            </Popconfirm>
-          ))}
-        </ModeContainer>
-      </Col>
-    </MainContainer>
+    <GameLayout>
+      <MainContainer>
+        <Col xs={24} md={6} style={{ textAlign: "center" }}></Col>
+        <Col xs={24} md={12}>
+          <br></br>
+          <Game2048Board
+            serverData={serverData}
+            version={version}></Game2048Board>
+          <Row align='middle' justify='center' style={{ textAlign: "center" }}>
+            <p>조작법 : ➡ / ⬅ / ⬆ / ⬇</p>
+            <p>
+              우측 상단메뉴를 통해 여러 모드와 테마로 즐길 수 있습니다! (웹
+              전용)
+            </p>
+          </Row>
+          <footer>게임 내용 출처 : "https://play2048.co/"</footer>
+        </Col>
+        <Col xs={24} md={6} style={{ textAlign: "center" }}>
+          <ModeContainer>
+            <H2>SELECT MODE</H2>
+            {new Array(4).fill(null).map((v, i) => (
+              <Popconfirm
+                placement='leftTop'
+                title={EXIT_TEXT}
+                onConfirm={() => {
+                  message.info("Mode changed.")
+                  onClickButton(i + 2)
+                }}
+                okText='Yes'
+                cancelText='No'
+                key={`Popconfirm__${i}`}>
+                <VersionButton>{`${i + 2}  ❌  ${i + 2}`}</VersionButton>
+              </Popconfirm>
+            ))}
+          </ModeContainer>
+        </Col>
+      </MainContainer>
+    </GameLayout>
   )
 }
 

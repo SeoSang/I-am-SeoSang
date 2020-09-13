@@ -4,7 +4,13 @@ import Ball from "../../components/games/Ball"
 import { FlexDiv, GAME_BG_COLOR, WhiteH2 } from "../../styles/styled"
 import GameNavigation from "../../components/GameNavigation"
 import styled from "styled-components"
-import { onClickLotteryStyle, LotteryContainer, BallsContainer } from "../../styles/lotto/styled"
+import {
+  onClickLotteryStyle,
+  LotteryContainer,
+  BallsContainer,
+} from "../../styles/lotto/styled"
+import NotSupported from "../../components/NotSupported"
+import GameLayout from "../../components/GameLayout"
 
 function getWinNumbers() {
   const BONUS_INDEX = 7
@@ -13,7 +19,9 @@ function getWinNumbers() {
     .map((v, i) => i + 1)
   const shuffle = []
   while (candidate.length > 0) {
-    shuffle.push(candidate.splice(Math.floor(Math.random() * candidate.length), 1)[0])
+    shuffle.push(
+      candidate.splice(Math.floor(Math.random() * candidate.length), 1)[0]
+    )
   }
   const bonusNum = shuffle[BONUS_INDEX]
   const winNumbers = shuffle.slice(0, 6).sort((p, c) => p - c)
@@ -26,7 +34,9 @@ const Lotto = () => {
   const [winBalls, setWinBalls] = useState<number[]>([])
   const [bonus, setBonus] = useState<number>(0)
   const [lotteryStyle, setLotteryStyle] = useState({})
-  const [ballContainerStyle, setBallContainerStyle] = useState({ display: "none" })
+  const [ballContainerStyle, setBallContainerStyle] = useState({
+    display: "none",
+  })
   const [textObject, setTextObject] = useState({ lottoNums: "", bonusNums: "" })
 
   const timeoutIDs = useRef<number[]>([])
@@ -76,13 +86,18 @@ const Lotto = () => {
   }, [])
 
   return (
-    <>
-      <GameNavigation></GameNavigation>
-      <FlexDiv height='100vh' backgroundColor={GAME_BG_COLOR} direction='column'>
+    <GameLayout>
+      <FlexDiv
+        height='100vh'
+        backgroundColor={GAME_BG_COLOR}
+        direction='column'>
         <LotteryContainer style={lotteryStyle} onClick={onClickLotto}>
           <img src='/games/lottery.png'></img>
         </LotteryContainer>
-        <FlexDiv height='25%' backgroundColor={GAME_BG_COLOR} direction='column'>
+        <FlexDiv
+          height='25%'
+          backgroundColor={GAME_BG_COLOR}
+          direction='column'>
           <div>
             <WhiteH2>{textObject.lottoNums}</WhiteH2>
           </div>
@@ -92,17 +107,22 @@ const Lotto = () => {
             ))}
           </BallsContainer>
         </FlexDiv>
-        <FlexDiv height='25%' backgroundColor={GAME_BG_COLOR} direction='column'>
+        <FlexDiv
+          height='25%'
+          backgroundColor={GAME_BG_COLOR}
+          direction='column'>
           <div>
             <WhiteH2>{textObject.bonusNums}</WhiteH2>
           </div>
           <BallsContainer style={ballContainerStyle}>
-            {bonus == null ? null : <Ball key='bonus 공' ballNum={bonus}></Ball>}
+            {bonus == null ? null : (
+              <Ball key='bonus 공' ballNum={bonus}></Ball>
+            )}
           </BallsContainer>
         </FlexDiv>
       </FlexDiv>
       <footer>"Icon made by Pixel perfect from www.flaticon.com"</footer>
-    </>
+    </GameLayout>
   )
 }
 

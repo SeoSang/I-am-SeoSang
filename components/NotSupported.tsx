@@ -22,7 +22,7 @@ const NotSupported = () => {
     <Conatiner>
       <img src='/sad.png' style={{ marginBottom: "20%" }}></img>
       <H2_KR color='#ea5455'>
-        죄송합니다. {<br></br>} 이 기능은 모바일에선 지원하지 않습니다.
+        죄송합니다. {<br></br>} 이 기능은 모바일에서는 지원하지 않습니다.
         <br />
         PC로 접속바랍니다!
       </H2_KR>

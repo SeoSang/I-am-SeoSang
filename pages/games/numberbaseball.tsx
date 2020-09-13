@@ -12,6 +12,8 @@ import styled from "styled-components"
 import ScoreBoard from "../../components/games/ScoreBoard"
 import BillBoard from "../../components/games/BillBoard"
 import { useInput } from "../../styles/buttons"
+import NotSupported from "../../components/NotSupported"
+import GameLayout from "../../components/GameLayout"
 
 export interface BaseballLine {
   inputNum: string
@@ -194,8 +196,7 @@ const NumberBaseball = () => {
   }
 
   return (
-    <React.Fragment>
-      <GameNavigation></GameNavigation>
+    <GameLayout>
       <FlexDiv
         height='100vh'
         backgroundColor={GAME_BG_COLOR}
@@ -229,7 +230,7 @@ const NumberBaseball = () => {
         </FlexDiv>
       </FlexDiv>
       <footer>"Icon made by Pixel perfect from www.flaticon.com"</footer>
-    </React.Fragment>
+    </GameLayout>
   )
 }
 

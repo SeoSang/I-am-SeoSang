@@ -16,6 +16,11 @@ const GameNavigationContainer = styled(FlexDiv)`
   top: 5%;
   display: inline-flex;
   flex-direction: column;
+  z-index: 3;
+
+  @media (max-width: 770px) {
+    display: none;
+  }
 `
 
 const ROLL_COLORS: RollButtonProps = {
@@ -51,7 +56,9 @@ const GameNavigation = () => {
         <RollButton content={"Lotto"} colors={ROLL_COLORS}></RollButton>
       </FlexDiv>
       <FlexDiv onClick={onClickHref("numberbaseball")} style={buttonStyle}>
-        <RollButton content={"Number Baseball"} colors={ROLL_COLORS}></RollButton>
+        <RollButton
+          content={"Number Baseball"}
+          colors={ROLL_COLORS}></RollButton>
       </FlexDiv>
     </GameNavigationContainer>
   )
