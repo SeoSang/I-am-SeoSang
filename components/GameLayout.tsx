@@ -4,6 +4,12 @@ import { GAME_BG_COLOR } from "../styles/styled"
 import GameNavigation from "./GameNavigation"
 import NotSupported from "./NotSupported"
 
+const GameDiv = styled.div`
+  @media (max-width: 770px) {
+    display: none;
+  }
+`
+
 const MainContainer = styled.div`
   color: #f5f6fa;
   min-height: 100vh;
@@ -15,7 +21,7 @@ const GameLayout: FC<{ children: any }> = ({ children }) => {
     <MainContainer>
       <GameNavigation />
       <NotSupported />
-      {children}
+      <GameDiv>{children}</GameDiv>
     </MainContainer>
   )
 }

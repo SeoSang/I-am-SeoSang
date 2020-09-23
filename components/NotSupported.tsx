@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { H1_KR, H2_KR } from "../styles/styled"
+import { H2_KR } from "../styles/styled"
 
 const Conatiner = styled.div`
   display: none;
