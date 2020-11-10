@@ -3,18 +3,67 @@ import { FlexDiv, INDEX_TEXT_COLOR, H2, INDEX_LINE_COLOR, A } from "../../styles
 import styled from "styled-components"
 import { Card } from "antd"
 import Meta from "antd/lib/card/Meta"
-import { useRouter } from "next/router"
 import Link from "next/link"
+
+const ProfjectCard = styled(Card)`
+  width: 45%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+  @media (max-width: 770px) {
+    width: 80%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+`
 
 const Project = () => {
   return (
     <FlexDiv direction='column' style={{ marginTop: "40px" }}>
       <FlexDiv style={{ justifyContent: "space-around" }}>
-        <Card
-          hoverable
-          style={{ width: "45%" }}
-          cover={<img src='/profile/project/mydangdang.png' />}
-        >
+        <ProfjectCard hoverable cover={<img src='/profile/project/freechat-freeboard.png' />}>
+          <Meta
+            title='FreeChat-FreeBoard'
+            description={
+              <p>
+                비밀채팅방+자유게시판<br></br>
+                기술 스택 : Socket.io, AWS(IaaS), Heroku(PaaS), Typescript, Next JS, Material UI,
+                Mobx, MySQL, Node JS(Express), etc <br></br>
+                참여 인원 : 혼자😂 <br></br>
+                #Socket.io #AWS #RDB #Mobx #Heroku #JWT #풀스택 <br></br>
+                <A href='http://freechat-freeboard.ml/' target='_blank'>
+                  URL
+                </A>
+                {"  "}
+                <A href='https://github.com/SeoSang/freechat-freeboard' target='_blank'>
+                  깃허브
+                </A>
+              </p>
+            }
+          />
+        </ProfjectCard>
+        <ProfjectCard hoverable cover={<img src='/profile/project/main.gif' />}>
+          <Meta
+            title='SportDoDo'
+            description={
+              <p>
+                승부를 예측하고 포인트를 쌓으세요!<br></br>
+                기술 스택 : Next JS, Redux, MongoDB, Node JS(Express), Real-Time Scheduling, JWT,
+                etc <br></br>
+                참여 인원 : 리액트 팀원들! <br></br>
+                #SPA #NoSQL #실시간 어플리케이션 #프론트총괄 #백엔드일부분 <br></br>
+                <A href='https://sports-dodo.vercel.app/' target='_blank'>
+                  URL
+                </A>
+                {"  "}
+                <A href='https://github.com/SeoSang/score____temp' target='_blank'>
+                  깃허브
+                </A>
+              </p>
+            }
+          />
+        </ProfjectCard>
+        <ProfjectCard hoverable cover={<img src='/profile/project/mydangdang.png' />}>
           <Meta
             title='My DangDang'
             description={
@@ -29,24 +78,8 @@ const Project = () => {
               </p>
             }
           />
-        </Card>
-        <Card hoverable style={{ width: "45%" }} cover={<img src='/profile/project/score.png' />}>
-          <Meta
-            title='ScoreBatting'
-            description={
-              <p>
-                승부를 예측하고 포인트를 쌓으세요!<br></br>
-                기술 스택 : JavaScript, Next JS, Redux, MongoDB, Node JS(Express), etc <br></br>
-                참여 인원 : 리액트 팀원들! <br></br>
-                #SPA #NoSQL #실시간 어플리케이션 #프론트담당 <br></br>
-                <A href='https://github.com/SeoSang/score____temp' target='_blank'>
-                  깃허브
-                </A>
-              </p>
-            }
-          />
-        </Card>
-        <Card hoverable style={{ width: "45%" }} cover={<img src='/profile/project/bat.png' />}>
+        </ProfjectCard>
+        <ProfjectCard hoverable cover={<img src='/profile/project/bat.png' />}>
           <Meta
             title='Bat 프로그래밍!'
             description={
@@ -64,8 +97,8 @@ const Project = () => {
               </p>
             }
           />
-        </Card>
-        <Card hoverable style={{ width: "45%" }} cover={<img src='/profile/project/5mok.png' />}>
+        </ProfjectCard>
+        <ProfjectCard hoverable cover={<img src='/profile/project/5mok.png' />}>
           <Meta
             title='You VS SeoPaggo'
             description={
@@ -80,7 +113,7 @@ const Project = () => {
               </p>
             }
           />
-        </Card>
+        </ProfjectCard>
         <Card
           hoverable
           style={{ width: "80%", marginTop: "40px" }}

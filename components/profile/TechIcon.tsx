@@ -12,19 +12,30 @@ interface TechIconData {
   comment: null | string
 }
 
+const ICON_WIDTH = 150
+const ICON_HEIGHT = 150
+const ICON_MARGIN = 20
+
 const IconBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 150px;
-  height: 150px;
+  width: ${ICON_WIDTH}px;
+  height: ${ICON_HEIGHT}px;
   border-radius: 15px;
-  margin: 20px;
+  margin: ${ICON_MARGIN}px;
   text-align: center;
   -webkit-box-shadow: 0px 2px 12px 0px rgba(125, 125, 125, 1);
   -moz-box-shadow: 0px 2px 12px 0px rgba(125, 125, 125, 1);
   box-shadow: 0px 2px 12px 0px rgba(125, 125, 125, 1);
+
+  @media (max-width: 755px) {
+    width: ${ICON_WIDTH / 2}px;
+    height: ${ICON_HEIGHT / 2}px;
+    border-radius: 8px;
+    margin: ${ICON_MARGIN / 2}px;
+  }
 `
 
 const TechHover = styled.div`
@@ -34,8 +45,8 @@ const TechHover = styled.div`
   justify-content: center;
   visibility: visible;
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: ${ICON_WIDTH}px;
+  height: ${ICON_HEIGHT}px;
   border-radius: 15px;
   text-align: center;
   opacity: 0;
@@ -58,6 +69,12 @@ const TechHover = styled.div`
       color: white;
       opacity: 1;
     }
+  }
+
+  @media (max-width: 755px) {
+    width: ${ICON_WIDTH / 2}px;
+    height: ${ICON_HEIGHT / 2}px;
+    border-radius: 8px;
   }
 `
 

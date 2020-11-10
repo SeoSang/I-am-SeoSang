@@ -143,43 +143,43 @@ const TechUsed = () => {
       </H2>
       <IconContainer>
         {TECH.Language.map((data) => (
-          <TechIcon data={data} />
+          <TechIcon data={data} key={data.icon} />
         ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Web</H2>
       <IconContainer>
         {TECH.Web.map((data) => (
-          <TechIcon data={data} />
+          <TechIcon data={data} key={data.icon} />
         ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Frontend</H2>
       <IconContainer>
         {TECH.Frontend.map((data) => (
-          <TechIcon data={data} />
+          <TechIcon data={data} key={data.icon} />
         ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Backend</H2>
       <IconContainer>
         {TECH.Backend.map((data) => (
-          <TechIcon data={data} />
+          <TechIcon data={data} key={data.icon} />
         ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Database</H2>
       <IconContainer>
         {TECH.Database.map((data) => (
-          <TechIcon data={data} />
+          <TechIcon data={data} key={data.icon} />
         ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Version Control</H2>
       <IconContainer>
         {TECH.VersionControl.map((data) => (
-          <TechIcon data={data} />
+          <TechIcon data={data} key={data.icon} />
         ))}
       </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>ETC</H2>
       <IconContainer>
         {TECH.ETC.map((data) => (
-          <TechIcon data={data} />
+          <TechIcon data={data} key={data.icon} />
         ))}
       </IconContainer>
     </FlexDiv>

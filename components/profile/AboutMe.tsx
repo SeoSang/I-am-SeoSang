@@ -1,6 +1,13 @@
 import React from "react"
 import { INDEX_LINE_COLOR, H3_KR, A } from "../../styles/styled"
 import { Row, Col } from "antd"
+import styled from "styled-components"
+
+const SummaryH3 = styled(H3_KR)`
+  @media (max-width: 770px) {
+    margin-top: 10px;
+  }
+`
 
 const AboutMe = () => {
   return (
@@ -9,7 +16,7 @@ const AboutMe = () => {
         <img src='/profile/profile_seo.jpg' style={{ maxWidth: "100%" }}></img>
       </Col>
       <Col xs={24} md={12} style={{ padding: "0 5vw" }}>
-        <H3_KR>⭐요약⭐</H3_KR>
+        <SummaryH3>⭐요약⭐</SummaryH3>
         <ul>
           <li> 1997.06.09 ~ 서울 망원동 </li>
           <li> 고려대학교 컴퓨터학과 4학년 재학중 </li>
