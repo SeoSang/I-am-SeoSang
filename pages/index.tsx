@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styled, { keyframes } from "styled-components"
 import IndexTexts from "../components/IndexTexts"
-import { INDEX_BG_COLOR } from "../styles/styled"
+import { FlexDiv, INDEX_BG_COLOR } from "../styles/styled"
 
 const ContainerDIv = styled.div`
   display: flex;
@@ -108,13 +108,15 @@ const Arrow = styled.i`
   right: 200px;
   animation: ${slide} 1.5s ease-in-out infinite, ${fadein} 0.5s ease-in-out;
   margin-left: 9px;
-  font-size: 5rem;
-  color: #99f3bd;
-  &:before {
+  font-size: 4.5rem;
+  color: #192a56;
+  &:after {
     content: "➡";
   }
   @media (max-width: 1000px) {
-    font-size: 4rem;
+    font-size: 3rem;
+    top: 15px;
+    right: 150px;
   }
 `
 
@@ -130,7 +132,13 @@ export default function Home() {
   }
   return (
     <ContentDiv>
-      {onMouse !== 0 ? <Arrow aria-hidden='true'></Arrow> : ""}
+      {onMouse !== 0 ? (
+        <FlexDiv>
+          <Arrow aria-hidden='true'>Menu</Arrow>
+        </FlexDiv>
+      ) : (
+        ""
+      )}
       <ContainerDIv>
         <IndexTexts onMouse={onMouse}></IndexTexts>
         <IconDiv>
