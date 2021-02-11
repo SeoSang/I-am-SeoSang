@@ -83,8 +83,10 @@ const IndexTexts: FC<{ onMouse: number }> = ({ onMouse }) => {
         <TextDiv>
           <H2_KR>저는 개발자입니다</H2_KR>
           <p>
-            풀스택 웹, 앱에 모두 관심이 있으며 <br /> 개발용 언어는 TypeScript,
-            React 를 주로 사용하고 있습니다.
+            TypeScript, React 을 기반으로 한 <strong>웹 풀스택</strong>을 주로
+            다루며 <br />
+            <strong>클라우드 컴퓨팅</strong>, <strong>데이터 분석</strong>에도
+            관심이 있습니다!
             <br />
             저는 개발이 즐겁고 개발자인 것이 자랑스럽습니다👍
           </p>

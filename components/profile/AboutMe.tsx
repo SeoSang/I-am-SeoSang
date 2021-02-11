@@ -20,21 +20,29 @@ const AboutMe = () => {
         <ul>
           <li> 1997.06.09 ~ 서울 망원동 </li>
           <li> 고려대학교 컴퓨터학과 4학년 재학중 </li>
-          <li> 관심분야 : 웹(코딩)📟, 컴퓨터 주변기기💻, 축구⚽, 게임🎮, 강아지🐶</li>
-          <li> 장점 : 한번 시작했으면 끝을 본다 배움을 즐긴다! 적응력이 좋다</li>
-          <li> 단점 : 꼼꼼함의 부족, 기억력이 안좋아 메모습관을 강제로 주입중😣</li>
+          <li>
+            {" "}
+            관심분야 : 웹(코딩)📟, 컴퓨터 주변기기💻, 축구⚽, 게임🎮, 강아지🐶
+          </li>
+          <li>
+            {" "}
+            장점 : 한번 시작했으면 끝을 본다 배움을 즐긴다! 적응력이 좋다
+          </li>
+          <li>
+            {" "}
+            단점 : 꼼꼼함의 부족, 기억력이 안좋아 메모습관을 강제로 주입중😣
+          </li>
           <br></br>
           <li> 2015 고려대학교 컴퓨터학과 입학</li>
-          <li> 2016. 03 ~ 2018. 03 공군 암호체계병 병장 만기전역</li>
-          <li> 2017~2018 10전투비행단 ICT 프로그래밍 동아리</li>
+          <li> 2016.03 ~ 2018.03 공군 암호체계병 병장 만기전역</li>
+          <li> 2017 ~ 2018 10전투비행단 ICT 프로그래밍 동아리</li>
           <li>
             {" "}
             2019 하나와영 해커톤 최우수상 수상 :{" "}
             <a
               style={{ color: INDEX_LINE_COLOR }}
               href='https://github.com/beygee/minki'
-              target='_blank'
-            >
+              target='_blank'>
               <strong>Minki</strong>
             </a>
           </li>
@@ -44,8 +52,7 @@ const AboutMe = () => {
             <a
               style={{ color: INDEX_LINE_COLOR }}
               href='https://www.youtube.com/watch?v=DTgJO6ti7s4'
-              target='_blank'
-            >
+              target='_blank'>
               <strong>Berry IP</strong>
             </a>
           </li>
@@ -54,8 +61,7 @@ const AboutMe = () => {
             <a
               style={{ color: INDEX_LINE_COLOR }}
               href='https://programming119.tistory.com'
-              target='_blank'
-            >
+              target='_blank'>
               <strong>개발자 아저씨들 힘을 모아</strong>
             </a>
           </li>
@@ -64,8 +70,7 @@ const AboutMe = () => {
             <a
               style={{ color: INDEX_LINE_COLOR }}
               href='https://github.com/SeoSang'
-              target='_blank'
-            >
+              target='_blank'>
               <strong>Github</strong>
             </a>
           </li>
@@ -75,8 +80,7 @@ const AboutMe = () => {
             <a
               style={{ color: INDEX_LINE_COLOR }}
               href='https://programming119.tistory.com/175'
-              target='_blank'
-            >
+              target='_blank'>
               <strong>후기</strong>
             </a>
           </li>
@@ -84,6 +88,11 @@ const AboutMe = () => {
         </ul>
       </Col>
       <Col xs={24} md={6}>
+        <H3_KR>📑 경력 </H3_KR>
+        <ul>
+          <li> 2020.12.28~ 카카오 추천팀 인턴 💛 </li>
+        </ul>
+        <br></br>
         <H3_KR>🧾 자격증 </H3_KR>
         <ul>
           <li> 삼성 SDS 알고리즘 Professional 등급 </li>
@@ -99,7 +108,6 @@ const AboutMe = () => {
           <li> 고등수학 프로과외러 </li>
           <br />
           <li>
-            {" "}
             연애중💕(18.08.13~) with{" "}
             <A href='https://blog.naver.com/minjy918' target='_blank'>
               김마림바
