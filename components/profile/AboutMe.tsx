@@ -1,19 +1,19 @@
-import React from "react"
-import { INDEX_LINE_COLOR, H3_KR, A } from "../../styles/styled"
-import { Row, Col } from "antd"
-import styled from "styled-components"
+import React from "react";
+import { INDEX_LINE_COLOR, H3_KR, A } from "../../styles/styled";
+import { Row, Col } from "antd";
+import styled from "styled-components";
 
 const SummaryH3 = styled(H3_KR)`
   @media (max-width: 770px) {
     margin-top: 10px;
   }
-`
+`;
 
 const AboutMe = () => {
   return (
     <Row style={{ margin: "20px 10px" }}>
       <Col xs={24} md={6}>
-        <img src='/profile/profile_seo.jpg' style={{ maxWidth: "100%" }}></img>
+        <img src="/profile/profile_seo.jpg" style={{ maxWidth: "100%" }}></img>
       </Col>
       <Col xs={24} md={12} style={{ padding: "0 5vw" }}>
         <SummaryH3>⭐요약⭐</SummaryH3>
@@ -41,8 +41,9 @@ const AboutMe = () => {
             2019 하나와영 해커톤 최우수상 수상 :{" "}
             <a
               style={{ color: INDEX_LINE_COLOR }}
-              href='https://github.com/beygee/minki'
-              target='_blank'>
+              href="https://github.com/beygee/minki"
+              target="_blank"
+            >
               <strong>Minki</strong>
             </a>
           </li>
@@ -51,8 +52,9 @@ const AboutMe = () => {
             2019 ICT멘토링 공모전 본선 입선 :{" "}
             <a
               style={{ color: INDEX_LINE_COLOR }}
-              href='https://www.youtube.com/watch?v=DTgJO6ti7s4'
-              target='_blank'>
+              href="https://www.youtube.com/watch?v=DTgJO6ti7s4"
+              target="_blank"
+            >
               <strong>Berry IP</strong>
             </a>
           </li>
@@ -60,8 +62,9 @@ const AboutMe = () => {
             2019 블로그 개설 :{" "}
             <a
               style={{ color: INDEX_LINE_COLOR }}
-              href='https://programming119.tistory.com'
-              target='_blank'>
+              href="https://programming119.tistory.com"
+              target="_blank"
+            >
               <strong>개발자 아저씨들 힘을 모아</strong>
             </a>
           </li>
@@ -69,8 +72,9 @@ const AboutMe = () => {
             2020 독학의 해, 잡다한 토이 프로젝트들 진행중 /
             <a
               style={{ color: INDEX_LINE_COLOR }}
-              href='https://github.com/SeoSang'
-              target='_blank'>
+              href="https://github.com/SeoSang"
+              target="_blank"
+            >
               <strong>Github</strong>
             </a>
           </li>
@@ -79,8 +83,9 @@ const AboutMe = () => {
             2020 하절기 삼성 SDS 대학생 알고리즘 특강 Professional 과정 수료 /{" "}
             <a
               style={{ color: INDEX_LINE_COLOR }}
-              href='https://programming119.tistory.com/175'
-              target='_blank'>
+              href="https://programming119.tistory.com/175"
+              target="_blank"
+            >
               <strong>후기</strong>
             </a>
           </li>
@@ -90,7 +95,8 @@ const AboutMe = () => {
       <Col xs={24} md={6}>
         <H3_KR>📑 경력 </H3_KR>
         <ul>
-          <li> 2020.12.28~ 카카오 추천팀 인턴 💛 </li>
+          <li> 2020.12.28 ~ 2020.02.27 카카오 추천팀 인턴 💛 </li>
+          <li> 2020.03.15 ~ 네이버 쇼핑검색서비스 인턴 💚 </li>
         </ul>
         <br></br>
         <H3_KR>🧾 자격증 </H3_KR>
@@ -104,19 +110,19 @@ const AboutMe = () => {
         <H3_KR>😎 기타</H3_KR>
         <ul>
           <li> 프로그래머스 점수랭킹 83위 </li>
-          <li> 백준 골드 2 (20.08.23 기준)</li>
+          <li> 백준 플레티넘 4 (21.04.18 기준)</li>
           <li> 고등수학 프로과외러 </li>
           <br />
           <li>
             연애중💕(18.08.13~) with{" "}
-            <A href='https://blog.naver.com/minjy918' target='_blank'>
+            <A href="https://blog.naver.com/minjy918" target="_blank">
               김마림바
             </A>{" "}
           </li>
         </ul>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default AboutMe
+export default AboutMe;

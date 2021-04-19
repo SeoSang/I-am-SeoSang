@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "antd": "^4.6.2",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.11.1",
     "curry": "^1.2.0",
     "easy-curry": "^1.0.11",

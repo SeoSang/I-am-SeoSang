@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
-import { FlexDiv, INDEX_TEXT_COLOR, H2, H3_KR } from "../../styles/styled"
-import TechIcon from "./TechIcon"
+import React from "react";
+import styled from "styled-components";
+import { FlexDiv, INDEX_TEXT_COLOR, H2, H3_KR } from "../../styles/styled";
+import TechIcon from "./TechIcon";
 
 const TECH = {
   Language: [
@@ -13,17 +13,17 @@ const TECH = {
     {
       icon: "python.ico",
       title: "python",
-      comment: "코딩테스트 주 언어",
+      comment: "코딩테스트, 웹 서버",
     },
     {
       icon: "java.ico",
       title: "java",
-      comment: "코딩테스트 보조 언어\n스프링부트 공부중",
+      comment: "코딩테스트 보조 언어, 스프링부트",
     },
     {
       icon: "c.ico",
       title: "C",
-      comment: "초급",
+      comment: "기본 문법",
     },
     { icon: "ocaml.ico", title: "Ocaml", comment: "함수형 프로그래밍" },
   ],
@@ -66,11 +66,6 @@ const TECH = {
       comment: "중급",
     },
     {
-      icon: "php.ico",
-      title: "PHP",
-      comment: "초급",
-    },
-    {
       icon: "nextjs.ico",
       title: "Next JS",
       comment: "중급",
@@ -85,19 +80,39 @@ const TECH = {
     {
       icon: "express.png",
       title: "Express",
-      comment: "초급",
+      comment: "중급",
+    },
+    {
+      icon: "koa.png",
+      title: "Koa",
+      comment: "중급",
+    },
+    {
+      icon: "django.png",
+      title: "Django",
+      comment: "중급",
     },
   ],
   Database: [
     {
       icon: "mysql.ico",
       title: "MYSQL",
-      comment: "SQL",
+      comment: "RDB",
     },
     {
       icon: "mongodb.ico",
       title: "Mongo DB",
       comment: "No SQL",
+    },
+    {
+      icon: "postgresql.png",
+      title: "PostgreSQL",
+      comment: "RDB",
+    },
+    {
+      icon: "firebase.jpg",
+      title: "Firebase",
+      comment: "이 사이트가 firebase 기반",
     },
   ],
   VersionControl: [
@@ -110,6 +125,11 @@ const TECH = {
       icon: "github.ico",
       title: "Github",
       comment: "버전관리",
+    },
+    {
+      icon: "jenkins.png",
+      title: "Jenkins",
+      comment: "CI/CD",
     },
   ],
   ETC: [
@@ -129,15 +149,15 @@ const TECH = {
       comment: "협업",
     },
   ],
-}
+};
 
 const TechUsed = () => {
   const IconContainer = styled(FlexDiv)`
     margin-bottom: 30px;
-  `
+  `;
 
   return (
-    <FlexDiv direction='column' width='100%'>
+    <FlexDiv direction="column" width="100%">
       <H2 color={INDEX_TEXT_COLOR} style={{ marginTop: "20px" }}>
         Language
       </H2>
@@ -170,7 +190,7 @@ const TechUsed = () => {
           <TechIcon data={data} key={data.icon} />
         ))}
       </IconContainer>
-      <H2 color={INDEX_TEXT_COLOR}>Version Control</H2>
+      <H2 color={INDEX_TEXT_COLOR}>Version Control, CI/CD</H2>
       <IconContainer>
         {TECH.VersionControl.map((data) => (
           <TechIcon data={data} key={data.icon} />
@@ -183,7 +203,7 @@ const TechUsed = () => {
         ))}
       </IconContainer>
     </FlexDiv>
-  )
-}
+  );
+};
 
-export default TechUsed
+export default TechUsed;
