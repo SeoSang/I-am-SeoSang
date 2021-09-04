@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import { H2_KR } from "../styles/styled"
+import React from "react";
+import styled from "styled-components";
+import { H2_KR } from "../styles/styled";
 
-const Conatiner = styled.div`
+const Container = styled.div`
   display: none;
   width: 100vw;
   height: 100vh;
@@ -15,19 +15,19 @@ const Conatiner = styled.div`
   @media (max-width: 770px) {
     display: flex;
   }
-`
+`;
 
 const NotSupported = () => {
   return (
-    <Conatiner>
-      <img src='/sad.png' style={{ marginBottom: "20%" }}></img>
-      <H2_KR color='#ea5455'>
+    <Container>
+      <img src="/sad.png" style={{ marginBottom: "20%" }}></img>
+      <H2_KR color="#ea5455">
         죄송합니다. {<br></br>} 이 기능은 모바일에서는 지원하지 않습니다.
         <br />
         PC로 접속바랍니다!
       </H2_KR>
-    </Conatiner>
-  )
-}
+    </Container>
+  );
+};
 
-export default NotSupported
+export default NotSupported;
