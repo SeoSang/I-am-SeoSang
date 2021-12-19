@@ -9,6 +9,7 @@ const ProfjectCard = styled(Card)`
   width: 45%;
   margin-bottom: 10px;
   margin-top: 10px;
+  cursor: auto;
 
   @media (max-width: 770px) {
     width: 80%;

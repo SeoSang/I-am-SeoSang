@@ -153,11 +153,6 @@ const TechUsed = () => {
       <H2 color={INDEX_TEXT_COLOR} style={{ marginTop: "20px" }}>
         Language
       </H2>
-      <IconContainer>
-        {TECH.Language.map((data) => (
-          <TechIcon data={data} key={data.icon} />
-        ))}
-      </IconContainer>
       <H2 color={INDEX_TEXT_COLOR}>Web</H2>
       <IconContainer>
         {TECH.Web.map((data) => (
