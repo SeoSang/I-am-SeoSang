@@ -4,29 +4,6 @@ import { FlexDiv, INDEX_TEXT_COLOR, H2, H3_KR } from "../../styles/styled";
 import TechIcon from "./TechIcon";
 
 const TECH = {
-  Language: [
-    {
-      icon: "javascript.ico",
-      title: "javascript",
-      comment: "중급",
-    },
-    {
-      icon: "python.ico",
-      title: "python",
-      comment: "코딩테스트, 웹 서버",
-    },
-    {
-      icon: "java.ico",
-      title: "java",
-      comment: "코딩테스트 보조 언어, 스프링부트",
-    },
-    {
-      icon: "c.ico",
-      title: "C",
-      comment: "기본 문법",
-    },
-    { icon: "ocaml.ico", title: "Ocaml", comment: "함수형 프로그래밍" },
-  ],
   Web: [
     {
       icon: "html.ico",
@@ -100,19 +77,24 @@ const TECH = {
       comment: "RDB",
     },
     {
-      icon: "mongodb.ico",
-      title: "Mongo DB",
-      comment: "No SQL",
-    },
-    {
       icon: "postgresql.png",
       title: "PostgreSQL",
       comment: "RDB",
     },
     {
+      icon: "redis.png",
+      title: "Redis",
+      comment: "In-Memory",
+    },
+    {
+      icon: "mongodb.ico",
+      title: "Mongo DB",
+      comment: "No SQL",
+    },
+    {
       icon: "firebase.jpg",
       title: "Firebase",
-      comment: "이 사이트가 firebase 기반",
+      comment: "for small project",
     },
   ],
   VersionControl: [
@@ -127,6 +109,11 @@ const TECH = {
       comment: "버전관리",
     },
     {
+      icon: "github-actions.png",
+      title: "Github Actions",
+      comment: "CI/CD",
+    },
+    {
       icon: "jenkins.png",
       title: "Jenkins",
       comment: "CI/CD",
@@ -134,14 +121,19 @@ const TECH = {
   ],
   ETC: [
     {
-      icon: "excel.ico",
-      title: "Excel",
-      comment: "컴활1급",
+      icon: "docker.ico",
+      title: "Docker",
+      comment: "이미지 구성 및 컨테이너 작업",
+    },
+    {
+      icon: "kubernetes.ico",
+      title: "Kubernetes",
+      comment: "컨테이너 오케스트레이션",
     },
     {
       icon: "notion.ico",
       title: "Express",
-      comment: "마크다운 필기, 문서작성",
+      comment: "마크다운 문서 선호",
     },
     {
       icon: "trello.ico",
