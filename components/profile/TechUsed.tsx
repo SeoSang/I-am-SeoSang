@@ -28,7 +28,7 @@ const TECH = {
     {
       icon: "webpack.ico",
       title: "Webpack",
-      comment: "모듈 번들러",
+      comment: "모듈 번들링",
     },
     {
       icon: "babel.ico",
@@ -150,10 +150,7 @@ const TechUsed = () => {
 
   return (
     <FlexDiv direction="column" width="100%">
-      <H2 color={INDEX_TEXT_COLOR} style={{ marginTop: "20px" }}>
-        Language
-      </H2>
-      <H2 color={INDEX_TEXT_COLOR}>Web</H2>
+      <H2 color={INDEX_TEXT_COLOR} style={{ marginTop: "20px" }}>Web</H2>
       <IconContainer>
         {TECH.Web.map((data) => (
           <TechIcon data={data} key={data.icon} />
