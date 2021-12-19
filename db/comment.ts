@@ -1,6 +1,4 @@
 import rootRef from "./index"
-import { admin } from "firebase-admin/lib/database"
-import randomstring from "randomstring"
 
 export interface CommentData {
   name: string

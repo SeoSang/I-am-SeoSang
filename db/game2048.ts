@@ -1,12 +1,11 @@
 import { Data2048, INIT_DATA_2048 } from "../pages/games/game2048"
 import rootRef from "./index"
-import { admin } from "firebase-admin/lib/database"
 
 interface Game2048DBSelector {
   get2048Data: () => Promise<Data2048>
   getBestScore_2048: (
     version: number
-  ) => Promise<number | firebase.database.DataSnapshot>
+  ) => Promise<number | any>
   setBestScore_2048: (version: number, score: number) => {}
   setBestName_2048: (version: number, name: string) => {}
 }
