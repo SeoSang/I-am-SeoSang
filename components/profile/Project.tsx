@@ -32,9 +32,6 @@ const Project = () => {
                 Mobx, MySQL, Node JS(Express), etc <br></br>
                 참여 인원 : 혼자😂 <br></br>
                 #Socket.io #AWS #RDB #Mobx #Heroku #JWT #풀스택 <br></br>
-                <A href='http://freechat-freeboard.ml/' target='_blank'>
-                  URL
-                </A>
                 {"  "}
                 <A href='https://github.com/SeoSang/freechat-freeboard' target='_blank'>
                   깃허브
