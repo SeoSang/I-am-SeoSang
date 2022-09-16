@@ -113,13 +113,6 @@ const AboutMe = () => {
           <li> 프로그래머스 점수랭킹 83위 </li>
           <li> 백준 플레티넘 4 (21.04.18 기준)</li>
           <li> 고등수학 프로과외러 </li>
-          <br />
-          <li>
-            연애중💕(18.08.13~) with{" "}
-            <A href="https://blog.naver.com/minjy918" target="_blank">
-              김마림바
-            </A>{" "}
-          </li>
         </ul>
       </Col>
     </Row>
