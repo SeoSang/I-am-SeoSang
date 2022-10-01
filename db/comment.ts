@@ -23,8 +23,8 @@ const ERROR_DATA = {
 
 export const getComments = async () => {
     try {
-        const commentRef = ref(db)
-        const commentSnapshot = await get(child(commentRef, COMMENT_PATH))
+        const dbRef = ref(db)
+        const commentSnapshot = await get(child(dbRef, COMMENT_PATH))
         return commentSnapshot.exists() ? commentSnapshot.val() : ERROR_DATA
     } catch (e) {
         console.error(e)
