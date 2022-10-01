@@ -30,7 +30,7 @@ const GuestBookDiv = styled.div`
 const CommentConatiner = styled(FlexDiv)`
   flex-direction: column;
   justify-content: flex-start;
-  flex-wrap: no-wrap;
+  flex-wrap: nowrap;
 `
 
 const ContentContainer = styled(FlexDiv)`
@@ -167,7 +167,8 @@ const comment = ({comments}: any) => {
                         title='방명록 남기기'
                         open={isModalOpen}
                         onOk={handleOk}
-                        onCancel={() => {
+                        onCancel={(e) => {
+                            e.stopPropagation();
                             setModalOpen(false)
                         }}>
                         <Row justify='space-around' align='middle'>
