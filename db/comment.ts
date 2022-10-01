@@ -1,48 +1,48 @@
-import rootRef from "./index"
+import db from "./index";
+import {child, get, push, ref, update} from "firebase/database";
+
+export const COMMENT_PATH = 'comments'
 
 export interface CommentData {
-  name: string
-  content: string
-  like: number
-  dislike: number
-  createdAt: string
-}
-
-interface CommentSelector {
-  getComments: () => Promise<any>
-  addComment: (comment: CommentData) => Promise<void>
+    name: string
+    content: string
+    like: number
+    dislike: number
+    createdAt: string
 }
 
 const ERROR_DATA = {
-  "0": {
-    name: "주의!",
-    content: "서버 오류 발생!",
-    like: 0,
-    dislike: 100,
-    createdAt: "2020-09-04 21:39",
-  },
+    "0": {
+        name: "주의!",
+        content: "서버 오류 발생!",
+        like: 0,
+        dislike: 100,
+        createdAt: "2020-09-04 21:39",
+    },
 }
 
-const comment: CommentSelector = {
-  getComments: async () => {
-    let res
+export const getComments = async () => {
     try {
-      await rootRef.child("comments").once("value", (data) => {
-        res = data.toJSON()
-      })
-      return res
+        const commentRef = ref(db)
+        const commentSnapshot = await get(child(commentRef, COMMENT_PATH))
+        return commentSnapshot.exists() ? commentSnapshot.val() : ERROR_DATA
     } catch (e) {
-      console.error(e)
-      return ERROR_DATA
+        console.error(e)
+        return ERROR_DATA
     }
-  },
-  addComment: async (comment: CommentData) => {
-    try {
-      await rootRef.child("comments").push(comment)
-    } catch (e) {
-      console.error(e)
-    }
-  },
 }
 
-export default comment
+export const addComment = async (comment: CommentData) => {
+    try {
+        const newCommentKey = push(child(ref(db), COMMENT_PATH)).key;
+        const updates: any = {}
+        updates[`/${COMMENT_PATH}/${newCommentKey}`] = comment
+        const updateResult = await update(ref(db), updates)
+        return updateResult
+    } catch (e) {
+        console.error(e)
+        return ERROR_DATA
+    }
+}
+
+

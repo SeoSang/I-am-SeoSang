@@ -1,27 +1,22 @@
-// Firebase App (the core Firebase SDK) is always required and
-// must be listed before other Firebase SDKs
-import * as firebase from "firebase/app"
+import {initializeApp} from "firebase/app"
+import {getDatabase} from "firebase/database";
 
-export const DB_URL = "https://i-am-seosang.firebaseio.com"
 
-// Add the Firebase services that you want to use
-import "firebase/database"
+const firebaseConfig = {
+    apiKey: "AIzaSyBUf_SeRSk2u3tQvHOlzeHGJjM9MYsyOqU",
+    authDomain: "i-am-seosang.firebaseapp.com",
+    databaseURL: "https://i-am-seosang.firebaseio.com",
+    projectId: "i-am-seosang",
+    storageBucket: "i-am-seosang.appspot.com",
+    messagingSenderId: "278704687418",
+    appId: "1:278704687418:web:7c1db6f6818dd525092803",
+    measurementId: "G-19TTHWRMWN"
+};
 
-// TODO: Replace the following with your app's Firebase project configuration
-var firebaseConfig = {
-  databaseURL: DB_URL,
-}
-// Initialize Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
-}
-var rootRef = firebase.database().ref()
+const app = initializeApp(firebaseConfig)
 
-// const dbSelector = (collection) => {
-//     game2048.
-// }
-
-export default rootRef
+const db = getDatabase(app)
+export default db
 
 // const admin = require("firebase-admin")
 // var serviceAccount = require("./i-am-seosang-firebase-adminsdk-x45gj-abbb2ff49b.json")
