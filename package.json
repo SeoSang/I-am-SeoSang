@@ -23,7 +23,6 @@
   "devDependencies": {
     "@ant-design/icons": "^4.2.2",
     "@firebase/firestore-types": "^1.12.1",
-    "@types/firebase": "^3.2.1",
     "@types/next-redux-saga": "^3.0.2",
     "@types/react": "^17.0.1",
     "@types/styled-components": "^5.1.3",
