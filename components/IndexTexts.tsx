@@ -96,8 +96,7 @@ const IndexTexts: FC<{ onMouse: number }> = ({onMouse}) => {
                 style={onMouse == 3 ? onMouseStyle : {transform: "scale(0)"}}>
                 <TextDiv>
                     <IndexImage src='/real.jpg'></IndexImage>
-                    <H2_KR>진짜는</H2_KR>
-                    <H2_KR>모두가 알아본다.</H2_KR>
+                    <H2_KR>Real Recognize Real</H2_KR>
                     <p>
                         겉만 번지르르하지 않은 진짜 실력을 갖추고 싶습니다. <br/>
                     </p>
