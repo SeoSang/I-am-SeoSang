@@ -73,7 +73,7 @@ const IndexTexts: FC<{ onMouse: number }> = ({onMouse}) => {
         <ContentDiv>
             <ContentBoxDiv
                 style={onMouse == 1 ? onMouseStyle : {transform: "scale(0)"}}>
-                <IndexImage src='/me_park.jpg'></IndexImage>
+                <IndexImage src='/me_2023.jpeg'></IndexImage>
                 <TextDiv>
                     <H2_KR>안녕하세요😁</H2_KR>
                     <p>반갑습니다! 저는 서상혁입니다.</p>
@@ -87,7 +87,7 @@ const IndexTexts: FC<{ onMouse: number }> = ({onMouse}) => {
                     <p>
                         TypeScript, React 을 기반으로 한 <strong>FrontEnd</strong>를 주로
                         다룹니다.<br/>
-                        하지만 전반적인 웹 생태계 모두에 관심을 가지고 있습니다 😊
+                        뿐만 아니라 전반적인 웹 생태계 모두에 관심을 가지고 있습니다 😊
                         <br/>
                     </p>
                 </TextDiv>
