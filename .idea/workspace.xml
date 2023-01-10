@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28257a09-b351-4111-9766-389a1d9b6416" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/profile/AboutMe.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/profile/AboutMe.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/profile/Project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/profile/Project.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/profile/photos/jotai.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/profile/Photo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/profile/Photo.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +45,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/user/Desktop/PERSONAL/I-am-SeoSang/public/profile/photos",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -57,6 +57,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/profile/photos" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public" />
     </key>
@@ -74,7 +77,7 @@
       <workItem from="1664620530257" duration="12986000" />
       <workItem from="1665024607039" duration="1798000" />
       <workItem from="1669002013032" duration="5609000" />
-      <workItem from="1673350889256" duration="4640000" />
+      <workItem from="1673350889256" duration="5887000" />
     </task>
     <servers />
   </component>
