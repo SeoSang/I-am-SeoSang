@@ -37,4 +37,4 @@ yarn-error.log*
 i-am-seosang-firebase-adminsdk-x45gj-abbb2ff49b.json
 
 # webstorm
-.idea/*
+.idea/*!/pages/profile.tsx
